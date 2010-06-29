@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JLayeredPane;
 
-import edu.vanderbilt.psychology.gui.main.MainStageWrapper;
+import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.TextElement;
 
 /**
@@ -16,10 +16,10 @@ import edu.vanderbilt.psychology.gui.slideElements.TextElement;
  */
 public class AddTextAction extends AbstractAction {
 	
-	private MainStageWrapper stage_;
+	private StageWrapper stage_;
 	final FontChooser fc = new FontChooser();
 
-	public AddTextAction(MainStageWrapper stage) {
+	public AddTextAction(StageWrapper stage) {
 		super("Add Text");
 		stage_ = stage;
 	}

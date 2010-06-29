@@ -39,7 +39,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.filechooser.FileFilter;
 
 import sun.awt.image.ImageFormatException;
-import edu.vanderbilt.psychology.gui.main.MainStageWrapper;
+import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.ImageElement;
 
 /**
@@ -53,9 +53,9 @@ import edu.vanderbilt.psychology.gui.slideElements.ImageElement;
  */
 public class AddImageAction extends AbstractAction {
 
-	private MainStageWrapper stage_;
+	private StageWrapper stage_;
 
-	public AddImageAction(MainStageWrapper stage) {
+	public AddImageAction(StageWrapper stage) {
 		super("Add Image");
 		stage_ = stage;
 	}

@@ -15,12 +15,15 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import sun.awt.image.ImageFormatException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.model.elements.ImageElementModel;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
@@ -28,6 +31,7 @@ import edu.vanderbilt.psychology.model.properties.Appearance;
 import edu.vanderbilt.psychology.model.properties.DataSource;
 import edu.vanderbilt.psychology.model.properties.Movement;
 import edu.vanderbilt.psychology.model.properties.Position;
+import edu.vanderbilt.psychology.model.properties.Property;
 
 /**
  * @author Hamilton Turner
@@ -43,6 +47,8 @@ public class ImageElement extends SlideElement {
 	private static final String Handle_Up_Text = "+";
 	private static final String Handle_Pressed_Text = "-";
 	private static final int Handle_Size = 10;
+	
+	private ArrayList<Property> properties_;
 
 	public ImageElement(File imageFileSelected) throws ImageFormatException {
 		super();
@@ -50,6 +56,8 @@ public class ImageElement extends SlideElement {
 		// Allows resize handles without an entire JLayeredPane
 		setLayout(null);
 
+		properties_ = new ArrayList<Property>();
+		
 		// Add properties
 		properties_.add(Appearance.getDefaultAppearance());
 		properties_.add(Movement.getDefaultMovement());
@@ -100,11 +108,24 @@ public class ImageElement extends SlideElement {
 
 	}
 	
+	@Override
+	public void initializeWithModel(ModelElement model) {
+		// TODO - implement
+		throw new NotImplementedException();
+	}
+	
+	@Override
+	public List<Property> getProperties() {
+		return properties_;
+	}
+
+	@Override
 	public ModelElement getModel() {
 		final ImageElementModel model = new ImageElementModel(this);		
 		return model;
 	}
 
+	@Override
 	public String getElementName() {
 		return name_;
 	}
@@ -218,4 +239,6 @@ public class ImageElement extends SlideElement {
 
 	/** Provide a Universal ID for serialization */
 	private static final long serialVersionUID = 6583957254094683348L;
+
+	
 }

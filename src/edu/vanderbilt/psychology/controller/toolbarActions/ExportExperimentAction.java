@@ -4,22 +4,25 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import edu.vanderbilt.psychology.controller.StateManager;
-import edu.vanderbilt.psychology.gui.main.MainStageWrapper;
+import edu.vanderbilt.psychology.controller.StageWrapperController;
+import edu.vanderbilt.psychology.gui.main.StageWrapper;
+import edu.vanderbilt.psychology.model.BuilderState;
+import edu.vanderbilt.psychology.model.Slide;
 
 public class ExportExperimentAction extends AbstractAction {
 
-	private MainStageWrapper stage_;
+	private StageWrapper stage_;
 
-	public ExportExperimentAction(MainStageWrapper stage) {
+	public ExportExperimentAction(StageWrapper stage) {
 		super("Export");
 		
 		stage_ = stage;
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		StateManager.getInstance().saveCurrentSlide(stage_);
-		StateManager.getInstance().export();
+		Slide s = StageWrapperController.writeStageWrapperToSlide(stage_, false);
+		BuilderState.getInstance().saveCurrentSlide(s);
+		BuilderState.getInstance().export();
 	}
 
 	

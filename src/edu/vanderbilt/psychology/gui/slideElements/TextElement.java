@@ -7,13 +7,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JLabel;
 
-import edu.vanderbilt.psychology.model.elements.TextElementModel;
+import edu.vanderbilt.psychology.model.elements.ModelElement;
+import edu.vanderbilt.psychology.model.elements.TextModelElement;
 import edu.vanderbilt.psychology.model.properties.Appearance;
 import edu.vanderbilt.psychology.model.properties.Movement;
 import edu.vanderbilt.psychology.model.properties.Position;
+import edu.vanderbilt.psychology.model.properties.Property;
 
 /**
  * @author Hamilton Turner
@@ -21,9 +25,12 @@ import edu.vanderbilt.psychology.model.properties.Position;
  */
 public class TextElement extends SlideElement {
 	private JLabel label_;
+	private ArrayList<Property> properties_;
 
 	public TextElement(String text, Font font, Color foreGround) {
 		super();
+
+		properties_ = new ArrayList<Property>();
 
 		// Add properties
 		properties_.add(Appearance.getDefaultAppearance());
@@ -41,7 +48,10 @@ public class TextElement extends SlideElement {
 
 		setOpaque(false);
 	}
-	
+
+	public TextElement() {
+	}
+
 	@Override
 	public Color getForeground() {
 		if (label_ != null)
@@ -52,7 +62,7 @@ public class TextElement extends SlideElement {
 	public String getText() {
 		return label_.getText();
 	}
-	
+
 	@Override
 	public Font getFont() {
 		if (label_ != null)
@@ -73,14 +83,45 @@ public class TextElement extends SlideElement {
 		g.drawLine(0, label_.getHeight(), 0, 0);
 	}
 
+	@Override
+	// TODO - make sure this works
+	public void initializeWithModel(ModelElement model) {
+		if (!(model instanceof TextModelElement))
+			throw new IllegalArgumentException(
+					"Attempted to initialize a TextElement with a model that was not an instance of TextModelElement");
+
+		TextModelElement tme = (TextModelElement) model;
+		properties_ = (ArrayList<Property>) tme.getProperties();
+
+		label_ = new JLabel(tme.getText());
+		label_.setFont(tme.getFont());
+		label_.setForeground(tme.getForeGround());
+		add(label_, tme.getLayer());
+
+		Dimension size = label_.getPreferredSize();
+		label_.setSize(size);
+		setBounds(0, 0, size.width, size.height);
+
+		setLocation(tme.getLocation());
+		setOpaque(false);
+
+	}
+
+	@Override
 	public String getElementName() {
 		return label_.getText();
 	}
 
 	@Override
-	public TextElementModel getModel() {
-		final TextElementModel model = new TextElementModel(this);
+	public ModelElement getModel() {
+		final TextModelElement model = new TextModelElement(this);
+
 		return model;
+	}
+
+	@Override
+	public List<Property> getProperties() {
+		return properties_;
 	}
 
 	/** Provide a Universal ID for serialization */

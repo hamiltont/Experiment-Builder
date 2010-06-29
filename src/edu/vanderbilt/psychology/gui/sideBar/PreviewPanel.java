@@ -20,8 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import edu.vanderbilt.psychology.controller.SelectionManager;
-import edu.vanderbilt.psychology.gui.main.MainSideBar;
-import edu.vanderbilt.psychology.gui.main.MainStageWrapper;
+import edu.vanderbilt.psychology.gui.main.SideBar;
+import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 
 /**
@@ -35,15 +35,15 @@ public class PreviewPanel extends JPanel {
 	private static final Dimension preferredSize_ = new Dimension(
 			Short.MAX_VALUE, height_);
 	private static final Dimension minimumSize_ = new Dimension(
-			MainSideBar.width_, height_);
+			SideBar.width_, height_);
 
 	private SlideElement currentElement_ = null;
 
 	private JLabel name_;
 
-	private MainStageWrapper stage_;
+	private StageWrapper stage_;
 
-	public PreviewPanel(MainStageWrapper stage) {
+	public PreviewPanel(StageWrapper stage) {
 		super();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		

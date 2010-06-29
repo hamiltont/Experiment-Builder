@@ -31,9 +31,12 @@ import edu.vanderbilt.psychology.model.properties.Property;
 public class Slide {
 	List<ModelElement> elements_ = new ArrayList<ModelElement>();
 
-	public void saveElement(SlideElement se) {
-		elements_.add(se.getModel());
-		System.out.println("Saved a ModelElement!");
+	public void saveElement(ModelElement me) {
+		elements_.add(me);
+	}
+	
+	public List<ModelElement> getModelElements() {
+		return elements_;
 	}
 
 }

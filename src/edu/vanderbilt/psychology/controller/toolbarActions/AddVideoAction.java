@@ -8,14 +8,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JLayeredPane;
 import javax.swing.filechooser.FileFilter;
 
-import edu.vanderbilt.psychology.gui.main.MainStageWrapper;
+import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.UnusedImagePanel_OnlyForReference;
 
 public class AddVideoAction extends AbstractAction {
 
-	private MainStageWrapper stage_;
+	private StageWrapper stage_;
 
-	public AddVideoAction(MainStageWrapper stage) {
+	public AddVideoAction(StageWrapper stage) {
 		super("Add Video");
 		stage_ = stage;
 	}

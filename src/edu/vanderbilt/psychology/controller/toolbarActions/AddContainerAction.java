@@ -8,16 +8,16 @@ import javax.swing.JFileChooser;
 import javax.swing.JLayeredPane;
 import javax.swing.filechooser.FileFilter;
 
-import edu.vanderbilt.psychology.gui.main.MainStageWrapper;
+import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.UnusedImagePanel_OnlyForReference;
 
 //TODO Container class needs to create a new container object 
 //and does not currently do so
 public class AddContainerAction extends AbstractAction {
 	
-	private MainStageWrapper stage_;
+	private StageWrapper stage_;
 
-	public AddContainerAction(MainStageWrapper stage) {
+	public AddContainerAction(StageWrapper stage) {
 		super("Add Container");
 		stage_ = stage;
 	}

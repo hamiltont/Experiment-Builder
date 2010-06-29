@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import edu.vanderbilt.psychology.gui.main.MainSideBar;
+import edu.vanderbilt.psychology.gui.main.SideBar;
 
 /**
  * Defines a standard look and feel for {@link Section}s. All {@link Section}s
@@ -88,7 +88,7 @@ public final class Section extends JPanel {
 		Font font;
 		BufferedImage open, closed;
 		final int OFFSET = 30, PAD = 5;
-		private final Dimension size = new Dimension(MainSideBar.width_, 20);
+		private final Dimension size = new Dimension(SideBar.width_, 20);
 
 		public HeaderPanel(String text) {
 			super();

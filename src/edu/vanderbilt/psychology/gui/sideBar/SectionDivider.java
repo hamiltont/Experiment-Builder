@@ -15,7 +15,7 @@ import java.awt.font.LineMetrics;
 
 import javax.swing.JPanel;
 
-import edu.vanderbilt.psychology.gui.main.MainSideBar;
+import edu.vanderbilt.psychology.gui.main.SideBar;
 
 /**
  * @author  Hamilton Turner
@@ -29,7 +29,7 @@ public class SectionDivider extends JPanel {
 	public SectionDivider(String text) {
 		text_ = text;
 		font = new Font(Font.SERIF, Font.BOLD, 14);
-		Dimension size = new Dimension(MainSideBar.width_, 20);
+		Dimension size = new Dimension(SideBar.width_, 20);
 		setPreferredSize(size);
 		setMaximumSize(size);
 		setMinimumSize(size);

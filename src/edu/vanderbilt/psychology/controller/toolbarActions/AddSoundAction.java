@@ -8,14 +8,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JLayeredPane;
 import javax.swing.filechooser.FileFilter;
 
-import edu.vanderbilt.psychology.gui.main.MainStageWrapper;
+import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.UnusedImagePanel_OnlyForReference;
 
 public class AddSoundAction extends AbstractAction {
 	
-	private MainStageWrapper stage_;
+	private StageWrapper stage_;
 
-	public AddSoundAction(MainStageWrapper stage) {
+	public AddSoundAction(StageWrapper stage) {
 		super("Add Sound");
 		stage_ = stage;
 	}

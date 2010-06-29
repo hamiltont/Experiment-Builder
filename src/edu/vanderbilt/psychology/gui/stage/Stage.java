@@ -9,12 +9,12 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import edu.vanderbilt.psychology.gui.main.MainStageWrapper;
+import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.Experiment;
 
 /**
- * Acts as the stage backdrop for the {@link MainStageWrapper}. This is the
+ * Acts as the stage backdrop for the {@link StageWrapper}. This is the
  * element that displays the correct aspect ratio. Our two current options for
  * aspect ratio are 16:9 and 4:3. Currently, the height on this element is
  * always set to be 675px, so with 16:9 the width is 1200 and with 4:3 the width
@@ -41,7 +41,7 @@ public class Stage extends JPanel {
 			d = new Dimension(multiplier * 16, multiplier * 9);
 		}
 
-		// Location set by MainStageWrapper so this can be centered
+		// Location set by StageWrapper so this can be centered
 		setSize(d); 
 
 		setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));

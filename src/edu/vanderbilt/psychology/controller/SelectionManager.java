@@ -6,14 +6,14 @@ package edu.vanderbilt.psychology.controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import edu.vanderbilt.psychology.gui.main.MainSideBar;
+import edu.vanderbilt.psychology.gui.main.SideBar;
 import edu.vanderbilt.psychology.gui.sideBar.PreviewPanel;
 import edu.vanderbilt.psychology.gui.sideBar.SectionedPanel;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 
 /**
  * Adds itself as a mouse click listener on all of the SlideElements, and
- * notifies the {@link MainSideBar} when the selection changes. Specifically,
+ * notifies the {@link SideBar} when the selection changes. Specifically,
  * notifies {@link PreviewPanel} whenever the mouse hovers over a different
  * {@link SlideElement}, and notifies the {@link SectionedPanel} when a
  * different element is clicked

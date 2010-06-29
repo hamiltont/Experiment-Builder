@@ -15,14 +15,14 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import edu.vanderbilt.psychology.gui.main.MainSideBar;
+import edu.vanderbilt.psychology.gui.main.SideBar;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.DataCapture;
 import edu.vanderbilt.psychology.model.properties.Property;
 
 /**
  * 
- * This controls the part of the {@link MainSideBar} below the
+ * This controls the part of the {@link SideBar} below the
  * {@link PreviewPanel}. It lays out multiple {@link Section} elements, and adds
  * a few {@link DividerPanel} elements in between the {@link Section} elements
  * to make the UI more intuitive
@@ -40,7 +40,7 @@ public class SectionedPanel extends JPanel {
 	private static final Dimension preferredSize_ = new Dimension(
 			Short.MAX_VALUE, Short.MAX_VALUE);
 	private static final Dimension minimumSize_ = new Dimension(
-			MainSideBar.width_, 100);
+			SideBar.width_, 100);
 
 	/**
 	 * Holds the dynamically changing list of Element properties

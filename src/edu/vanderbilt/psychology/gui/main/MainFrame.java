@@ -38,19 +38,24 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import edu.vanderbilt.psychology.model.BuilderState;
+
 import net.java.swingfx.jdraggable.DefaultDraggableManager;
 import net.java.swingfx.jdraggable.DragPolicy;
+import net.java.swingfx.jdraggable.Draggable;
 import net.java.swingfx.jdraggable.DraggableManager;
 
 /**
  * Entry point for the entire application. MainFrame defines the entire
  * application frame. It contains all other application components, such as the
- * {@link MainStageWrapper}, {@link MainSideBar}, {@link MainToolBar}, etc.
+ * {@link StageWrapper}, {@link SideBar}, {@link ToolBar}, etc.
  * 
  * @author Hamilton Turner
  * 
- *         {@link http 
- *         ://java.sun.com/docs/books/tutorial/uiswing/components/rootpane.html}
+ * 
+ * @see <a
+ *      href="http://java.sun.com/docs/books/tutorial/uiswing/components/rootpane.html">The
+ *      Java Tutorials on RootPane</a>
  */
 // TODO - this should setup the SelectionManager. Also, the SelectionManager
 // should be initialized with nothing, and then should have an
@@ -75,12 +80,37 @@ public class MainFrame extends JFrame {
 		});
 	}
 
-	private MainToolBar toolBar_;
-	private MainSideBar sideBar_;
-	private MainStageWrapper stage_;
+	@SuppressWarnings("unused")
+	private ToolBar toolBar_;
+	@SuppressWarnings("unused")
+	private SideBar sideBar_;
+	@SuppressWarnings("unused")
+	private StageWrapper stage_;
 
+	public static final String APP_WINDOW_TITLE = "Experiment Builder";
+
+	/**
+	 * Sets the size of the application window. Sets up the stage wrapper as a
+	 * {@link DraggableManager} (allowing anything inside of it to become
+	 * draggable by simply implementing {@link Draggable}). Sets up the
+	 * {@link ToolBar} and the {@link SideBar}. The app window is broken up as
+	 * follows:
+	 * 
+	 * <pre>
+	 * --------------------------
+	 * |  Toolbar               |
+	 * |---------------|--------|
+	 * |  Stage        | Side   |
+	 * |     Wrapper   |    Bar |
+	 * |               |        |
+	 * --------------------------
+	 * </pre>
+	 * 
+	 * Also performs initialization of the model used by the builder component.
+	 * Does so by setting up the {@link BuilderState}
+	 */
 	public MainFrame() {
-		super("Experiment Builder");
+		super(APP_WINDOW_TITLE);
 
 		// Make the big window be indented 50 pixels from each edge
 		// of the screen.
@@ -100,13 +130,14 @@ public class MainFrame extends JFrame {
 		c.weighty = 1.0;
 		c.anchor = GridBagConstraints.CENTER;
 
-		// Setup stage as a Draggable Container
-		MainStageWrapper stage = new MainStageWrapper(this);
+		// Setup stage as a Draggable Container, allowing us to place Draggable
+		// components inside of it
+		StageWrapper stageWrapper = new StageWrapper(this);
 		DraggableManager manager = new DefaultDraggableManager();
-		manager.registerDraggableContainer(stage);
+		manager.registerDraggableContainer(stageWrapper);
 		manager.setDragPolicy(DragPolicy.STRICT);
 
-		add(stage, c);
+		add(stageWrapper, c);
 
 		// Toolbar constraints
 		c = new GridBagConstraints();
@@ -116,7 +147,7 @@ public class MainFrame extends JFrame {
 		c.weightx = 1.0;
 		c.gridwidth = 2;
 
-		MainToolBar toolBar = new MainToolBar(stage);
+		ToolBar toolBar = new ToolBar(stageWrapper);
 		toolBar_ = toolBar;
 		add(toolBar, c);
 
@@ -128,34 +159,30 @@ public class MainFrame extends JFrame {
 		c.weighty = 1.0;
 		c.anchor = GridBagConstraints.LINE_END;
 
-		MainSideBar sideBar = new MainSideBar(stage);
+		SideBar sideBar = new SideBar(stageWrapper);
 		sideBar_ = sideBar;
 		add(sideBar, c);
 
-		// Keep this as a reminder to setup buttons later
+		// Change the title
+		setTitle(getTitle() + " - Slide 1 of 1");
+
+		// Initialize the model
+		new BuilderState(stageWrapper);
+
+		// TODO Setup left/right arrows on the stage later. For now we have
+		// icons in the toolbar for next / previous, which is good enough. If
+		// you uncomment this, it will work but apparently the arrows will not
+		// change position when the window resizes. The stage resizing as a
+		// whole is buggy, so for now im just gonna ignore it and focus on
+		// making everything else work
 		/*
-		 * 
-		 * //TODO Get arrows to display in same position even when //window
-		 * resizes ImageIcon leftArrow = new ImageIcon("images/left_arrow.png");
-		 * JButton leftArrowBtn = new JButton(leftArrow);
-		 * desktop.add(leftArrowBtn);
+		 * ImageIcon leftArrow = new ImageIcon("images/left_arrow.png"); JButton
+		 * leftArrowBtn = new JButton(leftArrow); desktop.add(leftArrowBtn);
 		 * 
 		 * ImageIcon rightArrow = new ImageIcon("images/right_arrow.png");
 		 * JButton rightArrowBtn = new JButton(rightArrow);
 		 * desktop.add(rightArrowBtn);
 		 */
-	}
-
-	public MainToolBar getToolBar() {
-		return toolBar_;
-	}
-
-	public MainSideBar getSideBar() {
-		return sideBar_;
-	}
-
-	public MainStageWrapper getStage() {
-		return stage_;
 	}
 
 	/** Provide a Universal ID for serialization */
