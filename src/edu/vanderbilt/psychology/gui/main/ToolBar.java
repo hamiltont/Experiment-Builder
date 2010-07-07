@@ -1,5 +1,6 @@
 package edu.vanderbilt.psychology.gui.main;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JToolBar;
@@ -11,6 +12,8 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddTextAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddVideoAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.ExportExperimentAction;
 import edu.vanderbilt.psychology.gui.toolBar.ToolbarButton;
+import edu.vanderbilt.psychology.model.Experiment;
+import edu.vanderbilt.psychology.model.Slide;
 
 /**
  * Manages the initial creation of {@link ToolbarButton}s and their ordered
@@ -22,6 +25,18 @@ import edu.vanderbilt.psychology.gui.toolBar.ToolbarButton;
  */
 public class ToolBar extends JToolBar {
 
+	private static final int TOOLBAR_HEIGHT = 70;
+	private static final Dimension TOOLBAR_SEPARATOR_DIMENSION = new Dimension(
+			2, TOOLBAR_HEIGHT);
+
+	/**
+	 * The intent in the separation is to break the toolbar up into 3 sections.
+	 * One section shall be buttons to add stuff to the current {@link Slide},
+	 * another seciton shall be buttons to change {@link Slide} properties, and
+	 * the last section shall be to change {@link Experiment} properties
+	 * 
+	 * @param stage
+	 */
 	public ToolBar(StageWrapper stage) {
 		super();
 
@@ -53,19 +68,26 @@ public class ToolBar extends JToolBar {
 		final ToolbarButton addImage = new ToolbarButton(addImageAction,
 				"images/picture_add.png", "Add Image");
 
+		// Disable the buttons we have not implemented
+		addVid.setEnabled(false);
+		addSound.setEnabled(false);
+		addCont.setEnabled(false);
+
 		// Create and add 'add' buttons
 		add(addImage);
 		add(addVid);
 		add(addSound);
 		add(addText);
 		add(addCont);
+		addSeparator(TOOLBAR_SEPARATOR_DIMENSION);
 		// NOTE Other possible buttons: Add Webcam (or record film)
 
 		// Create and add other buttons
+		add(export);
 		// add(nextButton);
 		// add(prevButton);
-		// createNextSlideButton(stage);
-		add(export);
+
+		addSeparator(TOOLBAR_SEPARATOR_DIMENSION);
 
 		// Show
 		setVisible(true);

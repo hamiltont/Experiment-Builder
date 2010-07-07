@@ -7,6 +7,16 @@ import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Provides a common button look and feel
+ * 
+ * @todo Add in a method for creating a new button using only an action and some
+ *       string. This will make it easier for plugin developers to get started
+ *       right away on the core pieces of their code, rather than having to
+ *       create an ImageIcon first
+ * @author hamiltont
+ * 
+ */
 public class ToolbarButton extends JButton {
 
 	private final static int TOOLBAR_FONT_SIZE = 12;
