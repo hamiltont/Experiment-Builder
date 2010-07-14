@@ -4,7 +4,6 @@
 package edu.vanderbilt.psychology.gui.sideBar;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,7 +14,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import edu.vanderbilt.psychology.gui.main.SideBar;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.DataCapture;
 import edu.vanderbilt.psychology.model.properties.Property;
@@ -36,12 +34,7 @@ import edu.vanderbilt.psychology.model.properties.Property;
 // General Properties. I will likely change this at a later time to say
 // something like "Inputs", "Slide Properties" and "Experiment Properties"
 public class SectionedPanel extends JPanel {
-	public static final int height_ = 200;
-	private static final Dimension preferredSize_ = new Dimension(
-			Short.MAX_VALUE, Short.MAX_VALUE);
-	private static final Dimension minimumSize_ = new Dimension(
-			SideBar.width_, 100);
-
+	
 	/**
 	 * Holds the dynamically changing list of Element properties
 	 */
@@ -151,18 +144,6 @@ public class SectionedPanel extends JPanel {
 			currentElementPropertiesPanel_.add(s);
 
 		validate();
-	}
-
-	public Dimension getPreferredSize() {
-		return preferredSize_;
-	}
-
-	public Dimension getMinimumSize() {
-		return minimumSize_;
-	}
-
-	public Dimension getMaximumSize() {
-		return preferredSize_;
 	}
 
 	/** Provide a Universal ID for serialization */

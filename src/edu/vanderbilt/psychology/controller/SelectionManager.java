@@ -6,7 +6,6 @@ package edu.vanderbilt.psychology.controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import edu.vanderbilt.psychology.gui.main.SideBar;
 import edu.vanderbilt.psychology.gui.sideBar.PreviewPanel;
 import edu.vanderbilt.psychology.gui.sideBar.SectionedPanel;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;

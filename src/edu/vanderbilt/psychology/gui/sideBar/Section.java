@@ -4,7 +4,6 @@
 package edu.vanderbilt.psychology.gui.sideBar;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -21,8 +20,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-
-import edu.vanderbilt.psychology.gui.main.SideBar;
 
 /**
  * Defines a standard look and feel for {@link Section}s. All {@link Section}s
@@ -73,31 +70,18 @@ public final class Section extends JPanel {
 		headerPanel_.repaint();
 	}
 
-	@Override
-	public Dimension getMaximumSize() {
-		// TODO - This is kind of a hack. Somewhere there is a LayoutManager
-		// that is using the MaximumSize as the desired size (more likely there
-		// is a LayoutManager that is ignoring the max/min/preferred size
-		// completely and expanding as much as possible)
-		return super.getPreferredSize();
-	}
-
 	private class HeaderPanel extends JPanel implements MouseListener {
 
 		String text_;
 		Font font;
 		BufferedImage open, closed;
 		final int OFFSET = 30, PAD = 5;
-		private final Dimension size = new Dimension(SideBar.width_, 20);
 
 		public HeaderPanel(String text) {
 			super();
 			addMouseListener(this);
 			text_ = text;
 			font = new Font(Font.SERIF, Font.BOLD, 14);
-			setPreferredSize(size);
-			setMaximumSize(size);
-			setMinimumSize(size);
 
 			try {
 				open = ImageIO.read(new File("images/arrow_down_mini.png"));

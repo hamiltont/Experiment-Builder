@@ -3,9 +3,6 @@ package edu.vanderbilt.psychology.gui.main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -22,7 +19,18 @@ import edu.vanderbilt.psychology.controller.toolbarActions.ExportExperimentActio
 import edu.vanderbilt.psychology.gui.sideBar.PreviewPanel;
 import edu.vanderbilt.psychology.gui.sideBar.SectionedPanel;
 import edu.vanderbilt.psychology.gui.toolBar.ToolbarButton;
+import edu.vanderbilt.psychology.model.Experiment;
+import edu.vanderbilt.psychology.model.Slide;
 
+/**
+ * The sidebar and the slide switcher have a pre-defined dimension used
+ * initially. The toolbar calculates it's preferred dimensions based off of it's
+ * internal components. The reason for this is that the switcher and the sidebar
+ * will eventually (version 2) be resizable.
+ * 
+ * @author Hamilton Turner
+ * 
+ */
 public class Builder {
 	/**
 	 * The only place this is used right now is for the separator dimension.
@@ -55,6 +63,13 @@ public class Builder {
 	 * preferred height. The {@link BorderLayout} will set the width of the
 	 * toolbar to take all available room, and the preferred width of the
 	 * toolbar is ignored.
+	 * </p>
+	 * 
+	 * <p>
+	 * The intent in the separation is to break the toolbar up into 3 sections.
+	 * One section shall be buttons to add stuff to the current {@link Slide},
+	 * another section shall be buttons to change {@link Slide} properties, and
+	 * the last section shall be to change {@link Experiment} properties
 	 * </p>
 	 * 
 	 * @param stage
@@ -125,6 +140,32 @@ public class Builder {
 	 * not be resizable, but in version 2 it may have resize capabilities added
 	 * </p>
 	 * 
+	 * 
+	 * <p>
+	 * The sidebar internally uses a {@link BorderLayout} that is broken apart
+	 * as follows:
+	 * </p>
+	 * <img
+	 * src="../../../../../../doc-source/diagrams/sidebar-border-layout.jpg" />
+	 * <p>
+	 * The top panel (teal color) is the {@link PreviewPanel} section. The
+	 * height of the top component is set using the preferred size of the
+	 * internal {@link PreviewPanel}. In the future this may be a resizable
+	 * property. The preferred width of the {@link PreviewPanel} is ignored, and
+	 * the top component expands to fill all available space. However, the
+	 * available space is limited to {@link Builder#SIDEBAR_WIDTH}, so the width
+	 * of the top component will always be equal to
+	 * {@link Builder#SIDEBAR_WIDTH}.
+	 * </p>
+	 * 
+	 * <p>
+	 * The bottom panel (red color) is the {@link SectionedPanel}. The height of
+	 * the bottom component expands as much as it can. The width of the bottom
+	 * component expands as well. However, the bottom component has the same
+	 * width limitation that the top component experiences. Namely, the bottom
+	 * component width will always be equal to {@link Builder#SIDEBAR_WIDTH}.
+	 * </p>
+	 * 
 	 * <p>
 	 * TODO Currently this method does some state initialization. I would prefer
 	 * to put this state initialization elsewhere and have the {@link Builder}
@@ -133,11 +174,6 @@ public class Builder {
 	 * through gui code to figure it out.
 	 * </p>
 	 * 
-	 * <p>
-	 * TODO Currently the sidebar is internally using a {@link GridBagLayout}.
-	 * This is likely overkill, and is probably resulting in some hard to debug
-	 * issues. Change this to use a simpler {@link LayoutManager}
-	 * <p>
 	 * 
 	 * @param stage
 	 * @return
@@ -147,24 +183,14 @@ public class Builder {
 
 		sideBar.setPreferredSize(new Dimension(SIDEBAR_WIDTH, 1));
 
-		sideBar.setLayout(new GridBagLayout());
-		sideBar.setBorder(BorderFactory.createLoweredBevelBorder());
-
-		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = 0;
-		c.gridy = 0;
+		sideBar.setLayout(new BorderLayout());
+		sideBar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		PreviewPanel previewPanel = new PreviewPanel(stage);
-		sideBar.add(previewPanel, c);
-
-		c = new GridBagConstraints();
-		c.gridx = 0;
-		c.gridy = 1;
-		c.fill = GridBagConstraints.VERTICAL;
-		c.weighty = 1.0;
+		sideBar.add(previewPanel, BorderLayout.NORTH);
 
 		SectionedPanel propertyListPanel = new SectionedPanel();
-		sideBar.add(propertyListPanel, c);
+		sideBar.add(propertyListPanel, BorderLayout.CENTER);
 
 		// Setup the SelectionManger singleton
 		new SelectionManager(previewPanel, propertyListPanel);
