@@ -35,13 +35,14 @@ import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
  * <img src="../../../../../../doc-source/diagrams/sidebar-border-layout.jpg" />
  * 
  * <p>
- * The top panel (teal color) is this {@link PreviewPanel} section. The height
- * of the top component is set using the preferred size of the internal
- * {@link PreviewPanel}. In the future this may be a resizable property. The
- * preferred width of the {@link PreviewPanel} is ignored, and the top component
- * expands to fill all available space. However, the available space is limited
- * to {@link Builder#SIDEBAR_WIDTH}, so the width of the top component will
- * always be equal to {@link Builder#SIDEBAR_WIDTH}.
+ * The top panel (teal color) is this {@link PreviewPanel} section, and the
+ * bottom panel is the {@link SectionedPanel}. The height of the top component
+ * is set using the preferred size of the internal {@link PreviewPanel}. In the
+ * future this may be a resizable property. The preferred width of the
+ * {@link PreviewPanel} is ignored, and the top component expands to fill all
+ * available space. However, the available space is limited to
+ * {@link Builder#SIDEBAR_WIDTH}, so the width of the top component will always
+ * be equal to {@link Builder#SIDEBAR_WIDTH}.
  * </p>
  * 
  * <p>
@@ -53,6 +54,7 @@ import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
  * @author Hamilton Turner
  * 
  * @see MainFrame
+ * @see SectionedPanel
  */
 // TODO Allow an individual element to override the default PreviewPanel
 public class PreviewPanel extends JPanel {
