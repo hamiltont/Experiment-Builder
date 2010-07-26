@@ -1,0 +1,245 @@
+<edu.vanderbilt.psychology.XMLFile>
+	<cards__>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>BIRD</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>blue_bird_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>BIRD</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>blue_bird_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>BIRD</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>blue_bird_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>DOG</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>blue_dog_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>DOG</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>blue_dog_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>DOG</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>blue_dog_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>FISH</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>blue_fish_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>FISH</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>blue_fish_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>BLUE</color__>
+			<shape__>FISH</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>blue_fish_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>BIRD</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>red_bird_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>BIRD</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>red_bird_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>BIRD</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>red_bird_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>DOG</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>red_dog_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>DOG</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>red_dog_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>DOG</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>red_dog_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>FISH</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>red_fish_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>FISH</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>red_fish_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>RED</color__>
+			<shape__>FISH</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>red_fish_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>BIRD</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>yellow_bird_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>BIRD</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>yellow_bird_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>BIRD</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>yellow_bird_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>DOG</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>yellow_dog_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>DOG</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>yellow_dog_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>DOG</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>yellow_dog_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>FISH</shape__>
+			<size__>LARGE</size__>
+			<imagePath__>yellow_fish_large.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>FISH</shape__>
+			<size__>MEDIUM</size__>
+			<imagePath__>yellow_fish_medium.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+		<edu.vanderbilt.psychology.Card>
+			<color__>YELLOW</color__>
+			<shape__>FISH</shape__>
+			<size__>SMALL</size__>
+			<imagePath__>yellow_fish_small.jpg</imagePath__>
+		</edu.vanderbilt.psychology.Card>
+
+
+
+
+	</cards__>
+
+
+	<distractor__>
+		<shape__>SNAKE</shape__>
+		<color__>BLACK</color__>
+		<size__>MEDIUM_LARGE</size__>
+		<imagePath__>SnakeFoil.jpg</imagePath__>
+	</distractor__>
+</edu.vanderbilt.psychology.XMLFile>
