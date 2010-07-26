@@ -1,2 +1,5 @@
 doc/
 bin/
+# Project generates output Excel file containing result data
+# We don't want to be constantly committing changes to this data
+*.xls
