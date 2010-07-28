@@ -173,7 +173,7 @@ public class ThreeDimensionalStrategy {
 
 		while (testCards_.size() != 6 && !availableCards.isEmpty()) {
 			Card c = returnRandomCard(availableCards);
-			boolean ok = verifyTestCard(c);
+			boolean ok = verifyTestCard(c); 
 			if (ok)
 				testCards_.add(c);
 
