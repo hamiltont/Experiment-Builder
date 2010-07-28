@@ -101,7 +101,7 @@ public class Main {
 			File f = new File(filename);
 			if (f.exists()) {
 				instructionsLabel.setText("   '" + filename
-						+ "' already exists. Please enter a new filename");
+						+ "' already exists. Please enter a new filename"); 
 
 				return;
 			}
