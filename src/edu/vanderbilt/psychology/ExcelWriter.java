@@ -26,7 +26,8 @@ public class ExcelWriter {
 
 	public ExcelWriter(String filename) {
 		try {
-			workbook_ = Workbook.createWorkbook(new File("output.xls"));
+			// The filename should end in .xls!
+			workbook_ = Workbook.createWorkbook(new File(filename));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -147,8 +148,7 @@ public class ExcelWriter {
 				WritableCell c = sheet_.getWritableCell(col, row);
 				c.setCellFormat(format2);
 			}
-		
-		
+
 		try {
 			workbook_.write();
 		} catch (IOException e) {

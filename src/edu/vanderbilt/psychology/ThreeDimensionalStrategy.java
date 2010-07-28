@@ -34,8 +34,10 @@ public class ThreeDimensionalStrategy {
 		remainingGames.add(Game.SHAPE);
 		remainingGames.add(Game.COLOR);
 		remainingGames.add(Game.SIZE);
-
-		excel_ = new ExcelWriter("Boo");
+	}
+	
+	public void setFilename(String s) {
+		excel_ = new ExcelWriter(s);
 	}
 
 	public void playNextGame(JFrame frame) {
