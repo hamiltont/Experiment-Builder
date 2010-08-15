@@ -78,9 +78,19 @@ import edu.vanderbilt.psychology.model.properties.Property;
  * minimum height. If the available size continues to shrink, the components
  * will begin disappearing. This indicates that a {@link Section} or
  * {@link SectionDivider} may want to set it's minimum size appropriately so as
- * not to be decreased in height beyond recognition.
+ * not to be decreased in height beyond recognition. The minimum size is a
+ * secondary concern when using a {@link BoxLayout}, because by default it
+ * attempts to expand and use all available space. Declaring the maximum size
+ * tends to be much more necessary that declaring the minimum size.
  * </p>
  * 
+ * <p>
+ * TODO This is currently a {@link BoxLayout} wrapped by another
+ * {@link BoxLayout}. Kind of wish I could get rid of the useless redirection
+ * here and simply manage the logical organization of components within the main
+ * {@link BoxLayout}. This is something that can be done later, as the current
+ * setup is working and would be a hassle to change
+ * </p>
  * 
  * @author Hamilton Turner
  * 

@@ -3,7 +3,9 @@
  */
 package edu.vanderbilt.psychology.gui.sideBar;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -27,15 +29,39 @@ import javax.swing.JPanel;
  * expand/collapse the {@link Section}. When expanded, the {@link Section}
  * displays a content {@link JPanel}.
  * 
- * Sections are only created by the {@link SectionedPanel}.
- * {@link SectionedPanel} accepts objects that implement {@link ISectionable}
- * and adds those objects to a {@link Section}
+ * {@link Section}s internally use a {@link BorderLayout}. The
+ * {@link HeaderPanel} is contained inside of {@link BorderLayout#NORTH} and the
+ * content panel inside {@link BorderLayout#SOUTH}. This allows the panels to
+ * specify their preferred height. The total preferred height of this
+ * {@link Section} is <br />
+ * <code>
+ * <pre>
+ * if (contentPanel.isVisible())
+ *   height = contentPanelHeight + headerPanelHeight;
+ * else
+ *   height = headerPanelHeight;
+ * </pre>
+ * </code>
+ * 
+ * <p>
+ * Additionally, it is important to remember that the {@link Section} (built
+ * using the {@link BorderLayout}) is contained within the
+ * {@link SectionedPanel} (built using the {@link BoxLayout}). The
+ * {@link BoxLayout} will stretch expand components to fill all available room
+ * as much as possible, but will also respect each components declared maximum
+ * size and will not stretch components beyond that size. This means that it is
+ * critical that this {@link BorderLayout} specify a maximum size in order to
+ * not be expanded vertically by the {@link BoxLayout}. The tallest we would
+ * ever want the {@link Section} to be is it's preferred height, so our maximum
+ * size is reported to be our preferred height.
+ * </p>
  * 
  * @author Hamilton Turner
  * 
  */
 // TODO If the code base gets to the optimize level, then we should attempt to
-// avoid re-creating all of these Section object. We are using a Prototype model
+// avoid re-creating all of these Section objects. We are using a Prototype
+// model
 // for the Propertys, so something similar should work here. Do a check to see
 // if something matches the default and avoid creating a new object if it does
 public final class Section extends JPanel {
@@ -45,15 +71,19 @@ public final class Section extends JPanel {
 
 	public Section(String text, JPanel panel) {
 		super();
-		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		setLayout(new BorderLayout());
+
+		// setPreferredSize(new Dimension(Short.MAX_VALUE,
+		// PREFERRED_HEADER_HEIGHT));
+		// setMaximumSize(getPreferredSize());
 
 		selected_ = false;
 		headerPanel_ = new HeaderPanel(text);
 
 		contentPanel_ = panel;
 
-		add(headerPanel_);
-		add(panel);
+		add(headerPanel_, BorderLayout.NORTH);
+		add(panel, BorderLayout.SOUTH);
 		panel.setVisible(false);
 
 	}
@@ -70,7 +100,44 @@ public final class Section extends JPanel {
 		headerPanel_.repaint();
 	}
 
+	@Override
+	public Dimension getMinimumSize() {
+		Dimension hp = headerPanel_.getMinimumSize();
+
+		if (contentPanel_.isShowing()) {
+			Dimension cp = contentPanel_.getMinimumSize();
+
+			int minHeight = cp.height + hp.height;
+			int minWidth = Math.max(cp.width, hp.width);
+			return new Dimension(minWidth, minHeight);
+		}
+
+		return hp;
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		Dimension hp = headerPanel_.getPreferredSize();
+
+		if (contentPanel_.isShowing()) {
+			Dimension cp = contentPanel_.getPreferredSize();
+
+			int height = cp.height + hp.height;
+			int width = Math.max(cp.width, hp.width);
+			return new Dimension(width, height);
+		}
+
+		return hp;
+	}
+
+	@Override
+	public Dimension getMaximumSize() {
+		return getPreferredSize();
+	}
+
 	private class HeaderPanel extends JPanel implements MouseListener {
+
+		private static final int PREFERRED_HEADER_HEIGHT = 25;
 
 		String text_;
 		Font font;
@@ -79,6 +146,12 @@ public final class Section extends JPanel {
 
 		public HeaderPanel(String text) {
 			super();
+
+			// TODO calculate preferred width from length of text
+			setPreferredSize(new Dimension(Short.MAX_VALUE,
+					PREFERRED_HEADER_HEIGHT));
+			setMaximumSize(getPreferredSize());
+
 			addMouseListener(this);
 			text_ = text;
 			font = new Font(Font.SERIF, Font.BOLD, 14);

@@ -13,15 +13,32 @@ import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 /**
+ * Delineates a grouping of {@link Section}s in the sidebar
+ * 
+ * <p>
+ * It is important to remember that the {@link SectionDivider} is contained
+ * within the {@link SectionedPanel} (built using the {@link BoxLayout}). The
+ * {@link BoxLayout} will stretch expand components to fill all available room
+ * as much as possible, but will also respect each components declared maximum
+ * size and will not stretch components beyond that size. This means that it is
+ * critical that this {@link SectionDivider} specify a maximum size in order to
+ * not be expanded vertically by the {@link BoxLayout}. The tallest we would
+ * ever want the {@link SectionDivider} to be is it's preferred height, so our
+ * maximum size is reported to be our preferred height.
+ * </p>
+ * 
  * @author Hamilton Turner
  */
 public class SectionDivider extends JPanel {
 	private String text_;
 	private Font font;
 	private static final int PREFERRED_HEIGHT = 30;
+	private static final Dimension PREFERRED_SIZE = new Dimension(
+			Short.MAX_VALUE, PREFERRED_HEIGHT);
 
 	private static final int OFFSET = 30;
 
@@ -29,8 +46,8 @@ public class SectionDivider extends JPanel {
 		super();
 		text_ = text;
 		font = new Font(Font.SERIF, Font.BOLD, 14);
-		setPreferredSize(new Dimension(1, PREFERRED_HEIGHT));
-		setMaximumSize(new Dimension(Short.MAX_VALUE, PREFERRED_HEIGHT));
+		setPreferredSize(PREFERRED_SIZE);
+		setMaximumSize(PREFERRED_SIZE);
 	}
 
 	protected void paintComponent(Graphics g) {
