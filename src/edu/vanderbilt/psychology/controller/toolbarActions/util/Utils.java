@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package edu.vanderbilt.psychology.controller.toolbarActions;
+package edu.vanderbilt.psychology.controller.toolbarActions.util;
 
 import java.io.File;
 import javax.swing.ImageIcon;

@@ -8,6 +8,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLayeredPane;
 import javax.swing.filechooser.FileFilter;
 
+import edu.vanderbilt.psychology.controller.toolbarActions.util.Utils;
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.UnusedImagePanel_OnlyForReference;
 
