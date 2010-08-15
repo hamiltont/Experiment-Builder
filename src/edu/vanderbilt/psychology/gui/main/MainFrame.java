@@ -88,6 +88,10 @@ public class MainFrame extends JFrame {
 				MainFrame frame = new MainFrame();
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+				// TODO Change this once we can fully resize stuff within the
+				// StageWrapper
+				frame.setResizable(false);
+
 				// Display the window.
 				frame.setVisible(true);
 			}
