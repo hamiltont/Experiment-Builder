@@ -1,7 +1,6 @@
 package edu.vanderbilt.psychology.controller.toolbarActions.util;
 
 import java.awt.Font;
-import java.io.Serializable;
 
 
 /*
