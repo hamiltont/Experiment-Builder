@@ -32,18 +32,13 @@ public class AddTextAction extends AbstractAction {
 		FontChooser fc = new FontChooser();
 
 		Result r = fc.getResult();
-		if (r == Result.OK)
-			approve(fc.getFont(), fc.getColor());
+		if (r == Result.OK) {
 
-	}
+			TextElement te = new TextElement(fc.getText(), fc.getFont(), fc
+					.getColor());
+			stage_.add(te, JLayeredPane.PALETTE_LAYER);
+		}
 
-	private void approve(Font font, Color fontColor) {
-
-		// TODO - Make this load the correct text after modifying the font
-		// interface
-		TextElement te = new TextElement("Hello World", font, fontColor);
-
-		stage_.add(te, JLayeredPane.PALETTE_LAYER);
 	}
 
 	private static final long serialVersionUID = 571492674596081599L;

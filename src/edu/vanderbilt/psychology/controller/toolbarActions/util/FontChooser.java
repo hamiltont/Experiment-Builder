@@ -22,13 +22,13 @@ package edu.vanderbilt.psychology.controller.toolbarActions.util;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -37,8 +37,8 @@ import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -56,16 +56,23 @@ public class FontChooser extends JDialog {
 	public enum Result {
 		OK, CANCEL
 	};
-	
+
 	private Result result_ = Result.CANCEL;
-	
-	private JComboBox fontNamesCombo_;
-	private final JComboBox fontSizesCombo_ = new JComboBox(new String[] { "8",
-			"9", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28",
-			"36", "48", "72" });
-	private final JCheckBox boldCheck_ = new JCheckBox("Bold");
-	private final JCheckBox italicCheck_ = new JCheckBox("Italic");
-	private final JLabel previewLabel_ = new JLabel("PreviewText");
+
+	private JComboBox fontNamesCombo_ = new JComboBox(GraphicsEnvironment
+			.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
+
+	private static final String[] possibleFontSizes = new String[] { "8", "9",
+			"10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "36",
+			"48", "72" };
+	private static final int DEFAULT_FONT_SIZE_INDEX = 8;
+
+	private final JComboBox fontSizesCombo_ = new JComboBox(possibleFontSizes);
+
+	private final JCheckBox boldCheck_ = new JCheckBox("Bold", false);
+	private final JCheckBox italicCheck_ = new JCheckBox("Italic", false);
+	private final JTextArea previewLabel_ = new JTextArea(
+			"Type or Paste your text here!", 5, 10);
 	final JColorChooser colorChooser = new JColorChooser();
 
 	private Font font_;
@@ -74,101 +81,21 @@ public class FontChooser extends JDialog {
 
 	public FontChooser() {
 		super((JFrame) null, "Font Chooser", true);
-		createUserInterface();
-
-		previewUpdateListener_ = new PreviewLabelUpdateListener();
-		fontNamesCombo_.addActionListener(previewUpdateListener_);
-		fontSizesCombo_.addActionListener(previewUpdateListener_);
-		boldCheck_.addActionListener(previewUpdateListener_);
-		italicCheck_.addActionListener(previewUpdateListener_);
-
-		fontNamesCombo_.setSelectedIndex(0);
-		fontSizesCombo_.setSelectedIndex(0);
-		boldCheck_.setSelected(false);
-		italicCheck_.setSelected(false);
-
-		updateFontFromDialog();
-		
-		setVisible(true);
-	}
-
-	public Result getResult() {
-		return result_;
-	}
-	
-	public Font getFont() {
-		return font_;
-	}
-
-	public Color getColor() {
-		return colorChooser.getColor();
-	}
-
-	private void createUserInterface() {
-		final JPanel content = new JPanel(new GridBagLayout());
-		final GridBagConstraints gbc = new GridBagConstraints();
-
-		setContentPane(content);
-		content.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-		gbc.anchor = GridBagConstraints.WEST;
-		gbc.insets = new Insets(2, 2, 2, 2);
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-
-		gbc.gridx = gbc.gridy = 0;
-		content.add(new JLabel("Font"), gbc);
-
-		++gbc.gridx;
-		content.add(new JLabel("Size"), gbc);
-
-		colorChooser.setPreviewPanel(new JPanel());
-
-		++gbc.gridx;
-		content.add(new JLabel("Style"), gbc);
-
-		++gbc.gridy;
-		gbc.gridx = 0;
-		fontNamesCombo_ = new JComboBox(GraphicsEnvironment
-				.getLocalGraphicsEnvironment().getAvailableFontFamilyNames());
-		content.add(fontNamesCombo_, gbc);
-
-		++gbc.gridx;
 		fontSizesCombo_.setEditable(true);
-		content.add(fontSizesCombo_, gbc);
 
-		++gbc.gridx;
-		content.add(boldCheck_, gbc);
-		++gbc.gridy;
-		content.add(italicCheck_, gbc);
+		// TODO Removed the ability to hit return until the TextElement can
+		// display multi-line text
+		// TODO An error message would be nice
+		previewLabel_.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER)
+					e.consume();
+			}
+		});
+		previewLabel_.setLineWrap(true);
+		
 
-		gbc.gridx = 0;
-		++gbc.gridy;
-		gbc.gridwidth = GridBagConstraints.REMAINDER;
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.anchor = GridBagConstraints.CENTER;
-		content.add(createPreviewPanel(), gbc);
-
-		++gbc.gridy;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.LAST_LINE_START;
-		content.add(createButtonsPanel(), gbc);
-
-		// gbc.anchor = GridBagConstraints.SOUTH;
-		// content.add(createColorPanel(), gbc);
-
-		pack();
-		setResizable(true);
-	}
-
-	private JPanel createPreviewPanel() {
-		final JPanel pnl = new JPanel(new BorderLayout());
-		pnl.setBorder(BorderFactory.createTitledBorder("Preview"));
-		Dimension prefSize = previewLabel_.getPreferredSize();
-		prefSize.height = 50;
-		previewLabel_.setPreferredSize(prefSize);
-		pnl.add(previewLabel_, BorderLayout.CENTER);
-		updatePreviewLabel();
-
+		colorChooser.setColor(102, 102, 102);
 		ColorSelectionModel model = colorChooser.getSelectionModel();
 		ChangeListener changeListener = new ChangeListener() {
 			public void stateChanged(ChangeEvent changeEvent) {
@@ -178,15 +105,114 @@ public class FontChooser extends JDialog {
 		};
 		model.addChangeListener(changeListener);
 
+		createUserInterface();
+
+		previewUpdateListener_ = new PreviewLabelUpdateListener();
+		fontNamesCombo_.addActionListener(previewUpdateListener_);
+		fontSizesCombo_.addActionListener(previewUpdateListener_);
+		boldCheck_.addActionListener(previewUpdateListener_);
+		italicCheck_.addActionListener(previewUpdateListener_);
+
+		fontNamesCombo_.setSelectedIndex(0);
+		fontSizesCombo_.setSelectedIndex(DEFAULT_FONT_SIZE_INDEX);
+
+		updateFontFromDialog();
+
+		setVisible(true);
+	}
+
+	public String getText() {
+		return previewLabel_.getText();
+	}
+
+	public Result getResult() {
+		return result_;
+	}
+
+	public Font getFont() {
+		return font_;
+	}
+
+	public Color getColor() {
+		return colorChooser.getColor();
+	}
+
+	// Create preview panel, font options, color picker
+	private void createUserInterface() {
+		final JPanel content = new JPanel(new BorderLayout());
+		setContentPane(content);
+		content.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		content.add(createPreviewPanel(), BorderLayout.CENTER);
+
+		JPanel optionsAndSubmit = new JPanel(new BorderLayout());
+		optionsAndSubmit.add(createFontPanel(), BorderLayout.NORTH);
+		optionsAndSubmit.add(createColorPanel(), BorderLayout.CENTER);
+		optionsAndSubmit.add(createButtonsPanel(), BorderLayout.SOUTH);
+
+		content.add(optionsAndSubmit, BorderLayout.SOUTH);
+
+		pack();
+		setResizable(true);
+	}
+
+	private JPanel createFontPanel() {
+		JPanel fontPanel = new JPanel(new BorderLayout());
+		fontPanel.setBorder(BorderFactory.createTitledBorder("Font Options"));
+
+		JPanel topFontOptions = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		topFontOptions.add(boldCheck_);
+		topFontOptions.add(italicCheck_);
+		fontPanel.add(topFontOptions, BorderLayout.NORTH);
+
+		JPanel bottomFontOptions = new JPanel(new BorderLayout());
+		bottomFontOptions.add(fontNamesCombo_, BorderLayout.CENTER);
+		bottomFontOptions.add(fontSizesCombo_, BorderLayout.EAST);
+
+		fontPanel.add(bottomFontOptions, BorderLayout.SOUTH);
+
+		return fontPanel;
+	}
+
+	private JPanel createColorPanel() {
+		// TODO This works for now, but the entire font options UI looks 100%
+		// better if the
+		// initial width is about half the size of what the default color
+		// chooser needs. We can mitigate this problem by defining a very simply
+		// AbstractColorChooserPanel and setting it as the default, and then
+		// never adding the color chooser itself, just adding selection options
+		// to switch to other color choosers. This would allow us to manually
+		// pull those other color choosers and display them, animating out the
+		// widening of the window as we go. That would look a lot better.
+		// Eventually it would be nice to allow users to set a default color
+		// chooser that they would like to use, but that is a ways away
+		JPanel colorPanel = new JPanel();
+		colorChooser.setPreviewPanel(new JPanel(false));
+		colorPanel.setBorder(BorderFactory.createTitledBorder("Color Options"));
+		colorPanel.add(colorChooser);
+		return colorPanel;
+	}
+
+	private JPanel createPreviewPanel() {
+		final JPanel pnl = new JPanel(new BorderLayout());
+		pnl.setBorder(BorderFactory.createTitledBorder("Preview"));
+
+		Dimension prefSize = previewLabel_.getPreferredSize();
+		// TODO - change previewLabel to a JTextArea or equivalent
+		if (prefSize.width >= 300)
+			prefSize.width = 300;
+		previewLabel_.setPreferredSize(prefSize);
+
+		pnl.add(previewLabel_, BorderLayout.CENTER);
+		updatePreviewLabel();
+
 		return pnl;
 	}
 
 	private JPanel createButtonsPanel() {
-		JPanel pnl = new JPanel();
-		pnl.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		JPanel pnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-		JButton okBtn = new JButton("OK");
+		JButton okBtn = new JButton("Accept");
 		okBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				result_ = Result.OK;
@@ -194,35 +220,16 @@ public class FontChooser extends JDialog {
 				dispose();
 			}
 		});
+
 		JButton cancelBtn = new JButton("Cancel");
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				FontChooser.this.font_ = null;
 				dispose();
 			}
 		});
 
-		c.weightx = 0.5;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 1;
-		c.insets = new Insets(10, 0, 0, 0);
-		pnl.add(okBtn, c);
-
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.5;
-		c.gridx = 1;
-		c.gridy = 1;
-		c.insets = new Insets(10, 0, 0, 0);
-		pnl.add(cancelBtn, c);
-
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.ipady = 40; // make this component tall
-		c.weightx = 0.0;
-		c.gridwidth = 3;
-		c.gridx = 0;
-		c.gridy = 0;
-		pnl.add(colorChooser, c);
+		pnl.add(cancelBtn);
+		pnl.add(okBtn);
 
 		getRootPane().setDefaultButton(okBtn);
 
@@ -242,7 +249,7 @@ public class FontChooser extends JDialog {
 		FontBuilder.italic = italicCheck_.isSelected();
 		font_ = FontBuilder.createFont();
 	}
-	
+
 	private void updatePreviewLabel() {
 		updateFontFromDialog();
 		previewLabel_.setFont(font_);
