@@ -1,7 +1,5 @@
 package edu.vanderbilt.psychology.controller.toolbarActions;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
