@@ -15,6 +15,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddImageAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddSoundAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddTextAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddVideoAction;
+import edu.vanderbilt.psychology.controller.toolbarActions.CreateListAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.ExportExperimentAction;
 import edu.vanderbilt.psychology.gui.sideBar.PreviewPanel;
 import edu.vanderbilt.psychology.gui.sideBar.SectionedPanel;
@@ -87,6 +88,7 @@ public class Builder {
 		final AddSoundAction addSoundAction = new AddSoundAction(stage);
 		final AddVideoAction addVideoAction = new AddVideoAction(stage);
 		final AddImageAction addImageAction = new AddImageAction(stage);
+		final CreateListAction createListAction = new CreateListAction();
 
 		// Create Toolbar buttons
 		final ToolbarButton export = new ToolbarButton(exportAction,
@@ -101,6 +103,8 @@ public class Builder {
 				"images/film_add.png", "Add Video");
 		final ToolbarButton addImage = new ToolbarButton(addImageAction,
 				"images/picture_add.png", "Add Image");
+		final ToolbarButton createList = new ToolbarButton(createListAction,
+				"images/picture_add.png", "Create List");
 
 		// Disable the buttons we have not implemented
 		addVid.setEnabled(false);
@@ -118,6 +122,7 @@ public class Builder {
 
 		// Create and add other sections
 		toolbar.add(export);
+		toolbar.add(createList);
 		// add(nextButton);
 		// add(prevButton);
 		toolbar.addSeparator(TOOLBAR_SEPARATOR_DIMENSION);
