@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import edu.vanderbilt.psychology.controller.toolbarActions.util.CreateListDialog;
+import edu.vanderbilt.psychology.gui.toolBar.CreateListDialog;
 
 @SuppressWarnings("serial")
 public class CreateListAction extends AbstractAction {

@@ -1,4 +1,4 @@
-package edu.vanderbilt.psychology.controller.toolbarActions.util;
+package edu.vanderbilt.psychology.gui.toolBar;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -24,7 +24,7 @@ public class CreateListDialog extends JDialog {
 		JPanel ui = buildStepOneUI();
 		setContentPane(ui);
 		pack();
-		
+
 		setVisible(true);
 	}
 
@@ -59,9 +59,17 @@ public class CreateListDialog extends JDialog {
 		JPanel continueCancel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton cancel = new JButton("Cancel");
 		JButton cont = new JButton("Continue");
+
+		// @Seth, this is where you should register button listeners for the
+		// continue and cancel buttons. Please have the listeners perform the
+		// appropriate actions e.g. the cancel button should clost the create
+		// list dialog and the continue button should close the create list
+		// dialog and then open a dialog that will allow a user to input some
+		// list data
+
 		continueCancel.add(cancel);
 		continueCancel.add(cont);
-		
+
 		ui.add(continueCancel, BorderLayout.SOUTH);
 
 		return ui;

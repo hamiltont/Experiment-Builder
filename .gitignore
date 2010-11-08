@@ -1,2 +1,5 @@
 doc/
 bin/
+
+# For mac users
+.DS_Store
