@@ -16,6 +16,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+/**
+ * Builds and displays the create list dialog. Currently also handles building
+ * and showing and sub-dialogs that may result from interacting with the create
+ * list dialog.
+ * 
+ * @author hamiltont
+ * @contributor sethfri
+ * 
+ */
 @SuppressWarnings("serial")
 public class CreateListDialog extends JDialog {
 
@@ -60,66 +69,11 @@ public class CreateListDialog extends JDialog {
 
 		ui.add(buttons, BorderLayout.CENTER);
 
+		// Building the bottom panel for the continue and cancel buttons
 		JPanel continueCancel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-		JButton cont = new JButton("Continue");
-		cont.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				dispose();
-
-				JFrame listDialog = new JFrame("List Dialog");
-				listDialog.setLayout(new FlowLayout());
-
-				JPanel ui = new JPanel(new BorderLayout());
-				listDialog.add(ui);
-				listDialog.setContentPane(ui);
-				listDialog.pack();
-
-				listDialog.setVisible(true);
-
-				JPanel listEntry = new JPanel(new FlowLayout());
-
-				JTextField typeListEntry = new JTextField(
-						"Type strings and hit enter to put them in the list");
-				JButton enter = new JButton("Enter");
-				listEntry.add(typeListEntry);
-				listEntry.add(enter, FlowLayout.RIGHT);
-
-				ui.add(listEntry, BorderLayout.NORTH);
-
-				JPanel listArea = new JPanel(new FlowLayout());
-
-				JList list = new JList();
-				list.setLayoutOrientation(JList.VERTICAL);
-				JScrollPane listPane = new JScrollPane(list);
-				JButton remove = new JButton("Remove String");
-				listArea.add(listPane, FlowLayout.LEFT);
-				listArea.add(remove, FlowLayout.RIGHT);
-
-				ui.add(listArea, BorderLayout.CENTER);
-
-				JPanel cancelOk = new JPanel(new FlowLayout());
-
-				JButton ok = new JButton("Ok");
-				ok.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						dispose();
-					}
-				});
-				JButton cancel = new JButton("Cancel");
-				cancel.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						dispose();
-					}
-
-				});
-
-				cancelOk.add(cancel, FlowLayout.CENTER);
-				cancelOk.add(ok, FlowLayout.RIGHT);
-
-				ui.add(cancelOk, BorderLayout.SOUTH);
-			}
-		});
+		JButton continueButton = new JButton("Continue");
+		continueButton.addActionListener(continueListener_);
 
 		JButton cancel = new JButton("Cancel");
 		cancel.addActionListener(new ActionListener() {
@@ -128,17 +82,77 @@ public class CreateListDialog extends JDialog {
 			}
 		});
 
-		// @Seth, this is where you should register button listeners for the
-		// continue and cancel buttons. Please have the listeners perform the
-		// appropriate actions e.g. the cancel button should close the create
-		// list dialog and the continue button should close the create list
-		// dialog and then open a dialog that will allow a user to input some
-		// list data
-
 		continueCancel.add(cancel);
-		continueCancel.add(cont);
+		continueCancel.add(continueButton);
 
 		ui.add(continueCancel, BorderLayout.SOUTH);
+
+		return ui;
+	}
+
+	private ActionListener continueListener_ = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			dispose();
+
+			JDialog listDialog = new JDialog();
+
+			JPanel ui = buildTextListUI(listDialog);
+
+			listDialog.setContentPane(ui);
+			listDialog.pack();
+			listDialog.setVisible(true);
+
+		}
+	};
+
+	private JPanel buildTextListUI(final JDialog parentDialog) {
+		JPanel ui = new JPanel(new BorderLayout());
+
+		// Creating the top panel with the entry pane
+		JPanel textEntryPanel = new JPanel(new FlowLayout());
+		JTextField entryTextField = new JTextField(
+				"Type strings and hit enter to put them in the list");
+		JButton enter = new JButton("Enter");
+		textEntryPanel.add(entryTextField);
+		textEntryPanel.add(enter);
+		ui.add(textEntryPanel, BorderLayout.NORTH);
+
+		// Creating the middle panel with the list and remove items
+		JPanel listArea = new JPanel(new FlowLayout());
+
+		JList list = new JList();
+		list.setLayoutOrientation(JList.VERTICAL);
+		JScrollPane listPane = new JScrollPane(list);
+		JButton remove = new JButton("Remove String");
+		listArea.add(listPane);
+		listArea.add(remove);
+
+		ui.add(listArea, BorderLayout.CENTER);
+
+		// Creating the bottom panel with the cancel and ok buttons
+		JPanel cancelOk = new JPanel(new FlowLayout());
+
+		JButton ok = new JButton("Ok");
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				parentDialog.dispose();
+			}
+		});
+
+		JButton cancel = new JButton("Cancel");
+		cancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				parentDialog.dispose();
+			}
+
+		});
+
+		cancelOk.add(cancel);
+		cancelOk.add(ok);
+
+		ui.add(cancelOk, BorderLayout.SOUTH);
 
 		return ui;
 	}
