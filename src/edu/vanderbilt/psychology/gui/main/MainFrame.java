@@ -31,24 +31,38 @@
 
 package edu.vanderbilt.psychology.gui.main;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-
-import edu.vanderbilt.psychology.model.BuilderState;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 import net.java.swingfx.jdraggable.DefaultDraggableManager;
 import net.java.swingfx.jdraggable.DragPolicy;
 import net.java.swingfx.jdraggable.Draggable;
 import net.java.swingfx.jdraggable.DraggableManager;
+import edu.vanderbilt.psychology.model.BuilderState;
 
 /**
- * Entry point for the entire application. MainFrame defines the entire
- * application frame. It contains all other application components, such as the
- * {@link StageWrapper}, {@link SideBar}, {@link ToolBar}, etc.
+ * <p>
+ * Entry point for the entire application. MainFrame defines the layout for the
+ * entire application frame. It uses the {@link Builder} to create the four main
+ * elements that will go into the {@link MainFrame}, the: sidebar, toolbar,
+ * stage, and slide switcher.
+ * </p>
+ * <p>
+ * The application window is defined using a {@link BorderLayout} as follows:<br>
+ * 
+ * <img src=
+ * "../../../../../../doc-source/diagrams/main-frame-border-layout.jpg"
+ * alt="Application main BorderLayout" /><br />
+ * The toolbar and the slide switcher are essentially allowed to declare the
+ * height they wish to be. The sidebar is allowed to declare the width it would
+ * like to be. All otehr dimensions automatically stretch to fill all available
+ * space.
+ * </p>
  * 
  * @author Hamilton Turner
  * 
@@ -74,18 +88,15 @@ public class MainFrame extends JFrame {
 				MainFrame frame = new MainFrame();
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+				// TODO Change this once we can fully resize stuff within the
+				// StageWrapper
+				frame.setResizable(false);
+
 				// Display the window.
 				frame.setVisible(true);
 			}
 		});
 	}
-
-	@SuppressWarnings("unused")
-	private ToolBar toolBar_;
-	@SuppressWarnings("unused")
-	private SideBar sideBar_;
-	@SuppressWarnings("unused")
-	private StageWrapper stage_;
 
 	public static final String APP_WINDOW_TITLE = "Experiment Builder";
 
@@ -93,19 +104,20 @@ public class MainFrame extends JFrame {
 	 * Sets the size of the application window. Sets up the stage wrapper as a
 	 * {@link DraggableManager} (allowing anything inside of it to become
 	 * draggable by simply implementing {@link Draggable}). Sets up the
-	 * {@link ToolBar} and the {@link SideBar}. The app window is broken up as
-	 * follows:
+	 * {@link ToolBar} and the {@link SideBar}.
 	 * 
-	 * <pre>
-	 * --------------------------
-	 * |  Toolbar               |
-	 * |---------------|--------|
-	 * |  Stage        | Side   |
-	 * |     Wrapper   |    Bar |
-	 * |               |        |
-	 * --------------------------
-	 * </pre>
+	 * <p>
+	 * The application window is defined using a {@link BorderLayout} as
+	 * follows:<br>
 	 * 
+	 * <img src=
+	 * "../../../../../../doc-source/diagrams/main-frame-border-layout.jpg"
+	 * alt="Application main BorderLayout" /><br />
+	 * The toolbar and the slide switcher are essentially allowed to declare the
+	 * height they wish to be. The sidebar is allowed to declare the width it
+	 * would like to be. All otehr dimensions automatically stretch to fill all
+	 * available space.
+	 * </p>
 	 * Also performs initialization of the model used by the builder component.
 	 * Does so by setting up the {@link BuilderState}
 	 */
@@ -119,16 +131,7 @@ public class MainFrame extends JFrame {
 		setBounds(inset, inset, screenSize.width - inset * 2, screenSize.height
 				- inset * 2);
 
-		setLayout(new GridBagLayout());
-
-		// Stage constraints
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.BOTH;
-		c.gridx = 0;
-		c.gridy = 1;
-		c.weightx = 1.0;
-		c.weighty = 1.0;
-		c.anchor = GridBagConstraints.CENTER;
+		setLayout(new BorderLayout());
 
 		// Setup stage as a Draggable Container, allowing us to place Draggable
 		// components inside of it
@@ -137,52 +140,19 @@ public class MainFrame extends JFrame {
 		manager.registerDraggableContainer(stageWrapper);
 		manager.setDragPolicy(DragPolicy.STRICT);
 
-		add(stageWrapper, c);
+		JToolBar tb = Builder.buildToolBar(stageWrapper);
+		add(tb, BorderLayout.NORTH);
 
-		// Toolbar constraints
-		c = new GridBagConstraints();
-		c.fill = GridBagConstraints.BOTH;
-		c.gridx = 0;
-		c.gridy = 0;
-		c.weightx = 1.0;
-		c.gridwidth = 2;
+		JPanel sidebar = Builder.buildSideBar(stageWrapper);
+		add(sidebar, BorderLayout.EAST);
 
-		ToolBar toolBar = new ToolBar(stageWrapper);
-		toolBar_ = toolBar;
-		add(toolBar, c);
+		JPanel slideSwitcher = Builder.buildSlideSwitcher();
+		add(slideSwitcher, BorderLayout.SOUTH);
 
-		// Sidebar constraints
-		c = new GridBagConstraints();
-		c.fill = GridBagConstraints.VERTICAL;
-		c.gridx = 1;
-		c.gridy = 1;
-		c.weighty = 1.0;
-		c.anchor = GridBagConstraints.LINE_END;
-
-		SideBar sideBar = new SideBar(stageWrapper);
-		sideBar_ = sideBar;
-		add(sideBar, c);
-
-		// Change the title
-		setTitle(getTitle() + " - Slide 1 of 1");
+		add(stageWrapper, BorderLayout.CENTER);
 
 		// Initialize the model
 		new BuilderState(stageWrapper);
-
-		// TODO Setup left/right arrows on the stage later. For now we have
-		// icons in the toolbar for next / previous, which is good enough. If
-		// you uncomment this, it will work but apparently the arrows will not
-		// change position when the window resizes. The stage resizing as a
-		// whole is buggy, so for now im just gonna ignore it and focus on
-		// making everything else work
-		/*
-		 * ImageIcon leftArrow = new ImageIcon("images/left_arrow.png"); JButton
-		 * leftArrowBtn = new JButton(leftArrow); desktop.add(leftArrowBtn);
-		 * 
-		 * ImageIcon rightArrow = new ImageIcon("images/right_arrow.png");
-		 * JButton rightArrowBtn = new JButton(rightArrow);
-		 * desktop.add(rightArrowBtn);
-		 */
 	}
 
 	/** Provide a Universal ID for serialization */

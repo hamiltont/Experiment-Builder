@@ -4,6 +4,10 @@
 package edu.vanderbilt.psychology.gui.main;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
@@ -27,9 +31,19 @@ import edu.vanderbilt.psychology.gui.stage.Stage;
  */
 // TODO Update the minimum and maximum sizes for this component based off of the
 // Stage
+
+// TODO In order to implement a fully-resizable application window, the
+// SlideElements need to be resizeable. That implies that this JLayeredPane
+// needs to be able to lay out the components in some way. Until we figure that
+// out, the main JFrame is marked as not resizable.
+
+// TODO It would be nice to add a custom LayoutManager to the JLayeredPane that
+// completely ignored the layers and simply handled the resize operations. Aka
+// if the JLayeredPane was resized, then this would resize all of the internal
+// components as well, following some pre-defined rules
 public class StageWrapper extends JLayeredPane {
 
-	private boolean addedStage_ = false;
+	private Stage stage_;
 	private static final int stageInset_ = 20;
 
 	public StageWrapper(MainFrame frame) {
@@ -37,27 +51,27 @@ public class StageWrapper extends JLayeredPane {
 
 		setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 
-		setVisible(true);
-	}
+		stage_ = new Stage();
+		add(stage_, JLayeredPane.DEFAULT_LAYER);
 
-	public void doLayout() {
-		super.doLayout();
-		
-		if (addedStage_ == false) {
-			Stage s = new Stage(getWidth() - stageInset_, getHeight()
-					- stageInset_);
-			
-			// Center the stage
-			final int vspace = getWidth() - s.getWidth();
-			final int hspace = getHeight() - s.getHeight();
-			s.setLocation(vspace / 2, hspace / 2);
-			
-			add(s, JLayeredPane.DEFAULT_LAYER);
-			addedStage_ = true;
-		}
+		setVisible(true);
+
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+
+				stage_.setSize(getWidth() - stageInset_, getHeight()
+						- stageInset_);
+
+				// Center the stage
+				final int vspace = getWidth() - stage_.getWidth();
+				final int hspace = getHeight() - stage_.getHeight();
+				stage_.setLocation(vspace / 2, hspace / 2);
+			}
+		});
+
 	}
 
 	/** Provide a Universal ID for serialization */
 	private static final long serialVersionUID = 1851624859168284892L;
-
 }

@@ -2,8 +2,11 @@ package edu.vanderbilt.psychology.gui.toolBar;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+=======
+>>>>>>> a3438b0649a0d421b1d0baee80ec643c09f848f1
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -11,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+<<<<<<< HEAD
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -18,6 +22,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import edu.vanderbilt.psychology.controller.toolbarActions.util.FontChooser.Result;
+=======
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+>>>>>>> a3438b0649a0d421b1d0baee80ec643c09f848f1
 
 @SuppressWarnings("serial")
 public class CreateListDialog extends JDialog {
@@ -64,6 +72,7 @@ public class CreateListDialog extends JDialog {
 		ui.add(buttons, BorderLayout.CENTER);
 
 		JPanel continueCancel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+<<<<<<< HEAD
 
 		JButton cont = new JButton("Continue");
 		cont.addActionListener(new ActionListener() {
@@ -134,6 +143,14 @@ public class CreateListDialog extends JDialog {
 		// @Seth, this is where you should register button listeners for the
 		// continue and cancel buttons. Please have the listeners perform the
 		// appropriate actions e.g. the cancel button should close the create
+=======
+		JButton cancel = new JButton("Cancel");
+		JButton cont = new JButton("Continue");
+
+		// @Seth, this is where you should register button listeners for the
+		// continue and cancel buttons. Please have the listeners perform the
+		// appropriate actions e.g. the cancel button should clost the create
+>>>>>>> a3438b0649a0d421b1d0baee80ec643c09f848f1
 		// list dialog and the continue button should close the create list
 		// dialog and then open a dialog that will allow a user to input some
 		// list data

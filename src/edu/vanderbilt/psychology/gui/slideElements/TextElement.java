@@ -25,6 +25,7 @@ import edu.vanderbilt.psychology.model.properties.Property;
  */
 public class TextElement extends SlideElement {
 	private JLabel label_;
+	
 	private ArrayList<Property> properties_;
 
 	public TextElement(String text, Font font, Color foreGround) {

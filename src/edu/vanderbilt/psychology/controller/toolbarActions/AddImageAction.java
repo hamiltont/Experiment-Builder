@@ -39,6 +39,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.filechooser.FileFilter;
 
 import sun.awt.image.ImageFormatException;
+import edu.vanderbilt.psychology.controller.toolbarActions.util.Utils;
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.ImageElement;
 
