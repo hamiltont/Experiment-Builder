@@ -5,8 +5,6 @@ package edu.vanderbilt.psychology.model;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 
