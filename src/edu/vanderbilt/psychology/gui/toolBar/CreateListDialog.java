@@ -140,7 +140,8 @@ public class CreateListDialog extends JDialog {
 		JButton remove = new JButton("Remove String");
 		remove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				listModel.removeElement(list.getSelectedValues());
+				// Not really sure what argument to put here
+				// listModel.removeElement();
 			}
 		});
 		listArea.add(listPane);
