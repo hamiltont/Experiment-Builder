@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -19,6 +18,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import edu.vanderbilt.psychology.model.EBList;
 import edu.vanderbilt.psychology.model.ListDatabase;
 
 /**
@@ -140,30 +140,30 @@ public class CreateListDialog extends JDialog {
 		JButton remove = new JButton("Remove String");
 		remove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				// Not really sure what argument to put here
-				// listModel.removeElement();
+				listModel.remove(list.getSelectedIndex());
 			}
 		});
 		listArea.add(listPane);
 		listArea.add(remove);
-		
-		final JTextField nameTextField = new JTextField("Enter list name");
-		JButton accept = new JButton("Accept");
-		accept.addActionListener(new ActionListener() {
-			@SuppressWarnings("unchecked")
-			public void actionPerformed(ActionEvent evt) {
-				EBList<String> eblist = new EBList<String>(nameTextField.getText());
-				eblist.addAll((Collection<? extends String>) list);
-				ListDatabase.getInstance().addStringList(eblist);
-			}
-		});
-		listArea.add(nameTextField);
-		listArea.add(accept);
 
 		ui.add(listArea, BorderLayout.CENTER);
 
 		// Creating the bottom panel with the cancel and ok buttons
 		JPanel cancelOk = new JPanel(new FlowLayout());
+		
+		final JTextField nameTextField = new JTextField("Enter list name");
+		JButton accept = new JButton("Accept");
+		accept.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				EBList<String> eblist = new EBList<String>(nameTextField.getText());
+				for (int i = 0; i < list.getModel().getSize() - 1; i++) {
+					eblist.add((String) list.getModel().getElementAt(i));
+				}
+				ListDatabase.getInstance().addStringList(eblist);
+			}
+		});
+		cancelOk.add(nameTextField);
+		cancelOk.add(accept);
 
 		JButton ok = new JButton("Ok");
 		ok.addActionListener(new ActionListener() {
