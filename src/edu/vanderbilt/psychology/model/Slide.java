@@ -30,6 +30,7 @@ import edu.vanderbilt.psychology.model.properties.Property;
  */
 public class Slide {
 	List<ModelElement> elements_ = new ArrayList<ModelElement>();
+	List<EventReactor> reactors_ = new ArrayList<EventReactor>();
 
 	public void saveElement(ModelElement me) {
 		elements_.add(me);

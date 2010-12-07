@@ -7,18 +7,21 @@ import java.util.List;
  * Builds an Experiment Builder list object, which uses an internal ArrayList
  * to hold elements and expands the features of an ArrayList in that each
  * EBList has its own name and a pointer that points to the current position
- * of the list. The class is data-based, and is thus used for the model.
+ * of the list. 
  * 
  * @author sethfri
  *
  * @param <T>
  */
+// TODO - Implement the List interface
 public class EBList<T> {
-	 // TODO - Implement the List interface
 	
 	private List<T> mInternalList = new ArrayList<T>();
 	private int mCurrentListPos = -1;
 	private String mName;
+	
+	@SuppressWarnings("unused")
+	private EBList() {}
 	
 	public EBList(String name) {
 		setName(name);
@@ -33,6 +36,10 @@ public class EBList<T> {
 	}
 	
 	public void setLocation(int index) {
+		if (index < 0 || index > (mInternalList.size() - 1))
+			throw new IndexOutOfBoundsException("Unable to set a location of " + 
+					index + ". List size is " + mInternalList.size());
+		
 		mCurrentListPos = index;
 	}
 	
@@ -42,6 +49,10 @@ public class EBList<T> {
 	
 	public String getName() {
 		return mName;
+	}
+	
+	public T get() {
+		return mInternalList.get(mCurrentListPos);
 	}
 	
 	public void reset() {
