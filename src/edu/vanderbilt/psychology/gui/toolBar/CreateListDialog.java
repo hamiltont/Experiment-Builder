@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -15,6 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import edu.vanderbilt.psychology.model.EBList;
+import edu.vanderbilt.psychology.model.ListDatabase;
 
 /**
  * Builds and displays the create list dialog. Currently also handles building
@@ -109,12 +114,19 @@ public class CreateListDialog extends JDialog {
 
 	private JPanel buildTextListUI(final JDialog parentDialog) {
 		JPanel ui = new JPanel(new BorderLayout());
+		
+		final DefaultListModel listModel = new DefaultListModel();
 
 		// Creating the top panel with the entry pane
 		JPanel textEntryPanel = new JPanel(new FlowLayout());
-		JTextField entryTextField = new JTextField(
+		final JTextField entryTextField = new JTextField(
 				"Type strings and hit enter to put them in the list");
 		JButton enter = new JButton("Enter");
+		enter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				listModel.addElement(entryTextField.getText());
+			}
+		});
 		textEntryPanel.add(entryTextField);
 		textEntryPanel.add(enter);
 		ui.add(textEntryPanel, BorderLayout.NORTH);
@@ -122,10 +134,15 @@ public class CreateListDialog extends JDialog {
 		// Creating the middle panel with the list and remove items
 		JPanel listArea = new JPanel(new FlowLayout());
 
-		JList list = new JList();
+		final JList list = new JList(listModel);
 		list.setLayoutOrientation(JList.VERTICAL);
 		JScrollPane listPane = new JScrollPane(list);
 		JButton remove = new JButton("Remove String");
+		remove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				listModel.remove(list.getSelectedIndex());
+			}
+		});
 		listArea.add(listPane);
 		listArea.add(remove);
 
@@ -133,6 +150,20 @@ public class CreateListDialog extends JDialog {
 
 		// Creating the bottom panel with the cancel and ok buttons
 		JPanel cancelOk = new JPanel(new FlowLayout());
+		
+		final JTextField nameTextField = new JTextField("Enter list name");
+		JButton accept = new JButton("Accept");
+		accept.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				EBList<String> eblist = new EBList<String>(nameTextField.getText());
+				for (int i = 0; i < list.getModel().getSize() - 1; i++) {
+					eblist.add((String) list.getModel().getElementAt(i));
+				}
+				ListDatabase.getInstance().addStringList(eblist);
+			}
+		});
+		cancelOk.add(nameTextField);
+		cancelOk.add(accept);
 
 		JButton ok = new JButton("Ok");
 		ok.addActionListener(new ActionListener() {
