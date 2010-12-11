@@ -60,7 +60,7 @@ import edu.vanderbilt.psychology.model.BuilderState;
  * alt="Application main BorderLayout" /><br />
  * The toolbar and the slide switcher are essentially allowed to declare the
  * height they wish to be. The sidebar is allowed to declare the width it would
- * like to be. All otehr dimensions automatically stretch to fill all available
+ * like to be. All other dimensions automatically stretch to fill all available
  * space.
  * </p>
  * 
