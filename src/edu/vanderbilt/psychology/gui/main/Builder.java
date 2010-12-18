@@ -4,10 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -56,10 +60,10 @@ public class Builder {
 	private static final int SIDEBAR_WIDTH = 300;
 
 	private static final int SLIDE_SWITCHER_HEIGHT = 100;
-	
-	private static final int JLAYEREDPANE_WIDTH = 100;
-	
-	private static final int JLAYEREDPANE_HEIGHT = 100;
+
+	private static final int SLIDE_THUMBNAIL_WIDTH = 80;
+
+	private static final int SLIDE_THUMBNAIL_HEIGHT = 80;
 
 	/**
 	 * Creates and populates the toolbar.
@@ -226,48 +230,118 @@ public class Builder {
 	 */
 	protected static JPanel buildSlideSwitcher() {
 		JPanel switcher = new JPanel();
-		switcher.setLayout(new FlowLayout());
-
-		switcher
-				.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		switcher.setLayout(new FlowLayout(FlowLayout.LEFT));
 		switcher.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
+
+		/*
+		 * JLayeredPane menu = new JLayeredPane(); menu.setPreferredSize(new
+		 * Dimension(150, 135));
+		 * 
+		 * JPanel palette = new JPanel(); palette.setLayout(new FlowLayout());
+		 * JButton dropdown = new JButton("V"); palette.add(dropdown);
+		 * 
+		 * menu.add(palette, JLayeredPane.PALETTE_LAYER); palette.setBounds(75,
+		 * 0, 75, 35);
+		 * 
+		 * JPanel modal = new JPanel(); modal.setLayout(new FlowLayout());
+		 * 
+		 * JButton makeCopy = new JButton("Make Copy"); JButton repeat = new
+		 * JButton("Repeat x times"); JButton repeatUntil = new
+		 * JButton("Repeat Until..."); modal.add(makeCopy); modal.add(repeat);
+		 * modal.add(repeatUntil);
+		 * 
+		 * menu.add(modal, JLayeredPane.MODAL_LAYER); modal.setBounds(0, 35,
+		 * 150, 100);
+		 * 
+		 * switcher.add(menu);
+		 * 
+		 * JPanel newSlide = new JPanel(); newSlide.setLayout(new
+		 * BorderLayout()); JButton plus = new JButton("+"); newSlide.add(plus,
+		 * BorderLayout.CENTER); JLabel newSlideText = new JLabel("New Slide");
+		 * newSlide.add(newSlideText, BorderLayout.SOUTH);
+		 * 
+		 * switcher.add(newSlide);
+		 */
+
+		// Build the JLayeredPane to hold the thumbnail
+		JLayeredPane slide = new JLayeredPane();
+		slide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
+				SLIDE_THUMBNAIL_HEIGHT));
+		slide.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+		// Build a blank background image for now
+		BufferedImage backgroundImage = new BufferedImage(
+				SLIDE_THUMBNAIL_WIDTH, SLIDE_THUMBNAIL_HEIGHT,
+				BufferedImage.TYPE_INT_RGB);
+		int rgb = Color.RED.getRGB();
+		for (int x = 0; x < SLIDE_THUMBNAIL_WIDTH; x++)
+			for (int y = 0; y < SLIDE_THUMBNAIL_HEIGHT; y++)
+				backgroundImage.setRGB(x, y, rgb);
+
+		// Create the background image layer
+		ImageIcon backgroundIcon = new ImageIcon(backgroundImage);
+		JLabel slideThumbnail = new JLabel(backgroundIcon);
+		slideThumbnail.setBounds(0, 0, SLIDE_THUMBNAIL_WIDTH,
+				SLIDE_THUMBNAIL_HEIGHT);
+		slide.add(slideThumbnail, JLayeredPane.DEFAULT_LAYER);
+
+		// Create the menu
+		final JPanel menu = new JPanel();
+		menu.setLayout(new BoxLayout(menu, BoxLayout.PAGE_AXIS));
+		JButton button1 = new JButton("action1");
+		JButton button2 = new JButton("action2");
+		JButton button3 = new JButton("action3");
+		menu.add(button1);
+		menu.add(button2);
+		menu.add(button3);
+		menu.setVisible(false);
+		menu.setBounds(0, 0, SLIDE_THUMBNAIL_WIDTH - 10,
+				SLIDE_THUMBNAIL_HEIGHT - 10);
+		slide.add(menu, JLayeredPane.PALETTE_LAYER);
+
 		
-    	JLayeredPane menu = new JLayeredPane();
-    	menu.setPreferredSize(new Dimension(150, 135));
-    	
-    	JPanel palette = new JPanel();
-    	palette.setLayout(new FlowLayout());
-    	JButton dropdown = new JButton("V");
-    	palette.add(dropdown);
-    	
-    	menu.add(palette, JLayeredPane.PALETTE_LAYER);
-    	palette.setBounds(75, 0, 75, 35);
-    	
-    	JPanel modal = new JPanel();
-    	modal.setLayout(new FlowLayout());
-  
-    	JButton makeCopy = new JButton("Make Copy");
-    	JButton repeat = new JButton("Repeat x times");
-    	JButton repeatUntil = new JButton("Repeat Until...");
-    	modal.add(makeCopy);
-    	modal.add(repeat);
-    	modal.add(repeatUntil);
-    	
-    	menu.add(modal, JLayeredPane.MODAL_LAYER);
-    	modal.setBounds(0, 35, 150, 100);
-    	
-    	switcher.add(menu);
-    	
-    	JPanel newSlide = new JPanel();
-    	newSlide.setLayout(new BorderLayout());
-    	JButton plus = new JButton("+");
-    	newSlide.add(plus, BorderLayout.CENTER);
-    	JLabel newSlideText = new JLabel("New Slide");
-    	newSlide.add(newSlideText, BorderLayout.SOUTH);
-    	
-    	switcher.add(newSlide);
+		
+		// Create the menu button
+		// I chose not to use a JButton b/c I cant seem to control the LAF on a
+		// per-component basis
+		JLabel menuButton = new JLabel("v");
+		menuButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (menu.isVisible())
+					menu.setVisible(false);
+				else
+					menu.setVisible(true);
+			}
+		});
+		int width = 10;
+		int height = 10;
+		menuButton.setBounds(SLIDE_THUMBNAIL_WIDTH - width, 0, width, height);
+		slide.add(menuButton, JLayeredPane.PALETTE_LAYER);
+
+		switcher.add(slide);
 
 		return switcher;
 	}
-
 }
