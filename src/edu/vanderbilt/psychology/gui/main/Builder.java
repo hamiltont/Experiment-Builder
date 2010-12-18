@@ -3,8 +3,13 @@ package edu.vanderbilt.psychology.gui.main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
@@ -51,6 +56,10 @@ public class Builder {
 	private static final int SIDEBAR_WIDTH = 300;
 
 	private static final int SLIDE_SWITCHER_HEIGHT = 100;
+	
+	private static final int JLAYEREDPANE_WIDTH = 100;
+	
+	private static final int JLAYEREDPANE_HEIGHT = 100;
 
 	/**
 	 * Creates and populates the toolbar.
@@ -217,10 +226,46 @@ public class Builder {
 	 */
 	protected static JPanel buildSlideSwitcher() {
 		JPanel switcher = new JPanel();
+		switcher.setLayout(new FlowLayout());
 
 		switcher
 				.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		switcher.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
+		
+    	JLayeredPane menu = new JLayeredPane();
+    	menu.setPreferredSize(new Dimension(150, 135));
+    	
+    	JPanel palette = new JPanel();
+    	palette.setLayout(new FlowLayout());
+    	JButton dropdown = new JButton("V");
+    	palette.add(dropdown);
+    	
+    	menu.add(palette, JLayeredPane.PALETTE_LAYER);
+    	palette.setBounds(75, 0, 75, 35);
+    	
+    	JPanel modal = new JPanel();
+    	modal.setLayout(new FlowLayout());
+  
+    	JButton makeCopy = new JButton("Make Copy");
+    	JButton repeat = new JButton("Repeat x times");
+    	JButton repeatUntil = new JButton("Repeat Until...");
+    	modal.add(makeCopy);
+    	modal.add(repeat);
+    	modal.add(repeatUntil);
+    	
+    	menu.add(modal, JLayeredPane.MODAL_LAYER);
+    	modal.setBounds(0, 35, 150, 100);
+    	
+    	switcher.add(menu);
+    	
+    	JPanel newSlide = new JPanel();
+    	newSlide.setLayout(new BorderLayout());
+    	JButton plus = new JButton("+");
+    	newSlide.add(plus, BorderLayout.CENTER);
+    	JLabel newSlideText = new JLabel("New Slide");
+    	newSlide.add(newSlideText, BorderLayout.SOUTH);
+    	
+    	switcher.add(newSlide);
 
 		return switcher;
 	}
