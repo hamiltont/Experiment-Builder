@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
+import edu.vanderbilt.psychology.model.Event;
 import edu.vanderbilt.psychology.model.Slide;
 
 /**
@@ -42,5 +43,11 @@ public class Movement extends Property {
 		JPanel poo = new JPanel();
 		poo.add(new JLabel("Hi there!!!"));
 		return new Section("Movement", poo);
+	}
+
+	@Override
+	public void receiveEvent(Event e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

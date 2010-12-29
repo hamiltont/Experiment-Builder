@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
+import edu.vanderbilt.psychology.model.Event;
 import edu.vanderbilt.psychology.model.Slide;
 
 /**
@@ -76,5 +77,11 @@ public class Position extends Property {
 	@Override
 	public Section getSection() {
 		return new Section(sectionTitle_, section_);
+	}
+
+	@Override
+	public void receiveEvent(Event e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

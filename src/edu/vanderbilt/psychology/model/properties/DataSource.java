@@ -14,6 +14,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddContainerAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddImageAction;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
+import edu.vanderbilt.psychology.model.Event;
 
 /**
  * This {@link Property} will define the source of data for a
@@ -59,6 +60,12 @@ public class DataSource extends Property {
 		JPanel poo = new JPanel();
 		poo.add(new JLabel("Hi there!!!"));
 		return new Section("Data Source", poo);
+	}
+
+	@Override
+	public void receiveEvent(Event e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

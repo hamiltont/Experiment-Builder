@@ -14,7 +14,8 @@ import edu.vanderbilt.psychology.model.Slide;
  * 
  */
 public class PlayerController extends JPanel {
-
+	private Experiment mExperiment;
+	
 	public PlayerController(Experiment e) {
 		
 	}
