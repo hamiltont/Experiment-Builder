@@ -3,15 +3,22 @@
  */
 package edu.vanderbilt.psychology.model;
 
+import edu.vanderbilt.psychology.player.EventManager;
+
 /**
  * Defines an abstract interface for listening to Events. May change later if we
- * need to have multiple defined types of EventListeners, such as
- * InputEventListener and PropertyEventListener, but for now this just serves as
- * a placeholder and an indicator in any class that can listen for events
+ * need to have multiple defined types of EventListeners.
  * 
  * @author Hamilton Turner
  * 
  */
 public interface EventListener {
 
+	/**
+	 * Called when the {@link EventManager} wants to pass this {@link EventListener} an {@link Event}
+	 * 
+	 * @param e
+	 *            the event
+	 */
+	public void receiveEvent(Event e);
 }

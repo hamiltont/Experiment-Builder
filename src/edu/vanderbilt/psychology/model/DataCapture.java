@@ -63,4 +63,10 @@ public class DataCapture implements EventListener {
 	public String getName() {
 		return "DataCapture";
 	}
+
+	@Override
+	public void receiveEvent(Event e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

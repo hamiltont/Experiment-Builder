@@ -14,7 +14,7 @@ public class Player {
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
+			public void run() { 
 				// Make sure we have nice window decorations.
 				JFrame.setDefaultLookAndFeelDecorated(true);
 
