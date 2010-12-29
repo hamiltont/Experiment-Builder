@@ -50,6 +50,9 @@ public class Builder {
 
 	private static final int SIDEBAR_WIDTH = 300;
 
+	/**
+	 * Sets the height in pixels of the slide switcher component at the bottom
+	 */
 	private static final int SLIDE_SWITCHER_HEIGHT = 100;
 
 	/**
@@ -218,8 +221,7 @@ public class Builder {
 	protected static JPanel buildSlideSwitcher() {
 		JPanel switcher = new JPanel();
 
-		switcher
-				.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		switcher.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		switcher.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
 
 		return switcher;
