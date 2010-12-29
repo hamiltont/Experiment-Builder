@@ -37,6 +37,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
 import net.java.swingfx.jdraggable.DefaultDraggableManager;
@@ -146,7 +147,7 @@ public class MainFrame extends JFrame {
 		JPanel sidebar = Builder.buildSideBar(stageWrapper);
 		add(sidebar, BorderLayout.EAST);
 
-		JPanel slideSwitcher = Builder.buildSlideSwitcher();
+		JScrollPane slideSwitcher = Builder.buildSlideSwitcher();
 		add(slideSwitcher, BorderLayout.SOUTH);
 
 		add(stageWrapper, BorderLayout.CENTER);

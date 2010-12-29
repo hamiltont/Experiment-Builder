@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
 
@@ -234,48 +235,58 @@ public class Builder {
 	 * 
 	 * @return
 	 */
-	protected static JPanel buildSlideSwitcher() {
+	// TODO - Make the scrollbar a bit prettier
+	protected static JScrollPane buildSlideSwitcher() {
 
 		final JPanel switcher = new JPanel();
 		switcher.setLayout(new FlowLayout(FlowLayout.LEFT));
-		switcher.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
+		switcher.setPreferredSize(new Dimension(10000, SLIDE_SWITCHER_HEIGHT));
 
-		/*
-		 * JLayeredPane menu = new JLayeredPane(); menu.setPreferredSize(new
-		 * Dimension(150, 135));
-		 * 
-		 * JPanel palette = new JPanel(); palette.setLayout(new FlowLayout());
-		 * JButton dropdown = new JButton("V"); palette.add(dropdown);
-		 * 
-		 * menu.add(palette, JLayeredPane.PALETTE_LAYER); palette.setBounds(75,
-		 * 0, 75, 35);
-		 * 
-		 * JPanel modal = new JPanel(); modal.setLayout(new FlowLayout());
-		 * 
-		 * JLabel makeCopy = new JLabel("Make Copy");
-		 * makeCopy.setBorder(BorderFactory.createLineBorder(Color.black));
-		 * JLabel repeat = new JLabel("Repeat x times");
-		 * repeat.setBorder(BorderFactory.createLineBorder(Color.black));
-		 * JLabel repeatUntil = new JLabel("Repeat Until...");
-		 * repeatUntil.setBorder(BorderFactory.createLineBorder(Color.black));
-		 * modal.add(makeCopy);
-		 * modal.add(repeat);
-		 * modal.add(repeatUntil);
-		 * 
-		 * menu.add(modal, JLayeredPane.MODAL_LAYER); modal.setBounds(0, 35,
-		 * 150, 100);
-		 * 
-		 * switcher.add(menu);
-		 * 
-		 * JPanel newSlide = new JPanel(); newSlide.setLayout(new
-		 * BorderLayout()); JButton plus = new JButton("+"); newSlide.add(plus,
-		 * BorderLayout.CENTER); JLabel newSlideText = new JLabel("New Slide");
-		 * newSlide.add(newSlideText, BorderLayout.SOUTH);
-		 * 
-		 * switcher.add(newSlide);
-		 */
+		JLayeredPane slide = createSlideThumbnail();
+		switcher.add(slide);
 
-		// Build the JLayeredPane to hold the thumbnail
+		final JPanel newSlide = new JPanel();
+		newSlide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
+				SLIDE_THUMBNAIL_HEIGHT));
+		newSlide.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		newSlide.setLayout(new BorderLayout());
+		JButton plus = new JButton("+");
+		plus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				// Remove the new slide, add the thumbnail, and re-add the
+				// slide. This ensures that the newSlide stays to the far right
+				switcher.remove(newSlide);
+				switcher.add(createSlideThumbnail());
+				switcher.add(newSlide);
+				switcher.revalidate();
+			}
+		});
+		newSlide.add(plus, BorderLayout.CENTER);
+		JLabel newSlideText = new JLabel("         New Slide");
+		newSlide.add(newSlideText, BorderLayout.SOUTH);
+
+		switcher.add(newSlide);
+
+		JScrollPane s = new JScrollPane(switcher);
+		s
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		s.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		s.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
+
+
+		return s;
+	}
+
+	/**
+	 * Creates a new slide thumbnail.
+	 * 
+	 * Implemented into the switcher, this method adds a new slide thumbnail to
+	 * the switcher when a new slide is created.
+	 * 
+	 * @return
+	 */
+	private static JLayeredPane createSlideThumbnail() {
+		// Build the JLayeredPane to hold the slide's thumbnail
 		JLayeredPane slide = new JLayeredPane();
 		slide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
 				SLIDE_THUMBNAIL_HEIGHT));
@@ -300,7 +311,8 @@ public class Builder {
 		// Create the menu
 		final JPanel menu = new JPanel();
 		menu.setLayout(new BoxLayout(menu, BoxLayout.PAGE_AXIS));
-		// Tried playing around with the spacing here to make the labels (or what
+		// Tried playing around with the spacing here to make the labels (or
+		// what
 		// will eventually become buttons) align properly (I also edited
 		// SLIDE_THUMBNAIL_WIDTH and SLIDE_THUMBNAIL_HEIGHT to match), but the
 		// "Repeat Until ..." button still ends up shorter than the other two.
@@ -312,29 +324,29 @@ public class Builder {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				
+
 			}
-		
+
 		});
 		JLabel repeat = new JLabel("    Repeat x times    ");
 		repeat.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -342,29 +354,29 @@ public class Builder {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				
+
 			}
-		
+
 		});
 		JLabel repeatUntil = new JLabel("    Repeat Until ...    ");
 		repeatUntil.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -372,29 +384,29 @@ public class Builder {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-			
+
 			}
-			
+
 		});
 		menu.add(makeCopy);
 		menu.add(repeat);
@@ -403,8 +415,6 @@ public class Builder {
 		menu.setBounds(0, 0, SLIDE_THUMBNAIL_WIDTH - 10,
 				SLIDE_THUMBNAIL_HEIGHT - 10);
 		slide.add(menu, JLayeredPane.PALETTE_LAYER);
-
-
 
 		// Create the menu button
 		// I chose not to use a JButton b/c I can't seem to control the LAF on a
@@ -445,66 +455,6 @@ public class Builder {
 		menuButton.setBounds(SLIDE_THUMBNAIL_WIDTH - width, 0, width, height);
 		slide.add(menuButton, JLayeredPane.PALETTE_LAYER);
 
-		switcher.add(slide);
-		
-		final JPanel newSlide = new JPanel();
-		newSlide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
-				SLIDE_THUMBNAIL_HEIGHT));
-		newSlide.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		newSlide.setLayout(new BorderLayout()); 
-		JButton plus = new JButton("+");
-		// This mostly works; the new slide only appears after clicking the
-		// dropdown button on the menu panel. Not sure what to do about that.
-		// There's also probably an easier way to place the new slide to the
-		// left of the new slide panel (i.e. the panel containing the button
-		// to make a new slide). I'm just not aware of it. I know I could set
-		// the bounds, but it would be difficult to set the bounds for a
-		// "general" slide.
-		plus.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				switcher.remove(newSlide);
-				switcher.add(createSlideThumbnail());
-				switcher.add(newSlide);
-			}
-		});
-		newSlide.add(plus, BorderLayout.CENTER); 
-		JLabel newSlideText = new JLabel("         New Slide");
-		newSlide.add(newSlideText, BorderLayout.SOUTH);
-		
-		switcher.add(newSlide);
-
-		return switcher;
-	}
-	
-	/**
-	 * Creates a new slide thumbnail.
-	 * 
-	 * Implemented into the switcher, this method adds a new slide
-	 * thumbnail to the switcher when a new slide is created.
-	 * 
-	 * @return
-	 */
-	private static JLayeredPane createSlideThumbnail() {
-		JLayeredPane slide = new JLayeredPane();
-		slide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
-				SLIDE_THUMBNAIL_HEIGHT));
-		slide.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-		// Build a blank background image for now
-		BufferedImage backgroundImage = new BufferedImage(
-				SLIDE_THUMBNAIL_WIDTH, SLIDE_THUMBNAIL_HEIGHT,
-				BufferedImage.TYPE_INT_RGB);
-		int rgb = Color.GRAY.getRGB();
-		for (int x = 0; x < SLIDE_THUMBNAIL_WIDTH; x++)
-			for (int y = 0; y < SLIDE_THUMBNAIL_HEIGHT; y++)
-				backgroundImage.setRGB(x, y, rgb);
-
-		// Create the background image layer
-		ImageIcon backgroundIcon = new ImageIcon(backgroundImage);
-		JLabel slideThumbnail = new JLabel(backgroundIcon);
-		slideThumbnail.setBounds(0, 0, SLIDE_THUMBNAIL_WIDTH,
-				SLIDE_THUMBNAIL_HEIGHT);
-		slide.add(slideThumbnail, JLayeredPane.DEFAULT_LAYER);
 		return slide;
 	}
 }
