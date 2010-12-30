@@ -1,4 +1,4 @@
-package edu.vanderbilt.psychology.model;
+package edu.vanderbilt.psychology.model.events;
 
 import javax.lang.model.element.Element;
 

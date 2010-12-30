@@ -25,7 +25,7 @@ import edu.vanderbilt.psychology.model.properties.Property;
  */
 public class TextElement extends SlideElement {
 	private JLabel label_;
-	
+
 	private ArrayList<Property> properties_;
 
 	public TextElement(String text, Font font, Color foreGround) {
@@ -97,6 +97,9 @@ public class TextElement extends SlideElement {
 		label_ = new JLabel(tme.getText());
 		label_.setFont(tme.getFont());
 		label_.setForeground(tme.getForeGround());
+
+		// TODO is this doing anything? We are not adding this to the
+		// JLayeredpane, so the integer doesn't have any significance
 		add(label_, tme.getLayer());
 
 		Dimension size = label_.getPreferredSize();

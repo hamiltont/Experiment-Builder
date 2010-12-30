@@ -3,6 +3,7 @@
  */
 package edu.vanderbilt.psychology.model;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -96,6 +97,7 @@ public class Experiment {
 	 * if one does not exist
 	 * 
 	 * @param position
+	 *            zero-indexed position of the slide within the experiment
 	 * @return
 	 */
 	public Slide getSlide(int position) {
@@ -144,5 +146,31 @@ public class Experiment {
 
 		System.out.println("Exported!");
 		System.exit(0);
+	}
+
+	public static Experiment loadExperiment() {
+		XStream xs = new XStream();
+
+		xs.alias("Experiment", Experiment.class);
+		xs.alias("Slide", Slide.class);
+		xs.alias("ImageElement", ImageElementModel.class);
+		xs.alias("TextElement", TextModelElement.class);
+		xs.alias("DataSource", DataSource.class);
+		xs.alias("Appearance", Appearance.class);
+		xs.alias("Position", Position.class);
+		xs.alias("Movement", Movement.class);
+
+		Experiment e = null;
+		try {
+			FileReader fr = new FileReader("test.xml");
+			e = (Experiment) xs.fromXML(fr);
+			fr.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
+		System.out.println("Imported!");
+
+		return e;
 	}
 }

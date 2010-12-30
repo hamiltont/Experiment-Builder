@@ -4,23 +4,19 @@
       <elements__>
         <TextElement>
           <location__>
-            <x>295</x>
-            <y>616</y>
+            <x>248</x>
+            <y>136</y>
           </location__>
           <layer__>100</layer__>
-          <text__>Hello World</text__>
+          <text__>Type or Paste your text here!</text__>
           <font__>
             <attributes>
               <entry>
-                <awt-text-attribute>size</awt-text-attribute>
-                <float>28.0</float>
+                <awt-text-attribute>family</awt-text-attribute>
+                <string>Abadi MT Condensed Extra Bold</string>
               </entry>
               <entry>
-                <awt-text-attribute>transform</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>tracking</awt-text-attribute>
+                <awt-text-attribute>posture</awt-text-attribute>
                 <null/>
               </entry>
               <entry>
@@ -28,27 +24,31 @@
                 <null/>
               </entry>
               <entry>
-                <awt-text-attribute>weight</awt-text-attribute>
-                <float>2.0</float>
+                <awt-text-attribute>tracking</awt-text-attribute>
+                <null/>
               </entry>
               <entry>
-                <awt-text-attribute>posture</awt-text-attribute>
+                <awt-text-attribute>weight</awt-text-attribute>
                 <null/>
+              </entry>
+              <entry>
+                <awt-text-attribute>transform</awt-text-attribute>
+                <null/>
+              </entry>
+              <entry>
+                <awt-text-attribute>size</awt-text-attribute>
+                <float>22.0</float>
               </entry>
               <entry>
                 <awt-text-attribute>width</awt-text-attribute>
                 <null/>
               </entry>
-              <entry>
-                <awt-text-attribute>family</awt-text-attribute>
-                <string>Abadi MT Condensed Extra Bold</string>
-              </entry>
             </attributes>
           </font__>
           <foreGround__>
-            <red>153</red>
-            <green>51</green>
-            <blue>0</blue>
+            <red>102</red>
+            <green>102</green>
+            <blue>102</blue>
             <alpha>255</alpha>
           </foreGround__>
           <properties__>
@@ -73,11 +73,11 @@
                     <nameExplicitlySet>false</nameExplicitlySet>
                     <newEventsOnly>true</newEventsOnly>
                     <prefSizeSet>false</prefSizeSet>
-                    <valid>true</valid>
-                    <visible>false</visible>
+                    <valid>false</valid>
+                    <visible>true</visible>
                     <width>0</width>
-                    <x>150</x>
-                    <y>20</y>
+                    <x>0</x>
+                    <y>0</y>
                     <background class="com.apple.laf.AquaNativeResources$CColorPaintUIResource" serialization="custom">
                       <awt-color>
                         <default>
@@ -88,7 +88,7 @@
                       <apple.awt.CColor>
                         <default>
                           <argb>-1118482</argb>
-                          <fNSColor>4296312832</fNSColor>
+                          <fNSColor>4330869936</fNSColor>
                         </default>
                       </apple.awt.CColor>
                       <apple.awt.CColorPaint>
@@ -98,15 +98,6 @@ CE5TT2JqZWN0AIWG</byte-array>
                         <default/>
                       </apple.awt.CColorPaint>
                     </background>
-                    <changeSupport serialization="custom">
-                      <java.beans.PropertyChangeSupport>
-                        <default>
-                          <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
-                          <source class="javax.swing.JPanel" reference="../../../../../.."/>
-                        </default>
-                        <null/>
-                      </java.beans.PropertyChangeSupport>
-                    </changeSupport>
                     <font class="com.apple.laf.AquaFonts$DerivedUIResourceFont" serialization="custom">
                       <awt-font>
                         <default>
@@ -144,7 +135,7 @@ CE5TT2JqZWN0AIWG</byte-array>
                             <eventMask>4104</eventMask>
                             <focusTraversalKeysEnabled>true</focusTraversalKeysEnabled>
                             <focusable>true</focusable>
-                            <height>29</height>
+                            <height>0</height>
                             <ignoreRepaint>false</ignoreRepaint>
                             <isFocusTraversableOverridden>0</isFocusTraversableOverridden>
                             <isPacked>false</isPacked>
@@ -301,7 +292,7 @@ CE5TT2JqZWN0AIWG</byte-array>
                             <eventMask>4104</eventMask>
                             <focusTraversalKeysEnabled>true</focusTraversalKeysEnabled>
                             <focusable>true</focusable>
-                            <height>27</height>
+                            <height>0</height>
                             <ignoreRepaint>false</ignoreRepaint>
                             <isFocusTraversableOverridden>1</isFocusTraversableOverridden>
                             <isPacked>false</isPacked>
@@ -314,7 +305,7 @@ CE5TT2JqZWN0AIWG</byte-array>
                             <visible>true</visible>
                             <width>0</width>
                             <x>0</x>
-                            <y>29</y>
+                            <y>0</y>
                             <background class="com.apple.laf.AquaNativeResources$CColorPaintUIResource" reference="../../../../../../../java.awt.Component/default/background"/>
                             <changeSupport serialization="custom">
                               <java.beans.PropertyChangeSupport>
@@ -415,7 +406,7 @@ CE5TT2JqZWN0AIWG</byte-array>
                                               <nameExplicitlySet>false</nameExplicitlySet>
                                               <newEventsOnly>false</newEventsOnly>
                                               <prefSizeSet>false</prefSizeSet>
-                                              <valid>true</valid>
+                                              <valid>false</valid>
                                               <visible>false</visible>
                                               <width>0</width>
                                               <x>0</x>
@@ -442,6 +433,7 @@ CE5TT2JqZWN0AIWG</byte-array>
                                           </javax.swing.CellRendererPane>
                                         </currentValuePane>
                                         <itemListener class="com.apple.laf.AquaComboBoxUI$1">
+                                          <lastBlink>0</lastBlink>
                                           <outer-class reference="../.."/>
                                         </itemListener>
                                         <popupMouseListener class="javax.swing.plaf.basic.BasicComboPopup$Handler">
@@ -1160,17 +1152,17 @@ CE5TT2JqZWN0AIWG</byte-array>
                                           <typedString></typedString>
                                           <outer-class class="com.apple.laf.AquaComboBoxUI" reference="../.."/>
                                         </keySelectionManager>
-                                        <isMinimumSizeDirty>false</isMinimumSizeDirty>
+                                        <isMinimumSizeDirty>true</isMinimumSizeDirty>
                                         <cachedMinimumSize>
-                                          <width>158</width>
-                                          <height>27</height>
+                                          <width>0</width>
+                                          <height>0</height>
                                         </cachedMinimumSize>
-                                        <isDisplaySizeDirty>false</isDisplaySizeDirty>
+                                        <isDisplaySizeDirty>true</isDisplaySizeDirty>
                                         <cachedDisplaySize>
-                                          <width>112</width>
-                                          <height>18</height>
+                                          <width>0</width>
+                                          <height>0</height>
                                         </cachedDisplaySize>
-                                        <sameBaseline>true</sameBaseline>
+                                        <sameBaseline>false</sameBaseline>
                                         <squareButton>true</squareButton>
                                         <wasOpaque>false</wasOpaque>
                                         <highlightNextAction class="com.apple.laf.AquaComboBoxUI$3" reference="../../../.."/>
@@ -1354,7 +1346,7 @@ CE5TT2JqZWN0AIWG</byte-array>
                             <eventMask>4104</eventMask>
                             <focusTraversalKeysEnabled>true</focusTraversalKeysEnabled>
                             <focusable>true</focusable>
-                            <height>29</height>
+                            <height>0</height>
                             <ignoreRepaint>false</ignoreRepaint>
                             <isFocusTraversableOverridden>0</isFocusTraversableOverridden>
                             <isPacked>false</isPacked>
@@ -1367,7 +1359,7 @@ CE5TT2JqZWN0AIWG</byte-array>
                             <visible>true</visible>
                             <width>0</width>
                             <x>0</x>
-                            <y>56</y>
+                            <y>0</y>
                             <background class="com.apple.laf.AquaNativeResources$CColorPaintUIResource" reference="../../../../../../../java.awt.Component/default/background"/>
                             <changeSupport serialization="custom">
                               <java.beans.PropertyChangeSupport>
@@ -1534,174 +1526,12 @@ CE5TT2JqZWN0AIWG</byte-array>
             </Position>
           </properties__>
         </TextElement>
-        <TextElement>
-          <location__>
-            <x>461</x>
-            <y>152</y>
-          </location__>
-          <layer__>100</layer__>
-          <text__>Hello World</text__>
-          <font__>
-            <attributes>
-              <entry>
-                <awt-text-attribute>size</awt-text-attribute>
-                <float>24.0</float>
-              </entry>
-              <entry>
-                <awt-text-attribute>transform</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>tracking</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>superscript</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>weight</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>posture</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>width</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>family</awt-text-attribute>
-                <string>Abadi MT Condensed Extra Bold</string>
-              </entry>
-            </attributes>
-          </font__>
-          <foreGround__>
-            <red>102</red>
-            <green>0</green>
-            <blue>255</blue>
-            <alpha>255</alpha>
-          </foreGround__>
-          <properties__>
-            <Appearance reference="../../../TextElement/properties__/Appearance"/>
-            <Movement reference="../../../TextElement/properties__/Movement"/>
-            <Position reference="../../../TextElement/properties__/Position"/>
-          </properties__>
-        </TextElement>
       </elements__>
+      <reactors__/>
     </Slide>
-    <Slide>
-      <elements__>
-        <TextElement>
-          <location__>
-            <x>141</x>
-            <y>49</y>
-          </location__>
-          <layer__>100</layer__>
-          <text__>Hello World</text__>
-          <font__>
-            <attributes>
-              <entry>
-                <awt-text-attribute>size</awt-text-attribute>
-                <float>36.0</float>
-              </entry>
-              <entry>
-                <awt-text-attribute>transform</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>tracking</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>superscript</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>weight</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>posture</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>width</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>family</awt-text-attribute>
-                <string>Abadi MT Condensed Extra Bold</string>
-              </entry>
-            </attributes>
-          </font__>
-          <foreGround__ reference="../../../../Slide/elements__/TextElement[2]/foreGround__"/>
-          <properties__>
-            <Appearance reference="../../../../../Slide/elements__/TextElement/properties__/Appearance"/>
-            <Movement reference="../../../../../Slide/elements__/TextElement/properties__/Movement"/>
-            <Position reference="../../../../../Slide/elements__/TextElement/properties__/Position"/>
-          </properties__>
-        </TextElement>
-      </elements__>
-    </Slide>
-    <Slide>
-      <elements__>
-        <TextElement>
-          <location__>
-            <x>789</x>
-            <y>497</y>
-          </location__>
-          <layer__>100</layer__>
-          <text__>Hello World</text__>
-          <font__>
-            <attributes>
-              <entry>
-                <awt-text-attribute>size</awt-text-attribute>
-                <float>28.0</float>
-              </entry>
-              <entry>
-                <awt-text-attribute>transform</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>tracking</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>superscript</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>weight</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>posture</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>width</awt-text-attribute>
-                <null/>
-              </entry>
-              <entry>
-                <awt-text-attribute>family</awt-text-attribute>
-                <string>Abadi MT Condensed Extra Bold</string>
-              </entry>
-            </attributes>
-          </font__>
-          <foreGround__ reference="../../../../Slide/elements__/TextElement/foreGround__"/>
-          <properties__>
-            <Appearance reference="../../../../../Slide/elements__/TextElement/properties__/Appearance"/>
-            <Movement reference="../../../../../Slide/elements__/TextElement/properties__/Movement"/>
-            <Position reference="../../../../../Slide/elements__/TextElement/properties__/Position"/>
-          </properties__>
-        </TextElement>
-      </elements__>
-    </Slide>
-    <Slide>
-      <elements__/>
-    </Slide>
+    <null/>
+    <null/>
+    <null/>
     <null/>
   </slides__>
 </Experiment>

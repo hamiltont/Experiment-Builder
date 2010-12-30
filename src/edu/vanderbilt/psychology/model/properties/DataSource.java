@@ -14,7 +14,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddContainerAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddImageAction;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
-import edu.vanderbilt.psychology.model.Event;
+import edu.vanderbilt.psychology.model.events.Event;
 
 /**
  * This {@link Property} will define the source of data for a

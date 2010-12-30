@@ -5,10 +5,12 @@ package edu.vanderbilt.psychology.model.elements;
 
 import java.util.List;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import javax.swing.JComponent;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import edu.vanderbilt.psychology.gui.slideElements.ImageElement;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
+import edu.vanderbilt.psychology.model.MutableInt;
 import edu.vanderbilt.psychology.model.properties.Property;
 
 /**
@@ -25,7 +27,13 @@ public class ImageElementModel extends ModelElement {
 
 	@Override
 	public SlideElement getInitializedSlideElement() {
-		// TODO Implement
+		// TODO Auto-generated method stub
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public JComponent getInitializedJComponent(MutableInt outputLayer) {
+		// TODO Auto-generated method stub
 		throw new NotImplementedException();
 	}
 }

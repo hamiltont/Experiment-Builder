@@ -6,8 +6,16 @@ package edu.vanderbilt.psychology.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+
+import com.sun.tools.javac.util.Pair;
+
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
+import edu.vanderbilt.psychology.model.events.EventReactor;
 import edu.vanderbilt.psychology.model.inputs.Input;
 import edu.vanderbilt.psychology.model.properties.Property;
 
@@ -44,4 +52,29 @@ public class Slide {
 		return elements_;
 	}
 
+	/**
+	 * Converts the internal model of elements into a series of
+	 * {@link JComponent}s that can then be added to the player's GUI
+	 * 
+	 * @return A list of {@link JComponent}s that represent various
+	 *         {@link ModelElement}s. Each list item is a {@link Pair}
+	 *         containing the {@link JComponent} and an {@link Integer}
+	 *         representing the layer it should be placed on in a
+	 *         {@link JLayeredPane}
+	 */
+	public List<Pair<JComponent, Integer>> getGui() {
+		ArrayList<Pair<JComponent, Integer>> components = new ArrayList<Pair<JComponent, Integer>>(
+				elements_.size());
+
+		for (int i = 0; i < elements_.size(); i++) {
+			MutableInt result = new MutableInt();
+			JComponent output = elements_.get(i).getInitializedJComponent(
+					result);
+
+			components.add(new Pair<JComponent, Integer>(output, result
+					.getValue()));
+		}
+
+		return components;
+	}
 }

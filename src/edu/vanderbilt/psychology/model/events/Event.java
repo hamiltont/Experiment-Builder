@@ -1,4 +1,4 @@
-package edu.vanderbilt.psychology.model;
+package edu.vanderbilt.psychology.model.events;
 
 public class Event {
 
