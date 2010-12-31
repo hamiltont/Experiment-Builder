@@ -20,23 +20,11 @@ import edu.vanderbilt.psychology.model.events.Event;
  * 
  */
 public class Appearance extends Property {
-	private static Appearance defaultAppearance_;
-	
-	private Appearance() { 
-		// setup default values
+
+	public Appearance() {
+		// TODO Implement
 	}
-	
-	public static Appearance getDefaultAppearance() {
-		if (defaultAppearance_ == null)
-			defaultAppearance_ = new Appearance();
-		return defaultAppearance_;
-	}
-	
-	@Override
-	public Object clone() {
-		return new Appearance();
-	}
-	
+
 	@Override
 	public Section getSection() {
 		JPanel poo = new JPanel();
@@ -47,7 +35,6 @@ public class Appearance extends Property {
 	@Override
 	public void receiveEvent(Event e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
 }

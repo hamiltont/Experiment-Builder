@@ -21,21 +21,9 @@ import edu.vanderbilt.psychology.model.events.Event;
  * 
  */
 public class Movement extends Property {
-	private static Movement defaultMovement_;
 
-	private Movement() {
-		// setup default values
-	}
-
-	public static Movement getDefaultMovement() {
-		if (defaultMovement_ == null)
-			defaultMovement_ = new Movement();
-		return defaultMovement_;
-	}
-
-	@Override
-	public Object clone() {
-		return new Movement();
+	public Movement() {
+		// TODO Setup default values
 	}
 
 	@Override
@@ -48,6 +36,5 @@ public class Movement extends Property {
 	@Override
 	public void receiveEvent(Event e) {
 		// TODO Auto-generated method stub
-		
 	}
 }

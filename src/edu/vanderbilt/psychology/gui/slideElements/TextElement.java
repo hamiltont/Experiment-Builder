@@ -35,9 +35,9 @@ public class TextElement extends SlideElement {
 		properties_ = new ArrayList<Property>();
 
 		// Add properties
-		properties_.add(Appearance.getDefaultAppearance());
-		properties_.add(Movement.getDefaultMovement());
-		properties_.add(Position.getDefaultPosition());
+		properties_.add(new Appearance());
+		properties_.add(new Movement());
+		properties_.add(new Position());
 		properties_.add(new MouseActions());
 
 		label_ = new JLabel(text);

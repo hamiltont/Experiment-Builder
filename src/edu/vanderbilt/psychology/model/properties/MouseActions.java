@@ -10,15 +10,11 @@ import javax.swing.JPanel;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import edu.vanderbilt.psychology.gui.dialogs.DialogManager;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
+import edu.vanderbilt.psychology.model.BuilderState;
+import edu.vanderbilt.psychology.model.Slide;
 import edu.vanderbilt.psychology.model.events.Event;
 
 public class MouseActions extends Property {
-
-	@Override
-	public Object clone() {
-		// TODO Auto-generated method stub
-		throw new NotImplementedException();
-	}
 
 	@SuppressWarnings("serial")
 	@Override
@@ -29,7 +25,15 @@ public class MouseActions extends Property {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// TODO do something with the dialog return value
 				DialogManager.showActionDialog();
+				
+				// Build the EventReactor
+				
+				
+				// Add it to the current slide
+				Slide currentSlide = BuilderState.getInstance().getCurrentSlide();
+				
 			}
 		}));
 		return new Section("Mouse Actions", panel);

@@ -30,8 +30,6 @@ public class DataSource extends Property {
 	private List<File> files_ = new ArrayList<File>();
 	private Type type_;
 	
-	private static DataSource defaultDataSource_;
-
 	public enum Type {
 		Single_File, Multiple_Files
 	};
@@ -48,11 +46,6 @@ public class DataSource extends Property {
 	public DataSource(List<File> files) {
 		files_.addAll(files);
 		type_ = Type.Multiple_Files;
-	}
-
-	@Override
-	public Object clone() {
-		return new DataSource();
 	}
 
 	@Override

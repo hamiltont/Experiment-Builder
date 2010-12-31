@@ -7,7 +7,6 @@ import java.awt.Point;
 
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.MutableInt;
