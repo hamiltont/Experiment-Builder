@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
 import edu.vanderbilt.psychology.model.elements.TextModelElement;
 import edu.vanderbilt.psychology.model.properties.Appearance;
+import edu.vanderbilt.psychology.model.properties.MouseActions;
 import edu.vanderbilt.psychology.model.properties.Movement;
 import edu.vanderbilt.psychology.model.properties.Position;
 import edu.vanderbilt.psychology.model.properties.Property;
@@ -37,6 +38,7 @@ public class TextElement extends SlideElement {
 		properties_.add(Appearance.getDefaultAppearance());
 		properties_.add(Movement.getDefaultMovement());
 		properties_.add(Position.getDefaultPosition());
+		properties_.add(new MouseActions());
 
 		label_ = new JLabel(text);
 		label_.setFont(font);

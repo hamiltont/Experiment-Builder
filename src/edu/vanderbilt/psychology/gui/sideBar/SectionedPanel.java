@@ -24,10 +24,9 @@ import edu.vanderbilt.psychology.model.properties.Property;
  * below the {@link PreviewPanel}.
  * 
  * This panel has multiple sections that help to divide the panel into usable
- * groupings. TODO In version 2, each section will be collapsable, so that non
- * relevant sections can be hidden from the user. The best way to understand
- * this panel is by imaging a list view, where the elements in the list are as
- * follows:
+ * groupings. Each section is collapsable, so that non relevant sections can be
+ * hidden from the user. The best way to understand this panel is by imaging a
+ * list view, where the elements in the list are as follows:
  * <ul>
  * <li> {@link SectionDivider}</li>
  * <li> {@link Section}</li>

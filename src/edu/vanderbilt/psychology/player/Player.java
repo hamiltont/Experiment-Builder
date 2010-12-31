@@ -2,7 +2,6 @@ package edu.vanderbilt.psychology.player;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Window;
 
 import javax.swing.JFrame;
 
