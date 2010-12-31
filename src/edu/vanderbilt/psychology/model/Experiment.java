@@ -104,7 +104,7 @@ public class Experiment {
 		if (position < 0)
 			throw new IllegalArgumentException("position must be positive");
 
-		if ((position > (slides_.length - 1)) || (slides_[position] == null)) {
+		if (getSlideExistsAtPosition(position) == false) {
 			System.out.println("No slide at position " + position);
 			System.out.println("Experiment size: " + getSize());
 			System.out.println("Returning new slide");
@@ -113,6 +113,13 @@ public class Experiment {
 		}
 
 		return slides_[position];
+	}
+
+	public boolean getSlideExistsAtPosition(int position) {
+		if ((position > (slides_.length - 1)) || (slides_[position] == null))
+			return false;
+
+		return true;
 	}
 
 	/**
@@ -124,7 +131,10 @@ public class Experiment {
 		return slides_.length;
 	}
 
-	public void saveExperiment() {
+	/**
+	 * Writes all {@link Slide}s contained within the {@link Experiment} to disk
+	 */
+	public void saveExperimentToDisk() {
 		XStream xs = new XStream();
 
 		xs.alias("Experiment", Experiment.class);

@@ -22,7 +22,7 @@ public class ExperimentTest {
 	}
 
 	/**
-	 * Test method for {@link edu.vanderbilt.psychology.model.Experiment#saveExperiment()}.
+	 * Test method for {@link edu.vanderbilt.psychology.model.Experiment#saveExperimentToDisk()}.
 	 */
 	@Test
 	public void testSaveExperiment() {

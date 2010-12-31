@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 import com.sun.tools.javac.util.Pair;
 
@@ -46,6 +44,10 @@ public class Slide {
 
 	public void saveElement(ModelElement me) {
 		elements_.add(me);
+	}
+	
+	public void clearElements() {
+		elements_.clear();
 	}
 
 	public List<ModelElement> getModelElements() {
