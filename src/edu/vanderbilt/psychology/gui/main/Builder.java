@@ -28,7 +28,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddSoundAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddTextAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddVideoAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.CreateListAction;
-import edu.vanderbilt.psychology.controller.toolbarActions.ExportExperimentAction;
+import edu.vanderbilt.psychology.controller.toolbarActions.SaveExperimentAction;
 import edu.vanderbilt.psychology.gui.sideBar.PreviewPanel;
 import edu.vanderbilt.psychology.gui.sideBar.SectionedPanel;
 import edu.vanderbilt.psychology.gui.toolBar.ToolbarButton;
@@ -100,7 +100,7 @@ public class Builder {
 		JToolBar toolbar = new JToolBar(JToolBar.HORIZONTAL);
 
 		// Create actions needed for the buttons
-		final ExportExperimentAction exportAction = new ExportExperimentAction(
+		final SaveExperimentAction saveAction = new SaveExperimentAction(
 				stage);
 		final AddContainerAction addContainerAction = new AddContainerAction(
 				stage);
@@ -111,8 +111,8 @@ public class Builder {
 		final CreateListAction createListAction = new CreateListAction();
 
 		// Create Toolbar buttons
-		final ToolbarButton export = new ToolbarButton(exportAction,
-				"images/export_icon.png", "Export");
+		final ToolbarButton export = new ToolbarButton(saveAction,
+				"images/save_icon.png", "Save");
 		final ToolbarButton addCont = new ToolbarButton(addContainerAction,
 				"images/container_add.png", "Add Container");
 		final ToolbarButton addText = new ToolbarButton(addTextAction,
