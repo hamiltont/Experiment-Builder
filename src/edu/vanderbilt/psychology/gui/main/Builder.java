@@ -240,52 +240,42 @@ public class Builder {
 
 		final JPanel switcher = new JPanel();
 		switcher.setLayout(new FlowLayout(FlowLayout.LEFT));
-<<<<<<< HEAD
-		switcher.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
-
-		switcher.add(createSlideThumbnail());
-		
-=======
 		switcher.setPreferredSize(new Dimension(10000, SLIDE_SWITCHER_HEIGHT));
 
 		JLayeredPane slide = createSlideThumbnail();
 		switcher.add(slide);
-
->>>>>>> upstream/master
+		
 		final JPanel newSlide = new JPanel();
 		newSlide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
 				SLIDE_THUMBNAIL_HEIGHT));
 		newSlide.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-<<<<<<< HEAD
-		newSlide.setLayout(new BorderLayout()); 
-		JButton plus = new JButton("+");
-		// TODO - There is probably a better way of placing a new slide to
-		// the left of the new slide panel (i.e. the panel containing the
-		// button to make a new slide).
-		plus.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-=======
 		newSlide.setLayout(new BorderLayout());
 		JButton plus = new JButton("+");
 		plus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				// Remove the new slide, add the thumbnail, and re-add the
 				// slide. This ensures that the newSlide stays to the far right
->>>>>>> upstream/master
 				switcher.remove(newSlide);
 				switcher.add(createSlideThumbnail());
 				switcher.add(newSlide);
 				switcher.revalidate();
 			}
 		});
-<<<<<<< HEAD
-		newSlide.add(plus, BorderLayout.CENTER); 
+
+		newSlide.add(plus, BorderLayout.CENTER);
 		JLabel newSlideText = new JLabel("         New Slide");
 		newSlide.add(newSlideText, BorderLayout.SOUTH);
 		
 		switcher.add(newSlide);
-
-		return switcher;
+		
+		JScrollPane s = new JScrollPane(switcher);
+		s
+		.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		s.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		s.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
+		
+		
+		return s;
 	}
 	
 	/**
@@ -303,38 +293,11 @@ public class Builder {
 	 * handle to the slide of which it is a thumbnail so that it can be
 	 * updated, etc.
 	 * </p>
-=======
-		newSlide.add(plus, BorderLayout.CENTER);
-		JLabel newSlideText = new JLabel("         New Slide");
-		newSlide.add(newSlideText, BorderLayout.SOUTH);
-
-		switcher.add(newSlide);
-
-		JScrollPane s = new JScrollPane(switcher);
-		s
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		s.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		s.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
-
-
-		return s;
-	}
-
-	/**
-	 * Creates a new slide thumbnail.
-	 * 
-	 * Implemented into the switcher, this method adds a new slide thumbnail to
-	 * the switcher when a new slide is created.
->>>>>>> upstream/master
 	 * 
 	 * @return
 	 */
 	private static JLayeredPane createSlideThumbnail() {
-<<<<<<< HEAD
-		// Build the JLayeredPane to hold the thumbnail
-=======
 		// Build the JLayeredPane to hold the slide's thumbnail
->>>>>>> upstream/master
 		JLayeredPane slide = new JLayeredPane();
 		slide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
 				SLIDE_THUMBNAIL_HEIGHT));
@@ -359,22 +322,10 @@ public class Builder {
 		// Create the menu
 		final JPanel menu = new JPanel();
 		menu.setLayout(new BoxLayout(menu, BoxLayout.PAGE_AXIS));
-<<<<<<< HEAD
 		// TODO - Fix the "Repeat Until ..." button to make it the same length
 		// as the other two.
 		final JLabel makeCopy = new JLabel("       Make Copy       ");
 		makeCopy.setBorder(BorderFactory.createRaisedBevelBorder());
-=======
-		// Tried playing around with the spacing here to make the labels (or
-		// what
-		// will eventually become buttons) align properly (I also edited
-		// SLIDE_THUMBNAIL_WIDTH and SLIDE_THUMBNAIL_HEIGHT to match), but the
-		// "Repeat Until ..." button still ends up shorter than the other two.
-		// This does not need to be fixed for V1 I'm sure, but it's probably
-		// something we want to look at in the future.
-		JLabel makeCopy = new JLabel("       Make Copy       ");
-		makeCopy.setBorder(BorderFactory.createLineBorder(Color.BLACK));
->>>>>>> upstream/master
 		makeCopy.addMouseListener(new MouseListener() {
 
 			@Override
@@ -394,23 +345,15 @@ public class Builder {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-<<<<<<< HEAD
 				makeCopy.setBorder(BorderFactory.createLoweredBevelBorder());
 				makeCopy.setOpaque(true);
 				makeCopy.setBackground(Color.LIGHT_GRAY);
-=======
-
->>>>>>> upstream/master
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-<<<<<<< HEAD
 				makeCopy.setBorder(BorderFactory.createRaisedBevelBorder());
 				makeCopy.setOpaque(false);
-=======
-
->>>>>>> upstream/master
 			}
 
 		});
@@ -435,23 +378,15 @@ public class Builder {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-<<<<<<< HEAD
 				repeat.setBorder(BorderFactory.createLoweredBevelBorder());
 				repeat.setOpaque(true);
 				repeat.setBackground(Color.LIGHT_GRAY);
-=======
-
->>>>>>> upstream/master
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-<<<<<<< HEAD
 				repeat.setBorder(BorderFactory.createRaisedBevelBorder());
 				repeat.setOpaque(false);
-=======
-
->>>>>>> upstream/master
 			}
 
 		});
@@ -476,23 +411,15 @@ public class Builder {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-<<<<<<< HEAD
 				repeatUntil.setBorder(BorderFactory.createLoweredBevelBorder());
 				repeatUntil.setOpaque(true);
 				repeatUntil.setBackground(Color.LIGHT_GRAY);
-=======
-
->>>>>>> upstream/master
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-<<<<<<< HEAD
 				repeatUntil.setBorder(BorderFactory.createRaisedBevelBorder());
 				repeatUntil.setOpaque(false);
-=======
-
->>>>>>> upstream/master
 			}
 
 		});
@@ -546,10 +473,6 @@ public class Builder {
 		int height = 13;
 		menuButton.setBounds(SLIDE_THUMBNAIL_WIDTH - width, 0, width, height);
 		slide.add(menuButton, JLayeredPane.PALETTE_LAYER);
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/master
 		return slide;
 	}
 }
