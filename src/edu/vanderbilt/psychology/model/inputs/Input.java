@@ -4,8 +4,8 @@
 package edu.vanderbilt.psychology.model.inputs;
 
 import edu.vanderbilt.psychology.model.DataCapture;
-import edu.vanderbilt.psychology.model.EventListener;
 import edu.vanderbilt.psychology.model.Experiment;
+import edu.vanderbilt.psychology.model.events.EventListener;
 import edu.vanderbilt.psychology.model.properties.Property;
 
 /**

@@ -6,7 +6,7 @@ package edu.vanderbilt.psychology.model.properties;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.DataCapture;
-import edu.vanderbilt.psychology.model.EventListener;
+import edu.vanderbilt.psychology.model.events.EventListener;
 
 /**
  * <p>
@@ -38,8 +38,6 @@ import edu.vanderbilt.psychology.model.EventListener;
  * <h4>TODO - To implement</h4>
  * <ul>
  * <li>Property chaining</li>
- * <li>Cloning the default property</li>
- * <li>Re-setting a property if it equals the default property</li>
  * <li>Adding public abstract String getName() method for logging</li>
  * </ul>
  * 
@@ -54,32 +52,6 @@ import edu.vanderbilt.psychology.model.EventListener;
  * </p>
  * 
  * <p>
- * {@link Property}s should all be clonable by calling the
- * {@link Property#clone()} method. This is intended to save memory in the
- * experiment player component by reusing the default {@link Property} as much
- * as possible. (This technique is similar to reference counting). If 15
- * {@link SlideElement}s all have an {@link Appearance} property, but all of the
- * {@link SlideElement}s are using the default {@link Appearance} values, then
- * there should only be 1 {@link Appearance} object in memory. If one of the
- * {@link SlideElement}s changes a value of its {@link Appearance} property, the
- * default {@link Appearance} object is cloned and the newly requested value is
- * set on that new object.
- * </p>
- * 
- * <p>
- * Conversely, if a non-default {@link Property} object has some value set, then
- * that {@link Property} should check if it now equals the default
- * {@link Property}. If it does, then it should be destroyed and replaced with
- * the default.
- * </p>
- * 
- * <p>
- * There is likely some way to do all of this quasi-ref counting stuff within
- * the {@link Property} superclass and make life a lot simpler for any of the
- * subclasses, but it is currently not a priority
- * </p>
- * 
- * <p>
  * At some point I need to add a getName() method for logging. This is to be
  * used for the {@link DataCapture}, inside of the log field 'name'. Rather than
  * adding a method to the Property only though, there will likely be some sort
@@ -87,9 +59,19 @@ import edu.vanderbilt.psychology.model.EventListener;
  * "data senders" must have a getName() method
  * </p>
  * 
+ * <h5>Note</h5> If a {@link Property} takes up a lot of memory, then it would
+ * be useful to make that property have an internal model that can be shared
+ * amongst multiple instances of a {@link Property} class
+ * 
+ * <br>
+ * <br>
+ * 
  * @author Hamilton Turner
  * 
  */
+// TODO - There is a mixing of the builder code and player code here. Some of
+// these methods are only needed for the builder, some of them are only needed
+// for the player
 public abstract class Property implements EventListener, Cloneable {
 
 	/**
@@ -103,12 +85,6 @@ public abstract class Property implements EventListener, Cloneable {
 	public final String getType() {
 		return "Property";
 	}
-
-	/**
-	 * This should return a deep copy of the {@link Property} in preparation for
-	 * changing some of the default {@link Property} values.
-	 */
-	public abstract Object clone();
 
 	/**
 	 * Requests the user interface {@link Section} for this {@link Property}.

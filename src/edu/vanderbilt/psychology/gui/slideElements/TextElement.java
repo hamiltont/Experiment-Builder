@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
 import edu.vanderbilt.psychology.model.elements.TextModelElement;
 import edu.vanderbilt.psychology.model.properties.Appearance;
+import edu.vanderbilt.psychology.model.properties.MouseActions;
 import edu.vanderbilt.psychology.model.properties.Movement;
 import edu.vanderbilt.psychology.model.properties.Position;
 import edu.vanderbilt.psychology.model.properties.Property;
@@ -25,7 +26,7 @@ import edu.vanderbilt.psychology.model.properties.Property;
  */
 public class TextElement extends SlideElement {
 	private JLabel label_;
-	
+
 	private ArrayList<Property> properties_;
 
 	public TextElement(String text, Font font, Color foreGround) {
@@ -34,9 +35,10 @@ public class TextElement extends SlideElement {
 		properties_ = new ArrayList<Property>();
 
 		// Add properties
-		properties_.add(Appearance.getDefaultAppearance());
-		properties_.add(Movement.getDefaultMovement());
-		properties_.add(Position.getDefaultPosition());
+		properties_.add(new Appearance());
+		properties_.add(new Movement());
+		properties_.add(new Position());
+		properties_.add(new MouseActions());
 
 		label_ = new JLabel(text);
 		label_.setFont(font);
@@ -97,6 +99,9 @@ public class TextElement extends SlideElement {
 		label_ = new JLabel(tme.getText());
 		label_.setFont(tme.getFont());
 		label_.setForeground(tme.getForeGround());
+
+		// TODO is this doing anything? We are not adding this to the
+		// JLayeredpane, so the integer doesn't have any significance
 		add(label_, tme.getLayer());
 
 		Dimension size = label_.getPreferredSize();

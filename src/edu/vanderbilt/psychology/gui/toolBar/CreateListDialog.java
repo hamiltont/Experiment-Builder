@@ -152,22 +152,17 @@ public class CreateListDialog extends JDialog {
 		JPanel cancelOk = new JPanel(new FlowLayout());
 		
 		final JTextField nameTextField = new JTextField("Enter list name");
-		JButton accept = new JButton("Accept");
-		accept.addActionListener(new ActionListener() {
+		cancelOk.add(nameTextField);
+		
+		JButton ok = new JButton("Ok");
+		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				EBList<String> eblist = new EBList<String>(nameTextField.getText());
 				for (int i = 0; i < list.getModel().getSize() - 1; i++) {
 					eblist.add((String) list.getModel().getElementAt(i));
 				}
 				ListDatabase.getInstance().addStringList(eblist);
-			}
-		});
-		cancelOk.add(nameTextField);
-		cancelOk.add(accept);
-
-		JButton ok = new JButton("Ok");
-		ok.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+				
 				parentDialog.dispose();
 			}
 		});

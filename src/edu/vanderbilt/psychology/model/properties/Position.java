@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.Slide;
+import edu.vanderbilt.psychology.model.events.Event;
 
 /**
  * Defines where and when a {@link SlideElement} is positioned on the
@@ -36,13 +37,12 @@ import edu.vanderbilt.psychology.model.Slide;
 // NOTE possible unit test for a plugin - checking the hell out of clone() and
 // getDefault...()
 public class Position extends Property {
-	private static Position defaultPosition_;
 	private static final String sectionTitle_ = "Position";
 	private static final String[] options = {"Move To", "Choose Between"}; 
 	
 	private JPanel section_;
 
-	private Position() {
+	public Position() {
 		section_ = new JPanel();
 		section_.setLayout(new BoxLayout(section_, BoxLayout.PAGE_AXIS));
 		
@@ -61,20 +61,15 @@ public class Position extends Property {
 		section_.add(chooseLocBtn);
 		
 	}
-
-	public static Position getDefaultPosition() {
-		if (defaultPosition_ == null)
-			defaultPosition_ = new Position();
-		return defaultPosition_;
-	}
-
-	@Override
-	public Object clone() {
-		return new Position();
-	}
-
+	
 	@Override
 	public Section getSection() {
 		return new Section(sectionTitle_, section_);
+	}
+
+	@Override
+	public void receiveEvent(Event e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

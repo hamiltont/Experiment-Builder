@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
 
@@ -27,7 +28,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddSoundAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddTextAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddVideoAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.CreateListAction;
-import edu.vanderbilt.psychology.controller.toolbarActions.ExportExperimentAction;
+import edu.vanderbilt.psychology.controller.toolbarActions.SaveExperimentAction;
 import edu.vanderbilt.psychology.gui.sideBar.PreviewPanel;
 import edu.vanderbilt.psychology.gui.sideBar.SectionedPanel;
 import edu.vanderbilt.psychology.gui.toolBar.ToolbarButton;
@@ -62,6 +63,9 @@ public class Builder {
 
 	private static final int SIDEBAR_WIDTH = 300;
 
+	/**
+	 * Sets the height in pixels of the slide switcher component at the bottom
+	 */
 	private static final int SLIDE_SWITCHER_HEIGHT = 100;
 
 	private static final int SLIDE_THUMBNAIL_WIDTH = 140;
@@ -96,7 +100,7 @@ public class Builder {
 		JToolBar toolbar = new JToolBar(JToolBar.HORIZONTAL);
 
 		// Create actions needed for the buttons
-		final ExportExperimentAction exportAction = new ExportExperimentAction(
+		final SaveExperimentAction saveAction = new SaveExperimentAction(
 				stage);
 		final AddContainerAction addContainerAction = new AddContainerAction(
 				stage);
@@ -107,8 +111,8 @@ public class Builder {
 		final CreateListAction createListAction = new CreateListAction();
 
 		// Create Toolbar buttons
-		final ToolbarButton export = new ToolbarButton(exportAction,
-				"images/export_icon.png", "Export");
+		final ToolbarButton export = new ToolbarButton(saveAction,
+				"images/save_icon.png", "Save");
 		final ToolbarButton addCont = new ToolbarButton(addContainerAction,
 				"images/container_add.png", "Add Container");
 		final ToolbarButton addText = new ToolbarButton(addTextAction,
@@ -231,17 +235,28 @@ public class Builder {
 	 * 
 	 * @return
 	 */
-	protected static JPanel buildSlideSwitcher() {
+	// TODO - Make the scrollbar a bit prettier
+	protected static JScrollPane buildSlideSwitcher() {
+
 		final JPanel switcher = new JPanel();
 		switcher.setLayout(new FlowLayout(FlowLayout.LEFT));
+<<<<<<< HEAD
 		switcher.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
 
 		switcher.add(createSlideThumbnail());
 		
+=======
+		switcher.setPreferredSize(new Dimension(10000, SLIDE_SWITCHER_HEIGHT));
+
+		JLayeredPane slide = createSlideThumbnail();
+		switcher.add(slide);
+
+>>>>>>> upstream/master
 		final JPanel newSlide = new JPanel();
 		newSlide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
 				SLIDE_THUMBNAIL_HEIGHT));
 		newSlide.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+<<<<<<< HEAD
 		newSlide.setLayout(new BorderLayout()); 
 		JButton plus = new JButton("+");
 		// TODO - There is probably a better way of placing a new slide to
@@ -249,12 +264,21 @@ public class Builder {
 		// button to make a new slide).
 		plus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
+=======
+		newSlide.setLayout(new BorderLayout());
+		JButton plus = new JButton("+");
+		plus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				// Remove the new slide, add the thumbnail, and re-add the
+				// slide. This ensures that the newSlide stays to the far right
+>>>>>>> upstream/master
 				switcher.remove(newSlide);
 				switcher.add(createSlideThumbnail());
 				switcher.add(newSlide);
 				switcher.revalidate();
 			}
 		});
+<<<<<<< HEAD
 		newSlide.add(plus, BorderLayout.CENTER); 
 		JLabel newSlideText = new JLabel("         New Slide");
 		newSlide.add(newSlideText, BorderLayout.SOUTH);
@@ -279,11 +303,38 @@ public class Builder {
 	 * handle to the slide of which it is a thumbnail so that it can be
 	 * updated, etc.
 	 * </p>
+=======
+		newSlide.add(plus, BorderLayout.CENTER);
+		JLabel newSlideText = new JLabel("         New Slide");
+		newSlide.add(newSlideText, BorderLayout.SOUTH);
+
+		switcher.add(newSlide);
+
+		JScrollPane s = new JScrollPane(switcher);
+		s
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		s.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		s.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
+
+
+		return s;
+	}
+
+	/**
+	 * Creates a new slide thumbnail.
+	 * 
+	 * Implemented into the switcher, this method adds a new slide thumbnail to
+	 * the switcher when a new slide is created.
+>>>>>>> upstream/master
 	 * 
 	 * @return
 	 */
 	private static JLayeredPane createSlideThumbnail() {
+<<<<<<< HEAD
 		// Build the JLayeredPane to hold the thumbnail
+=======
+		// Build the JLayeredPane to hold the slide's thumbnail
+>>>>>>> upstream/master
 		JLayeredPane slide = new JLayeredPane();
 		slide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
 				SLIDE_THUMBNAIL_HEIGHT));
@@ -308,15 +359,27 @@ public class Builder {
 		// Create the menu
 		final JPanel menu = new JPanel();
 		menu.setLayout(new BoxLayout(menu, BoxLayout.PAGE_AXIS));
+<<<<<<< HEAD
 		// TODO - Fix the "Repeat Until ..." button to make it the same length
 		// as the other two.
 		final JLabel makeCopy = new JLabel("       Make Copy       ");
 		makeCopy.setBorder(BorderFactory.createRaisedBevelBorder());
+=======
+		// Tried playing around with the spacing here to make the labels (or
+		// what
+		// will eventually become buttons) align properly (I also edited
+		// SLIDE_THUMBNAIL_WIDTH and SLIDE_THUMBNAIL_HEIGHT to match), but the
+		// "Repeat Until ..." button still ends up shorter than the other two.
+		// This does not need to be fixed for V1 I'm sure, but it's probably
+		// something we want to look at in the future.
+		JLabel makeCopy = new JLabel("       Make Copy       ");
+		makeCopy.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+>>>>>>> upstream/master
 		makeCopy.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
 
 			@Override
@@ -331,17 +394,25 @@ public class Builder {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+<<<<<<< HEAD
 				makeCopy.setBorder(BorderFactory.createLoweredBevelBorder());
 				makeCopy.setOpaque(true);
 				makeCopy.setBackground(Color.LIGHT_GRAY);
+=======
+
+>>>>>>> upstream/master
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+<<<<<<< HEAD
 				makeCopy.setBorder(BorderFactory.createRaisedBevelBorder());
 				makeCopy.setOpaque(false);
+=======
+
+>>>>>>> upstream/master
 			}
-		
+
 		});
 		final JLabel repeat = new JLabel("    Repeat x times    ");
 		repeat.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -349,7 +420,7 @@ public class Builder {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+
 			}
 
 			@Override
@@ -364,17 +435,25 @@ public class Builder {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
+<<<<<<< HEAD
 				repeat.setBorder(BorderFactory.createLoweredBevelBorder());
 				repeat.setOpaque(true);
 				repeat.setBackground(Color.LIGHT_GRAY);
+=======
+
+>>>>>>> upstream/master
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
+<<<<<<< HEAD
 				repeat.setBorder(BorderFactory.createRaisedBevelBorder());
 				repeat.setOpaque(false);
+=======
+
+>>>>>>> upstream/master
 			}
-		
+
 		});
 		final JLabel repeatUntil = new JLabel("    Repeat Until ...    ");
 		repeatUntil.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -382,7 +461,7 @@ public class Builder {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
 
 			@Override
@@ -397,17 +476,25 @@ public class Builder {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+<<<<<<< HEAD
 				repeatUntil.setBorder(BorderFactory.createLoweredBevelBorder());
 				repeatUntil.setOpaque(true);
 				repeatUntil.setBackground(Color.LIGHT_GRAY);
+=======
+
+>>>>>>> upstream/master
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+<<<<<<< HEAD
 				repeatUntil.setBorder(BorderFactory.createRaisedBevelBorder());
 				repeatUntil.setOpaque(false);
+=======
+
+>>>>>>> upstream/master
 			}
-			
+
 		});
 		menu.add(makeCopy);
 		menu.add(repeat);
@@ -459,6 +546,10 @@ public class Builder {
 		int height = 13;
 		menuButton.setBounds(SLIDE_THUMBNAIL_WIDTH - width, 0, width, height);
 		slide.add(menuButton, JLayeredPane.PALETTE_LAYER);
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
 		return slide;
 	}
 }

@@ -37,6 +37,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
 import net.java.swingfx.jdraggable.DefaultDraggableManager;
@@ -60,7 +61,7 @@ import edu.vanderbilt.psychology.model.BuilderState;
  * alt="Application main BorderLayout" /><br />
  * The toolbar and the slide switcher are essentially allowed to declare the
  * height they wish to be. The sidebar is allowed to declare the width it would
- * like to be. All otehr dimensions automatically stretch to fill all available
+ * like to be. All other dimensions automatically stretch to fill all available
  * space.
  * </p>
  * 
@@ -146,7 +147,7 @@ public class MainFrame extends JFrame {
 		JPanel sidebar = Builder.buildSideBar(stageWrapper);
 		add(sidebar, BorderLayout.EAST);
 
-		JPanel slideSwitcher = Builder.buildSlideSwitcher();
+		JScrollPane slideSwitcher = Builder.buildSlideSwitcher();
 		add(slideSwitcher, BorderLayout.SOUTH);
 
 		add(stageWrapper, BorderLayout.CENTER);

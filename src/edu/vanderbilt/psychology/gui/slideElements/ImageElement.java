@@ -47,7 +47,7 @@ public class ImageElement extends SlideElement {
 	private static final String Handle_Up_Text = "+";
 	private static final String Handle_Pressed_Text = "-";
 	private static final int Handle_Size = 10;
-	
+
 	private ArrayList<Property> properties_;
 
 	public ImageElement(File imageFileSelected) throws ImageFormatException {
@@ -57,15 +57,15 @@ public class ImageElement extends SlideElement {
 		setLayout(null);
 
 		properties_ = new ArrayList<Property>();
-		
+
 		// Add properties
-		properties_.add(Appearance.getDefaultAppearance());
-		properties_.add(Movement.getDefaultMovement());
-		properties_.add(Position.getDefaultPosition());
+		properties_.add(new Appearance());
+		properties_.add(new Movement());
+		properties_.add(new Position());
 		properties_.add(new DataSource(imageFileSelected));
-		
+
 		name_ = imageFileSelected.getName();
-		
+
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(imageFileSelected);
@@ -107,13 +107,13 @@ public class ImageElement extends SlideElement {
 		setBackground(Color.RED);
 
 	}
-	
+
 	@Override
 	public void initializeWithModel(ModelElement model) {
 		// TODO - implement
 		throw new NotImplementedException();
 	}
-	
+
 	@Override
 	public List<Property> getProperties() {
 		return properties_;
@@ -121,7 +121,7 @@ public class ImageElement extends SlideElement {
 
 	@Override
 	public ModelElement getModel() {
-		final ImageElementModel model = new ImageElementModel(this);		
+		final ImageElementModel model = new ImageElementModel(this);
 		return model;
 	}
 
@@ -181,7 +181,7 @@ public class ImageElement extends SlideElement {
 		}
 
 	};
-	
+
 	private DragMouseMotionListener motionListener_ = new DragMouseMotionListener();
 
 	/**
@@ -240,5 +240,4 @@ public class ImageElement extends SlideElement {
 	/** Provide a Universal ID for serialization */
 	private static final long serialVersionUID = 6583957254094683348L;
 
-	
 }

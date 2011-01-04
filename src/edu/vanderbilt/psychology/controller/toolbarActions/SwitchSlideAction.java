@@ -71,18 +71,18 @@ public class SwitchSlideAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Slide s = StageWrapperController.writeStageWrapperToSlide(stage_, true);
+		Slide s = BuilderState.writeStageWrapperToSlide(stage_, true);
 
 		switch (direction_) {
 
 		case (SWITCH_NEXT_SLIDE):
-			Slide next = BuilderState.getInstance().nextSlide(s);
-			StageWrapperController.writeSlideToStageWrapper(next, stage_);
+			Slide next = BuilderState.getInstance().getNextSlide(s);
+			BuilderState.writeSlideToStageWrapper(next, stage_);
 			break;
 
 		case (SWITCH_PREV_SLIDE):
-			Slide prev = BuilderState.getInstance().prevSlide(s);
-			StageWrapperController.writeSlideToStageWrapper(prev, stage_);
+			Slide prev = BuilderState.getInstance().getPreviousSlide(s);
+			BuilderState.writeSlideToStageWrapper(prev, stage_);
 			break;
 
 		default:

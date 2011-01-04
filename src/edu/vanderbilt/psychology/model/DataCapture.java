@@ -3,6 +3,8 @@
  */
 package edu.vanderbilt.psychology.model;
 
+import edu.vanderbilt.psychology.model.events.Event;
+import edu.vanderbilt.psychology.model.events.EventListener;
 import edu.vanderbilt.psychology.model.inputs.Input;
 import edu.vanderbilt.psychology.model.properties.Property;
 
@@ -62,5 +64,11 @@ public class DataCapture implements EventListener {
 
 	public String getName() {
 		return "DataCapture";
+	}
+
+	@Override
+	public void receiveEvent(Event e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

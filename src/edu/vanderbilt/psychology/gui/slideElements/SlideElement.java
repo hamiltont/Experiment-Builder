@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import net.java.swingfx.jdraggable.Draggable;
 import edu.vanderbilt.psychology.controller.SelectionManager;
-import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
 import edu.vanderbilt.psychology.model.properties.Property;
 
