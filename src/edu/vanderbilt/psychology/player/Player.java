@@ -3,6 +3,7 @@ package edu.vanderbilt.psychology.player;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import edu.vanderbilt.psychology.model.Experiment;
@@ -11,12 +12,24 @@ import edu.vanderbilt.psychology.model.Experiment;
  * The entry point for the experiment player
  * 
  * @author hamiltont
+ * @contributor sethfri
  * 
  */
 public class Player {
 
 	public static void main(String[] args) {
-		Experiment e = Experiment.loadExperiment();
+		Experiment e = null;
+		JFileChooser open = new JFileChooser();
+	    // TODO Fix file filter so that only XML, i.e. compatible, files are
+		// displayed.
+		/*
+		XMLFilter filter = new XMLFilter();
+	    open.setFileFilter(filter);
+	    */
+	    int returnVal = open.showOpenDialog(open); {
+	    if (returnVal == JFileChooser.APPROVE_OPTION) {
+	       e = Experiment.loadExperiment(open.getSelectedFile());}
+	    }
 		System.out.print(true);
 
 		final PlayerController pc = new PlayerController(e);

@@ -28,6 +28,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddSoundAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddTextAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddVideoAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.CreateListAction;
+import edu.vanderbilt.psychology.controller.toolbarActions.OpenExperimentAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.SaveExperimentAction;
 import edu.vanderbilt.psychology.gui.sideBar.PreviewPanel;
 import edu.vanderbilt.psychology.gui.sideBar.SectionedPanel;
@@ -100,6 +101,8 @@ public class Builder {
 		JToolBar toolbar = new JToolBar(JToolBar.HORIZONTAL);
 
 		// Create actions needed for the buttons
+		final OpenExperimentAction openAction = new OpenExperimentAction(
+				stage);
 		final SaveExperimentAction saveAction = new SaveExperimentAction(
 				stage);
 		final AddContainerAction addContainerAction = new AddContainerAction(
@@ -111,6 +114,9 @@ public class Builder {
 		final CreateListAction createListAction = new CreateListAction();
 
 		// Create Toolbar buttons
+		// TODO Replace icon for Open button.
+		final ToolbarButton open = new ToolbarButton(openAction, 
+				"images/save_icon.png", "Open");
 		final ToolbarButton export = new ToolbarButton(saveAction,
 				"images/save_icon.png", "Save");
 		final ToolbarButton addCont = new ToolbarButton(addContainerAction,
@@ -141,6 +147,7 @@ public class Builder {
 		// NOTE Other possible buttons: Add Webcam (or record film)
 
 		// Create and add other sections
+		toolbar.add(open);
 		toolbar.add(export);
 		toolbar.add(createList);
 		// add(nextButton);

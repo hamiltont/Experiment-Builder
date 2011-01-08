@@ -3,6 +3,7 @@
  */
 package edu.vanderbilt.psychology.model;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -134,7 +135,7 @@ public class Experiment {
 	/**
 	 * Writes all {@link Slide}s contained within the {@link Experiment} to disk
 	 */
-	public void saveExperimentToDisk() {
+	public void saveExperimentToDisk(File fileToBeSaved) {
 		XStream xs = new XStream();
 
 		xs.alias("Experiment", Experiment.class);
@@ -147,7 +148,7 @@ public class Experiment {
 		xs.alias("Movement", Movement.class);
 
 		try {
-			FileWriter fw = new FileWriter("test.xml");
+			FileWriter fw = new FileWriter(fileToBeSaved);
 			fw.write(xs.toXML(this));
 			fw.close();
 		} catch (IOException e) {
@@ -173,6 +174,32 @@ public class Experiment {
 		Experiment e = null;
 		try {
 			FileReader fr = new FileReader("test.xml");
+			e = (Experiment) xs.fromXML(fr);
+			fr.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
+		System.out.println("Imported!");
+
+		return e;
+	}
+	
+	public static Experiment loadExperiment(File fileToLoad) {
+		XStream xs = new XStream();
+
+		xs.alias("Experiment", Experiment.class);
+		xs.alias("Slide", Slide.class);
+		xs.alias("ImageElement", ImageElementModel.class);
+		xs.alias("TextElement", TextModelElement.class);
+		xs.alias("DataSource", DataSource.class);
+		xs.alias("Appearance", Appearance.class);
+		xs.alias("Position", Position.class);
+		xs.alias("Movement", Movement.class);
+
+		Experiment e = null;
+		try {
+			FileReader fr = new FileReader(fileToLoad);
 			e = (Experiment) xs.fromXML(fr);
 			fr.close();
 		} catch (IOException ex) {

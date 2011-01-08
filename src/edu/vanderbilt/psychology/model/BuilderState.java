@@ -5,6 +5,7 @@ package edu.vanderbilt.psychology.model;
 
 import java.awt.Component;
 import java.awt.Point;
+import java.io.File;
 import java.util.List;
 
 import edu.vanderbilt.psychology.controller.SelectionManager;
@@ -127,8 +128,8 @@ public class BuilderState {
 	 */
 	// TODO - Should this do something with ensuring all Slides have been saved
 	// to the experiment?
-	public void writeExperimentToDisk() {
-		experiment_.saveExperimentToDisk();
+	public void writeExperimentToDisk(File fileToBeWritten) {
+		experiment_.saveExperimentToDisk(fileToBeWritten);
 	}
 
 	/**
