@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
-
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.model.Experiment;
 
@@ -26,12 +25,9 @@ public class OpenExperimentAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 
 		JFileChooser open = new JFileChooser();
-	    // TODO Fix file filter so that only XML, i.e. compatible, files are
-		// displayed.
-		/*
+		open.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		XMLFilter filter = new XMLFilter();
 	    open.setFileFilter(filter);
-	    */
 	    int returnVal = open.showOpenDialog(stage_); {
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 	       Experiment.loadExperiment(open.getSelectedFile());}
