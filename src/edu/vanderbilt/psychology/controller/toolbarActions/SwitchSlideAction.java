@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import edu.vanderbilt.psychology.controller.StageWrapperController;
+import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.model.Experiment;
 import edu.vanderbilt.psychology.model.Slide;
@@ -71,17 +71,28 @@ public class SwitchSlideAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Slide s = BuilderState.writeStageWrapperToSlide(stage_, true);
 
 		switch (direction_) {
 
 		case (SWITCH_NEXT_SLIDE):
-			Slide next = BuilderState.getInstance().getNextSlide(s);
+			Slide next = BuilderState.getInstance().getNextSlide();
+
+			SelectionManager.getInstance().clearSelection();
+			stage_.repaint();
+
 			BuilderState.writeSlideToStageWrapper(next, stage_);
 			break;
 
 		case (SWITCH_PREV_SLIDE):
-			Slide prev = BuilderState.getInstance().getPreviousSlide(s);
+			Slide prev = BuilderState.getInstance().getPreviousSlide();
+
+			// TODO put this into the SSAction
+			// SelectionManager.getInstance().clearSelection();
+			// stageWrapper_.repaint();
+
+			SelectionManager.getInstance().clearSelection();
+			stage_.repaint();
+
 			BuilderState.writeSlideToStageWrapper(prev, stage_);
 			break;
 

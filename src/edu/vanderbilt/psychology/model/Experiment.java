@@ -14,6 +14,7 @@ import edu.vanderbilt.psychology.model.elements.ImageElementModel;
 import edu.vanderbilt.psychology.model.elements.TextModelElement;
 import edu.vanderbilt.psychology.model.properties.Appearance;
 import edu.vanderbilt.psychology.model.properties.DataSource;
+import edu.vanderbilt.psychology.model.properties.MouseActions;
 import edu.vanderbilt.psychology.model.properties.Movement;
 import edu.vanderbilt.psychology.model.properties.Position;
 
@@ -134,8 +135,10 @@ public class Experiment {
 
 	/**
 	 * Writes all {@link Slide}s contained within the {@link Experiment} to disk
+	 * 
+	 * @return true if this experiment was saved, false if an error occurred
 	 */
-	public void saveExperimentToDisk(File fileToBeSaved) {
+	public boolean saveExperimentToDisk(File fileToBeSaved) {
 		XStream xs = new XStream();
 
 		xs.alias("Experiment", Experiment.class);
@@ -144,8 +147,10 @@ public class Experiment {
 		xs.alias("TextElement", TextModelElement.class);
 		xs.alias("DataSource", DataSource.class);
 		xs.alias("Appearance", Appearance.class);
+		xs.alias("MouseActions", MouseActions.class);
 		xs.alias("Position", Position.class);
 		xs.alias("Movement", Movement.class);
+		xs.omitField(Position.class, "section_");
 
 		try {
 			FileWriter fw = new FileWriter(fileToBeSaved);
@@ -153,10 +158,11 @@ public class Experiment {
 			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 
 		System.out.println("Exported!");
-		System.exit(0);
+		return true;
 	}
 
 	public static Experiment loadExperiment() {
@@ -184,7 +190,7 @@ public class Experiment {
 
 		return e;
 	}
-	
+
 	public static Experiment loadExperiment(File fileToLoad) {
 		XStream xs = new XStream();
 

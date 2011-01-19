@@ -12,6 +12,7 @@ import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
+import edu.vanderbilt.psychology.model.events.EventReactor;
 
 /**
  * Holds state information needed by the builder component. For example,
@@ -58,67 +59,46 @@ public class BuilderState {
 	}
 
 	/**
-	 * Saves the current {@link Slide} to the {@link Experiment}, increments the
-	 * current slide counter, and returns the next {@link Slide}
+	 * Increments the current slide position, and returns the next {@link Slide}
+	 * . If no next {@link Slide} exists, one will be created and returned for
+	 * that position. Note that this <b>automatically</b> saves the current
+	 * {@link Slide}
 	 * 
-	 * @param currentSlide
-	 *            the {@link Slide} that is currently showing in the GUI
-	 * @return the next {@link Slide}, or a blank default {@link Slide} if there
-	 *         is no saved next {@link Slide}
+	 * 
+	 * @return the next {@link Slide}
 	 */
-	public Slide getNextSlide(Slide currentSlide) {
-
-		saveCurrentSlide(currentSlide);
+	public Slide getNextSlide() {
 		++currentSlidePos_;
-
-		// TODO put this into the SSAction
-		SelectionManager.getInstance().clearSelection();
-		stageWrapper_.repaint();
-
-		return experiment_.getSlide(currentSlidePos_);
+		return getCurrentSlide();
 	}
 
 	/**
 	 * Gets the {@link Slide} that is currently being shown on the
-	 * {@link StageWrapper}. If the {@link StageWrapper} has not yet been saved
-	 * to a {@link Slide} (or the saved representation is outdated) this
-	 * re-saves the {@link StageWrapper}
+	 * {@link StageWrapper}. This does save the current {@link Slide}
 	 * 
 	 * @return
 	 */
 	public Slide getCurrentSlide() {
-		if (experiment_.getSlideExistsAtPosition(currentSlidePos_) == true)
-			writeStageWrapperToExistingSlide(experiment_.getSlide(currentSlidePos_), stageWrapper_);
-		else
-			return writeStageWrapperToSlide(stageWrapper_, false);
-		
+		saveCurrentSlide();
+
 		return experiment_.getSlide(currentSlidePos_);
 	}
 
 	/**
-	 * Saves the current {@link Slide} to the {@link Experiment}, decrements the
-	 * current slide counter, and returns the next {@link Slide}. If you attempt
-	 * to decrement beyond the first {@link Slide}, then this method will do
-	 * nothing but return the first {@link Slide} to you
+	 * Decrements the current slide counter, and returns the {@link Slide} at
+	 * that location. If you attempt to decrement beyond the first {@link Slide}
+	 * , then this method will do nothing but return the first {@link Slide} to
+	 * you. Note that this <b>automatically</b> saves the current {@link Slide}
 	 * 
-	 * @param currentSlide
-	 *            the {@link Slide} that is currently showing in the GUI
 	 * @return the previous {@link Slide}. If you are already on the first
 	 *         {@link Slide}, then this method will just return the first
-	 *         {@link Slide} to you without saving it.
+	 *         {@link Slide} to you, re-saving it in the process.
 	 */
-	public Slide getPreviousSlide(Slide currentSlide) {
-		if (currentSlidePos_ == 0)
-			return currentSlide;
+	public Slide getPreviousSlide() {
+		if (currentSlidePos_ != 0)
+			--currentSlidePos_;
 
-		saveCurrentSlide(currentSlide);
-		--currentSlidePos_;
-
-		// TODO put this into the SSAction
-		SelectionManager.getInstance().clearSelection();
-		stageWrapper_.repaint();
-
-		return experiment_.getSlide(currentSlidePos_);
+		return getCurrentSlide();
 	}
 
 	/**
@@ -133,13 +113,24 @@ public class BuilderState {
 	}
 
 	/**
-	 * Given a {@link Slide}, saves that {@link Slide} to the {@link Experiment}
-	 * in the current position
-	 * 
-	 * @param currentSlide
+	 * Saves the Slide that is currently being worked on.
 	 */
-	public void saveCurrentSlide(Slide currentSlide) {
-		experiment_.saveSlide(currentSlide, currentSlidePos_);
+	public void saveCurrentSlide() {
+		Slide newSlide = null;
+		if (experiment_.getSlideExistsAtPosition(currentSlidePos_)) {
+			// Event reactors are not saved into the GUI, so we have to make
+			// sure we don't erase any existing EventReactors
+			Slide oldSlide = experiment_.getSlide(currentSlidePos_);
+
+			newSlide = writeStageWrapperToSlide(stageWrapper_, false);
+
+			newSlide.setEventReactors(oldSlide.getEventReactors());
+		} else
+			// Just save the GUI info
+			newSlide = writeStageWrapperToSlide(stageWrapper_, false);
+
+		experiment_.saveSlide(newSlide, currentSlidePos_);
+
 	}
 
 	/**
@@ -155,7 +146,7 @@ public class BuilderState {
 	 * @return The {@link Slide} containing all {@link SlideElement}s that were
 	 *         present on the {@link StageWrapper}
 	 */
-	public static Slide writeStageWrapperToSlide(StageWrapper stageWrapper,
+	private static Slide writeStageWrapperToSlide(StageWrapper stageWrapper,
 			boolean clearStage) {
 
 		Slide s = new Slide();
@@ -189,7 +180,7 @@ public class BuilderState {
 	 */
 	// TODO - this is a convoluted way of "updating" an existing slide w/o
 	// throwing away the reactor references
-	public static void writeStageWrapperToExistingSlide(Slide existingSlide,
+	private static void writeStageWrapperToExistingSlide(Slide existingSlide,
 			StageWrapper stageWrapper) {
 
 		existingSlide.clearElements();
@@ -208,8 +199,7 @@ public class BuilderState {
 		}
 	}
 
-	// TODO - implement. This will involve figuring out how to keep track of the
-	// location of the SlideElements. Things to consider: not all slideelements
+	// TODO - Things to consider: not all SlideElements
 	// may have a position. The stage may change size. The stageWrapper may
 	// change size. The application may change size
 	public static void writeSlideToStageWrapper(Slide s,

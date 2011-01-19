@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 import com.sun.tools.javac.util.Pair;
 

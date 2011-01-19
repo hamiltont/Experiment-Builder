@@ -46,6 +46,18 @@ public class Slide {
 		elements_.add(me);
 	}
 	
+	public void addEventReactor(EventReactor reactor) {
+		reactors_.add(reactor);
+	}
+	
+	public List<EventReactor> getEventReactors() {
+		return reactors_;
+	}
+	
+	public void setEventReactors(List<EventReactor> reactors) {
+		reactors_ = reactors;
+	}
+	
 	public void clearElements() {
 		elements_.clear();
 	}

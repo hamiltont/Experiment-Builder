@@ -8,11 +8,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.gui.dialogs.DialogManager;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.model.BuilderState;
-import edu.vanderbilt.psychology.model.Slide;
 import edu.vanderbilt.psychology.model.events.Event;
+import edu.vanderbilt.psychology.model.events.EventFactory;
+import edu.vanderbilt.psychology.model.events.EventReactor;
+import edu.vanderbilt.psychology.model.events.EventType;
 
 public class MouseActions extends Property {
 
@@ -29,10 +32,12 @@ public class MouseActions extends Property {
 				DialogManager.showActionDialog();
 				
 				// Build the EventReactor
-				
+				JPanel selection = SelectionManager.getInstance().getRealSelection();
+				Event ev = EventFactory.buildEvent (EventType.TYPE_SLIDE_EVENTS);
+				EventReactor er = new EventReactor(selection, ev);
 				
 				// Add it to the current slide
-				Slide currentSlide = BuilderState.getInstance().getCurrentSlide();
+				BuilderState.getInstance().getCurrentSlide().addEventReactor(er);
 				
 			}
 		}));

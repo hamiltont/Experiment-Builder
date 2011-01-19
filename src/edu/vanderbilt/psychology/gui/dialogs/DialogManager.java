@@ -1,6 +1,7 @@
 package edu.vanderbilt.psychology.gui.dialogs;
 
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 
 /**
  * Provides an interface to interact with the appropriate {@link JDialog}s.
@@ -14,6 +15,7 @@ import javax.swing.JDialog;
  */
 public class DialogManager {
 	private static JDialog mActionDialog;
+	private static JFileChooser mSaveFileChooser;
 
 	public static void showActionDialog() {
 		if (mActionDialog == null)

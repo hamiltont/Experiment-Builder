@@ -25,10 +25,9 @@ public class SelectionManager implements MouseListener {
 	private PreviewPanel previewPanel_;
 	private SectionedPanel propertyPanel_;
 
+	// We need two b/c they can have different elements in focus
 	private SlideElement currentPreviewSelection_;
-	private SlideElement currentRealSelection_; // We need two b/c they can have
-
-	// different elements in focus
+	private SlideElement currentRealSelection_; 
 
 	private SelectionManager() {
 	}
@@ -78,6 +77,10 @@ public class SelectionManager implements MouseListener {
 
 		currentPreviewSelection_ = se;
 		previewPanel_.updatePreview(se);
+	}
+	
+	public SlideElement getRealSelection() {
+		return currentRealSelection_;
 	}
 
 	public void mouseClicked(MouseEvent e) {

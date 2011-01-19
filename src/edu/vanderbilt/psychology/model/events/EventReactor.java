@@ -18,14 +18,6 @@ import edu.vanderbilt.psychology.player.EventManager;
 // TODO - add in conditions. See issue #7
 public class EventReactor implements EventListener {
 
-	// ===================== CONTINUE HERE ============================
-	// Add this event reactor to the current slide (inside of the mouse actions
-	// action listener). Then test one experiment export to make sure it's all
-	// working properly e.g. the reactor is being saved to the exp slide. Then
-	// try to make the player controller listen for the next slide event and
-	// automatically switch to the next slide. In this case, there is only one
-	// slide so the player controller should recognize the end of the experiment
-	// and react appropriately.
 	public EventReactor(JComponent observed, final Event eventToFire) {
 		observed.addMouseListener(new MouseListener() {
 
@@ -58,8 +50,6 @@ public class EventReactor implements EventListener {
 
 	@Override
 	public void receiveEvent(Event e) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

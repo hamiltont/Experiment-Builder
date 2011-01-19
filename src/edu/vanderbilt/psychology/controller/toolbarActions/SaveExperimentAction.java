@@ -28,12 +28,14 @@ public class SaveExperimentAction extends AbstractAction {
 	 */
 	public void actionPerformed(ActionEvent e) {
 
-		Slide s = BuilderState.writeStageWrapperToSlide(stage_, false);
-		BuilderState.getInstance().saveCurrentSlide(s);
+		BuilderState.getInstance().saveCurrentSlide();
 		JFileChooser save = new JFileChooser();
-	    int returnVal = save.showSaveDialog(stage_); {
-	    if (returnVal == JFileChooser.APPROVE_OPTION) {
-			BuilderState.getInstance().writeExperimentToDisk(save.getCurrentDirectory());}
-	    }
+		int returnVal = save.showSaveDialog(null);
+		{
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				BuilderState.getInstance().writeExperimentToDisk(
+						save.getSelectedFile());
+			}
+		}
 	}
 }
