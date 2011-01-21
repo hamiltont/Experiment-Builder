@@ -6,6 +6,7 @@ import java.awt.GraphicsEnvironment;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
+import edu.vanderbilt.psychology.controller.toolbarActions.XMLFilter;
 import edu.vanderbilt.psychology.model.Experiment;
 
 /**
@@ -22,20 +23,18 @@ public class Player {
 	public static void main(String[] args) {
 		Experiment e = null;
 		JFileChooser open = new JFileChooser();
-		// TODO Fix file filter so that only XML, i.e. compatible, files are
-		// displayed.
-		/*
-		 * XMLFilter filter = new XMLFilter(); open.setFileFilter(filter);
-		 */
-		int returnVal = open.showOpenDialog(open);
-		{
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				e = Experiment.loadExperiment(open.getSelectedFile());
-			}
-		}
-		System.out.print(true);
 
-		final PlayerController pc = new PlayerController(e);
+		open.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		XMLFilter filter = new XMLFilter();
+	    open.setFileFilter(filter);
+	    int returnVal = open.showOpenDialog(open); {
+	    if (returnVal == JFileChooser.APPROVE_OPTION) {
+	        e = Experiment.loadExperiment(open.getSelectedFile());
+	    } else if (returnVal == JFileChooser.CANCEL_OPTION) {
+	    	e = Experiment.loadExperiment();
+	    }
+	    
+	    final PlayerController pc = new PlayerController(e);
 
 		// Schedule a job for the event-dispatching thread:
 		// creating and showing this application's GUI.
@@ -64,7 +63,6 @@ public class Player {
 
 			}
 		});
-
 	}
-
+	}
 }

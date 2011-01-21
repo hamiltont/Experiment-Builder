@@ -1,6 +1,7 @@
 package edu.vanderbilt.psychology.controller.toolbarActions;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -30,12 +31,13 @@ public class SaveExperimentAction extends AbstractAction {
 
 		BuilderState.getInstance().saveCurrentSlide();
 		JFileChooser save = new JFileChooser();
+
 		int returnVal = save.showSaveDialog(null);
-		{
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				BuilderState.getInstance().writeExperimentToDisk(
-						save.getSelectedFile());
-			}
+		
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			BuilderState.getInstance().writeExperimentToDisk(
+					save.getSelectedFile());
 		}
+		
 	}
 }
