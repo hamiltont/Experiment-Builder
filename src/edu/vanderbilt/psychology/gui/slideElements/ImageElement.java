@@ -62,7 +62,7 @@ public class ImageElement extends SlideElement {
 		properties_.add(new Appearance());
 		properties_.add(new Movement());
 		properties_.add(new Position());
-		properties_.add(new DataSource(imageFileSelected));
+		properties_.add(new DataSource(imageFileSelected.getAbsolutePath()));
 
 		name_ = imageFileSelected.getName();
 
