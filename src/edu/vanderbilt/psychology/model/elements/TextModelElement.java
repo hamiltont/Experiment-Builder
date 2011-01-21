@@ -52,8 +52,7 @@ public class TextModelElement extends ModelElement {
 
 	@Override
 	public SlideElement getInitializedSlideElement() {
-		final TextElement te = new TextElement();
-		te.initializeWithModel(this);
+		TextElement te = new TextElement(this);
 		return te;
 	}
 

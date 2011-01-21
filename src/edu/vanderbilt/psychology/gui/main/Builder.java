@@ -33,6 +33,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.SaveExperimentAction;
 import edu.vanderbilt.psychology.gui.sideBar.PreviewPanel;
 import edu.vanderbilt.psychology.gui.sideBar.SectionedPanel;
 import edu.vanderbilt.psychology.gui.toolBar.ToolbarButton;
+import edu.vanderbilt.psychology.model.BuilderState;
 import edu.vanderbilt.psychology.model.Experiment;
 import edu.vanderbilt.psychology.model.Slide;
 
@@ -101,10 +102,8 @@ public class Builder {
 		JToolBar toolbar = new JToolBar(JToolBar.HORIZONTAL);
 
 		// Create actions needed for the buttons
-		final OpenExperimentAction openAction = new OpenExperimentAction(
-				stage);
-		final SaveExperimentAction saveAction = new SaveExperimentAction(
-				stage);
+		final OpenExperimentAction openAction = new OpenExperimentAction(stage);
+		final SaveExperimentAction saveAction = new SaveExperimentAction(stage);
 		final AddContainerAction addContainerAction = new AddContainerAction(
 				stage);
 		final AddTextAction addTextAction = new AddTextAction(stage);
@@ -115,7 +114,7 @@ public class Builder {
 
 		// Create Toolbar buttons
 		// TODO Replace icon for Open button.
-		final ToolbarButton open = new ToolbarButton(openAction, 
+		final ToolbarButton open = new ToolbarButton(openAction,
 				"images/save_icon.png", "Open");
 		final ToolbarButton export = new ToolbarButton(saveAction,
 				"images/save_icon.png", "Save");
@@ -251,7 +250,7 @@ public class Builder {
 
 		JLayeredPane slide = createSlideThumbnail();
 		switcher.add(slide);
-		
+
 		final JPanel newSlide = new JPanel();
 		newSlide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
 				SLIDE_THUMBNAIL_HEIGHT));
@@ -260,6 +259,10 @@ public class Builder {
 		JButton plus = new JButton("+");
 		plus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
+				// The createSlideThumbnail references the BuilderState, so we
+				// need to update it to point to the newly created slide
+				BuilderState.getInstance().getNextSlide();
+
 				// Remove the new slide, add the thumbnail, and re-add the
 				// slide. This ensures that the newSlide stays to the far right
 				switcher.remove(newSlide);
@@ -272,43 +275,74 @@ public class Builder {
 		newSlide.add(plus, BorderLayout.CENTER);
 		JLabel newSlideText = new JLabel("         New Slide");
 		newSlide.add(newSlideText, BorderLayout.SOUTH);
-		
+
 		switcher.add(newSlide);
-		
+
 		JScrollPane s = new JScrollPane(switcher);
 		s
-		.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		s.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		s.setPreferredSize(new Dimension(1, SLIDE_SWITCHER_HEIGHT));
-		
-		
+
 		return s;
 	}
-	
+
 	/**
 	 * Creates a new slide thumbnail.
 	 * 
 	 * <p>
-	 * Implemented into the switcher, this method adds a new slide
-	 * thumbnail to the switcher when a new slide is created. The thumbnail
-	 * also contains the dropdown menu, containing the "Make Copy", "Repeat
-	 * x times", and "Repeat Until ..." buttons.
+	 * Implemented into the switcher, this method adds a new slide thumbnail to
+	 * the switcher when a new slide is created. The thumbnail also contains the
+	 * dropdown menu, containing the "Make Copy", "Repeat x times", and "Repeat
+	 * Until ..." buttons.
 	 * </p>
 	 * 
 	 * <p>
-	 * TODO - At some point, the slide thumbnail should probably take a
-	 * handle to the slide of which it is a thumbnail so that it can be
-	 * updated, etc.
+	 * TODO - At some point, the slide thumbnail should probably take a handle
+	 * to the slide of which it is a thumbnail so that it can be updated, etc.
 	 * </p>
 	 * 
 	 * @return
 	 */
 	private static JLayeredPane createSlideThumbnail() {
 		// Build the JLayeredPane to hold the slide's thumbnail
-		JLayeredPane slide = new JLayeredPane();
+		final JLayeredPane slide = new JLayeredPane();
 		slide.setPreferredSize(new Dimension(SLIDE_THUMBNAIL_WIDTH,
 				SLIDE_THUMBNAIL_HEIGHT));
 		slide.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+		// Associate the Slide and the thumbnail
+		BuilderState.getInstance().getCurrentSlide().setSlideThumbnail(slide);
+
+		// Make the thumbnail clickable
+		slide.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				BuilderState.getInstance().saveCurrentSlide();
+				BuilderState.getInstance().setCurrentSlide(slide);
+			}
+		});
 
 		// Build a blank background image for now
 		BufferedImage backgroundImage = new BufferedImage(
@@ -452,24 +486,24 @@ public class Builder {
 				else
 					menu.setVisible(true);
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				menuButton.setBorder(BorderFactory.createLoweredBevelBorder());
 				menuButton.setOpaque(true);
 				menuButton.setBackground(Color.LIGHT_GRAY);
 			}
-			
+
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				menuButton.setBorder(BorderFactory.createRaisedBevelBorder());

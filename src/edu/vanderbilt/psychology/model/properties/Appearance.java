@@ -44,13 +44,20 @@ public class Appearance extends Property {
 		case ACTION_SHOW_BORDER:
 			e.getSource().setBorder(
 					BorderFactory.createLineBorder(Color.black, 5));
-			e.getSource().revalidate();
+
+			e.getSource().getParent().validate();
+			e.getSource().getParent().repaint();
+			
+			e.getSource().validate();
+			e.getSource().repaint();
+			e.getSource().paintImmediately(e.getSource().getBounds());
 			break;
 		case ACTION_HIDE_BORDER:
 			e.getSource().setBorder(BorderFactory.createEmptyBorder());
 			e.getSource().revalidate();
+			e.getSource().repaint();
 			break;
-		
+
 		default:
 			throw new IllegalArgumentException("Unknown action code!");
 		}

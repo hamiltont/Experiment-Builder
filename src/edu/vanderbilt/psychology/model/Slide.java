@@ -41,8 +41,13 @@ import edu.vanderbilt.psychology.model.properties.Property;
 // TODO Add some visual info the Slide, particularly the z-ordering of the
 // elements on screen (or add that to the Appearance element somehow)
 public class Slide {
+	
+	public static final int ACTION_ADVANCE_TO_NEXT_SLIDE = 0;
+	
 	Set<ModelElement> elements_ = new HashSet<ModelElement>();
 	List<EventReactor> reactors_ = new ArrayList<EventReactor>();
+
+	private JLayeredPane mSlideThumbnail;
 
 	public void saveElement(ModelElement me) {
 		elements_.add(me);
@@ -127,5 +132,13 @@ public class Slide {
 		}
 
 		return components;
+	}
+	
+	public void setSlideThumbnail(JLayeredPane thumbnail) {
+		mSlideThumbnail = thumbnail;
+	}
+	
+	public JLayeredPane getSlideThumbnail() {
+		return mSlideThumbnail;
 	}
 }

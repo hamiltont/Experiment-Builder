@@ -8,10 +8,12 @@ import javax.swing.JLayeredPane;
 import com.sun.tools.javac.util.Pair;
 
 import edu.vanderbilt.psychology.model.Experiment;
+import edu.vanderbilt.psychology.model.ListDatabase;
 import edu.vanderbilt.psychology.model.Slide;
 import edu.vanderbilt.psychology.model.events.Event;
 import edu.vanderbilt.psychology.model.events.EventListener;
 import edu.vanderbilt.psychology.model.events.EventType;
+import edu.vanderbilt.psychology.model.events.Sleeper;
 import edu.vanderbilt.psychology.model.properties.Appearance;
 
 /**
@@ -35,6 +37,10 @@ public class PlayerController extends JLayeredPane implements EventListener {
 				EventType.TYPE_SLIDE_EVENTS, this);
 		EventManager.getInstance().registerEventObserver(
 				EventType.TYPE_APPEARANCE_EVENTS, new Appearance());
+		EventManager.getInstance().registerEventObserver(
+				EventType.TYPE_SLEEP_EVENTS, new Sleeper());
+		EventManager.getInstance().registerEventObserver(
+				EventType.TYPE_LIST_EVENTS, ListDatabase.getInstance());
 
 		mExperiment = e;
 
@@ -54,18 +60,19 @@ public class PlayerController extends JLayeredPane implements EventListener {
 	 *            {@link Experiment} and should wrap up
 	 */
 	private void loadSlide(Slide s) {
-
+		removeAll();
+		
 		if (s == null)
 			System.exit(0);
 
 		List<Pair<JComponent, Integer>> components = s.getGui();
-		for (Pair<JComponent, Integer> pair : components)
-		{			
+		for (Pair<JComponent, Integer> pair : components) {
 			setLayer(pair.fst, pair.snd.intValue());
 			add(pair.fst);
 		}
 
-		revalidate();
+		validate();
+		repaint();
 	}
 
 	@Override

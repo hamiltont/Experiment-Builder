@@ -17,7 +17,7 @@ import java.util.List;
 public class EBList<T> {
 	
 	private List<T> mInternalList = new ArrayList<T>();
-	private int mCurrentListPos = -1;
+	private int mCurrentListPos = 0;
 	private String mName;
 	
 	@SuppressWarnings("unused")

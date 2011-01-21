@@ -31,6 +31,12 @@ public class TextElement extends SlideElement {
 
 	private TextModelElement mModel;
 
+	public TextElement(TextModelElement model) {
+		super();
+		initializeWithModel(model);
+		
+	}
+	
 	public TextElement(String text, Font font, Color foreGround) {
 		super();
 
@@ -55,10 +61,7 @@ public class TextElement extends SlideElement {
 
 		mModel = new TextModelElement(this);
 	}
-
-	public TextElement() {
-	}
-
+	
 	@Override
 	public Color getForeground() {
 		if (label_ != null)
@@ -114,7 +117,8 @@ public class TextElement extends SlideElement {
 
 		setLocation(tme.getLocation());
 		setOpaque(false);
-
+		
+		mModel = tme;
 	}
 
 	@Override

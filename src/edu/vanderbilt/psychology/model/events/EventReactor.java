@@ -2,10 +2,10 @@ package edu.vanderbilt.psychology.model.events;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
@@ -37,13 +37,14 @@ public class EventReactor implements EventListener {
 	private SlideElement mSlideElement;
 	private JComponent mComponent;
 	private ModelElement mModelElement;
-	private Event mEventToFire;
+	private List<Event> mEventsToFire;
 	private int mTrigger;
 
-	public EventReactor(SlideElement element, Event eventToFire,
-			int triggerOfInterest) {
+	public EventReactor(SlideElement element, int triggerOfInterest, Event... eventToFire) {
 		mSlideElement = element;
-		mEventToFire = eventToFire;
+		mEventsToFire = new ArrayList<Event>(eventToFire.length);
+		for (Event e : eventToFire)
+			mEventsToFire.add(e);
 
 		// Ensure that the trigger exists
 		if (triggerOfInterest != TRIGGER_ON_MOUSE_ENTER)
@@ -51,6 +52,8 @@ public class EventReactor implements EventListener {
 					"The provided trigger does not exist");
 
 		mTrigger = triggerOfInterest;
+		mModelElement = element.getModel();
+
 	}
 
 	/**
@@ -61,7 +64,7 @@ public class EventReactor implements EventListener {
 	 * 
 	 * @param component
 	 *            The component to add triggers to. Cannot be null
-	 *            
+	 * 
 	 * @see {@link EventReactor#TRIGGER_ON_MOUSE_ENTER}
 	 * 
 	 */
@@ -87,7 +90,8 @@ public class EventReactor implements EventListener {
 
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
-					EventManager.getInstance().sendEvent(mEventToFire);
+					for (Event e : mEventsToFire)
+						EventManager.getInstance().sendEvent(e);
 				}
 
 				@Override

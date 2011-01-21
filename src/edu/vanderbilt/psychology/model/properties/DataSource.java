@@ -4,7 +4,6 @@
 package edu.vanderbilt.psychology.model.properties;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -14,6 +13,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddContainerAction;
 import edu.vanderbilt.psychology.controller.toolbarActions.AddImageAction;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
+import edu.vanderbilt.psychology.model.EBList;
 import edu.vanderbilt.psychology.model.events.Event;
 
 /**
@@ -31,31 +31,45 @@ import edu.vanderbilt.psychology.model.events.Event;
  * 
  */
 public class DataSource extends Property {
-	private List<String> files_ = new ArrayList<String>();
+	private String mData;
+	private EBList<Object> mListData;
 	private Type type_;
 
-	private int mCurrentArrayPosition = 0;
-
 	public enum Type {
-		Single_File, Multiple_Files
+		Single_File, // A single filename
+		Multiple_Files, // An EBList of files
+		Single_String, Multiple_Strings
 	};
 
-	private DataSource() {
-		// setup default values
+	/**
+	 * 
+	 * @param data
+	 *            if this is file data, then the absolute path to the file. If
+	 *            it's a string, then the string
+	 * @param dataType
+	 *            can be either {@link Type#Single_File} or
+	 *            {@link Type#Single_String}
+	 */
+	public DataSource(String data, Type dataType) {
+		mData = data;
+		type_ = dataType;
 	}
 
-	public DataSource(String singleFilePath) {
-		files_.add(singleFilePath);
-		type_ = Type.Single_File;
-	}
-
-	public DataSource(List<String> filePaths) {
-		files_.addAll(filePaths);
-		type_ = Type.Multiple_Files;
+	public DataSource(EBList<Object> listData, Type dataType) {
+		mListData = listData;
+		type_ = dataType;
 	}
 
 	public String getCurrentData() {
-		return files_.get(mCurrentArrayPosition);
+		if (type_ == Type.Single_File || type_ == Type.Single_String)
+			return mData;
+		else if (type_ == Type.Multiple_Files)
+			return ((File) mListData.get()).getAbsolutePath();
+		else if (type_ == Type.Multiple_Strings)
+			return ((String) mListData.get());
+		else
+			throw new IllegalStateException(
+					"Unknown data type in the data source");
 	}
 
 	@Override

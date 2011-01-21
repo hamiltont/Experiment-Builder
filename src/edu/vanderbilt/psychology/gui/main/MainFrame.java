@@ -147,13 +147,13 @@ public class MainFrame extends JFrame {
 		JPanel sidebar = Builder.buildSideBar(stageWrapper);
 		add(sidebar, BorderLayout.EAST);
 
-		JScrollPane slideSwitcher = Builder.buildSlideSwitcher();
-		add(slideSwitcher, BorderLayout.SOUTH);
-
 		add(stageWrapper, BorderLayout.CENTER);
 
 		// Initialize the model
 		new BuilderState(stageWrapper);
+		
+		JScrollPane slideSwitcher = Builder.buildSlideSwitcher();
+		add(slideSwitcher, BorderLayout.SOUTH);
 	}
 
 	/** Provide a Universal ID for serialization */

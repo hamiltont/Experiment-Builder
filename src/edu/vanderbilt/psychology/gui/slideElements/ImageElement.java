@@ -25,6 +25,8 @@ import javax.swing.JLabel;
 import sun.awt.image.ImageFormatException;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import edu.vanderbilt.psychology.controller.SelectionManager;
+import edu.vanderbilt.psychology.model.EBList;
+import edu.vanderbilt.psychology.model.ListDatabase;
 import edu.vanderbilt.psychology.model.elements.ImageElementModel;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
 import edu.vanderbilt.psychology.model.properties.Appearance;
@@ -32,6 +34,7 @@ import edu.vanderbilt.psychology.model.properties.DataSource;
 import edu.vanderbilt.psychology.model.properties.Movement;
 import edu.vanderbilt.psychology.model.properties.Position;
 import edu.vanderbilt.psychology.model.properties.Property;
+import edu.vanderbilt.psychology.model.properties.DataSource.Type;
 
 /**
  * @author Hamilton Turner
@@ -52,6 +55,7 @@ public class ImageElement extends SlideElement {
 
 	private ImageElementModel mModel;
 
+	@SuppressWarnings("unchecked")
 	public ImageElement(File imageFileSelected) throws ImageFormatException {
 		super();
 
@@ -64,7 +68,15 @@ public class ImageElement extends SlideElement {
 		properties_.add(new Appearance());
 		properties_.add(new Movement());
 		properties_.add(new Position());
-		properties_.add(new DataSource(imageFileSelected.getAbsolutePath()));
+		// properties_.add(new DataSource(imageFileSelected.getAbsolutePath(),
+		// Type.Single_File));
+
+		EBList<File> files = new EBList<File>("mylist");
+		files.add(imageFileSelected);
+		ListDatabase.getInstance().addFileReferenceList(files);
+		
+		properties_.add(new DataSource(ListDatabase.getInstance().getByName(
+				"mylist"), Type.Multiple_Files));
 
 		name_ = imageFileSelected.getName();
 

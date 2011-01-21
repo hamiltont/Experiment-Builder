@@ -13,9 +13,11 @@ import edu.vanderbilt.psychology.gui.dialogs.DialogManager;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.BuilderState;
+import edu.vanderbilt.psychology.model.Slide;
 import edu.vanderbilt.psychology.model.events.Event;
 import edu.vanderbilt.psychology.model.events.EventReactor;
 import edu.vanderbilt.psychology.model.events.EventType;
+import edu.vanderbilt.psychology.model.events.Sleeper;
 
 public class MouseActions extends Property {
 
@@ -34,10 +36,19 @@ public class MouseActions extends Property {
 				// Build the EventReactor
 				SlideElement selection = SelectionManager.getInstance()
 						.getRealSelection();
-				Event ev = new Event(EventType.TYPE_APPEARANCE_EVENTS,
-						Appearance.ACTION_SHOW_BORDER, selection.getModel());
-				EventReactor er = new EventReactor(selection, ev,
-						EventReactor.TRIGGER_ON_MOUSE_ENTER);
+				Event ev1 = new Event(EventType.TYPE_APPEARANCE_EVENTS,
+						Appearance.ACTION_SHOW_BORDER, selection.getModel(),
+						null);
+				Event ev2 = new Event(EventType.TYPE_SLEEP_EVENTS,
+						Sleeper.ACTION_PAUSE_EXPERIMENT, selection.getModel(),
+						null);
+
+				Event ev3 = new Event(EventType.TYPE_SLIDE_EVENTS,
+						Slide.ACTION_ADVANCE_TO_NEXT_SLIDE, selection
+								.getModel(), null);
+
+				EventReactor er = new EventReactor(selection,
+						EventReactor.TRIGGER_ON_MOUSE_ENTER, ev1, ev2, ev3);
 
 				// Add it to the current slide
 				BuilderState.getInstance().getCurrentSlide()

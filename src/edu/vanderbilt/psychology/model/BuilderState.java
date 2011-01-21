@@ -8,6 +8,10 @@ import java.awt.Point;
 import java.io.File;
 import java.util.Set;
 
+import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
+
+import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
@@ -58,28 +62,55 @@ public class BuilderState {
 	}
 
 	/**
+	 * Searches for the {@link Slide} that is associated with the passed
+	 * thumbnail and sets that {@link Slide} as the current slide, updating the
+	 * GUI. Does not automatically save the current {@link Slide}
+	 * 
+	 * @param thumbnail
+	 */
+	public void setCurrentSlide(JLayeredPane thumbnail) {
+		int size = experiment_.getSize();
+		for (int i = 0; i < size; i++)
+			if (experiment_.getSlideExistsAtPosition(i)
+					&& experiment_.getSlide(i).getSlideThumbnail() == thumbnail) {
+				currentSlidePos_ = i;
+				clearStageWrapper(stageWrapper_);
+				writeSlideToStageWrapper(getCurrentSlide(), stageWrapper_);
+				return;
+			}
+	}
+
+	/**
 	 * Increments the current slide position, and returns the next {@link Slide}
 	 * . If no next {@link Slide} exists, one will be created and returned for
 	 * that position. Note that this <b>automatically</b> saves the current
-	 * {@link Slide}
+	 * {@link Slide}. Additionally, this method automatically updates the
+	 * {@link StageWrapper} with the info for the next slide. Also clears the
+	 * selection
 	 * 
 	 * 
 	 * @return the next {@link Slide}
 	 */
 	public Slide getNextSlide() {
+		saveCurrentSlide();
+		
+		SelectionManager.getInstance().clearSelection();
+
 		++currentSlidePos_;
-		return getCurrentSlide();
+
+		Slide next = getCurrentSlide();
+		clearStageWrapper(stageWrapper_);
+		writeSlideToStageWrapper(next, stageWrapper_);
+		return next;
 	}
 
 	/**
 	 * Gets the {@link Slide} that is currently being shown on the
-	 * {@link StageWrapper}. This does save the current {@link Slide}
+	 * {@link StageWrapper}. This does not save the current {@link Slide}
 	 * 
 	 * @return
 	 */
 	public Slide getCurrentSlide() {
-		saveCurrentSlide();
-
 		return experiment_.getSlide(currentSlidePos_);
 	}
 
@@ -87,17 +118,27 @@ public class BuilderState {
 	 * Decrements the current slide counter, and returns the {@link Slide} at
 	 * that location. If you attempt to decrement beyond the first {@link Slide}
 	 * , then this method will do nothing but return the first {@link Slide} to
-	 * you. Note that this <b>automatically</b> saves the current {@link Slide}
+	 * you. Note that this <b>automatically</b> saves the current {@link Slide}.
+	 * Additionally, this method automatically updates the {@link StageWrapper}
+	 * with the information for the newly retrieved slide. Also clears the
+	 * selection
 	 * 
 	 * @return the previous {@link Slide}. If you are already on the first
 	 *         {@link Slide}, then this method will just return the first
 	 *         {@link Slide} to you, re-saving it in the process.
 	 */
 	public Slide getPreviousSlide() {
+		saveCurrentSlide();
+
+		SelectionManager.getInstance().clearSelection();
+
 		if (currentSlidePos_ != 0)
 			--currentSlidePos_;
 
-		return getCurrentSlide();
+		Slide prev = getCurrentSlide();
+		clearStageWrapper(stageWrapper_);
+		writeSlideToStageWrapper(prev, stageWrapper_);
+		return prev;
 	}
 
 	/**
@@ -179,6 +220,18 @@ public class BuilderState {
 		}
 
 		return s;
+	}
+
+	public static void clearStageWrapper(StageWrapper sw) {
+		for (Component c : sw.getComponents()) {
+			if ((c instanceof SlideElement) == false)
+				continue;
+
+			sw.remove(c);
+		}
+
+		sw.validate();
+		sw.repaint();
 	}
 
 	// TODO - Things to consider: not all SlideElements

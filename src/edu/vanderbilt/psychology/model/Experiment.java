@@ -72,7 +72,9 @@ import edu.vanderbilt.psychology.model.properties.Position;
  * 
  */
 public class Experiment {
+	private ListDatabase mListDatabase = ListDatabase.getInstance();
 	private Slide[] slides_ = new Slide[5];
+	
 
 	// TODO add some cool checks in here to ensure that if we are saving over a
 	// slide, then that is the same slide we are already pointing to. There
@@ -109,10 +111,9 @@ public class Experiment {
 
 		if (getSlideExistsAtPosition(position) == false) {
 			System.out.println("No slide at position " + position);
-			System.out.println("Experiment size: " + getSize());
 			System.out.println("Returning new slide");
 
-			return new Slide();
+			slides_[position] = new Slide();
 		}
 
 		return slides_[position];
@@ -179,6 +180,7 @@ public class Experiment {
 	public static void addXStreamAliases(XStream xs) {
 		xs.alias("Experiment", Experiment.class);
 		xs.alias("Slide", Slide.class);
+		xs.omitField(Slide.class, "mSlideThumbnail");
 		xs.alias("ImageElement", ImageElementModel.class);
 		xs.alias("TextElement", TextModelElement.class);
 		xs.alias("DataSource", DataSource.class);
