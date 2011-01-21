@@ -29,6 +29,8 @@ public class TextElement extends SlideElement {
 
 	private ArrayList<Property> properties_;
 
+	private TextModelElement mModel;
+
 	public TextElement(String text, Font font, Color foreGround) {
 		super();
 
@@ -50,6 +52,8 @@ public class TextElement extends SlideElement {
 		setBounds(0, 0, size.width, size.height);
 
 		setOpaque(false);
+
+		mModel = new TextModelElement(this);
 	}
 
 	public TextElement() {
@@ -120,13 +124,13 @@ public class TextElement extends SlideElement {
 
 	@Override
 	public ModelElement getModel() {
-		final TextModelElement model = new TextModelElement(this);
-
-		return model;
+		return mModel;
 	}
 
 	@Override
 	public List<Property> getProperties() {
+		// TODO this is a hack for now. Later on refactor this so that the
+		// properties are stored in the model
 		return properties_;
 	}
 

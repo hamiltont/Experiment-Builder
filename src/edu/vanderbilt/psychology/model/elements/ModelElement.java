@@ -51,7 +51,8 @@ public abstract class ModelElement {
 	public abstract SlideElement getInitializedSlideElement();
 
 	/**
-	 * Gets a {@link JComponent} that is ready for use in the player
+	 * Gets a {@link JComponent} that is ready for use in the player. This
+	 * should always return the same reference. 
 	 * 
 	 * @param outputLayer
 	 *            An integer that represents the layer this {@link ModelElement}
@@ -60,6 +61,6 @@ public abstract class ModelElement {
 	 * 
 	 * @return The JComponent generated from this {@link ModelElement}
 	 */
-	public abstract JComponent getInitializedJComponent(MutableInt outputLayer);
+	public abstract JComponent getJComponent(MutableInt outputLayer);
 
 }

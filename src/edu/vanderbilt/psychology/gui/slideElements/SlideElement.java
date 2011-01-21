@@ -79,8 +79,10 @@ public abstract class SlideElement extends JPanel implements Draggable {
 	}
 
 	/**
-	 * Should be called to get the {@link ModelElement} that represents a given
-	 * {@link SlideElement}
+	 * Should be called to get the {@link ModelElement} that is backing this
+	 * {@link SlideElement}. Note that the reference returned should always be
+	 * the same, the {@link SlideElement} is just one representation of the
+	 * {@link ModelElement}
 	 * 
 	 * @return
 	 */

@@ -24,6 +24,7 @@ import edu.vanderbilt.psychology.model.properties.Property;
 public class ImageElementModel extends ModelElement {
 	private List<Property> properties_;
 	private Dimension mSize;
+	private JComponent mComponent;
 
 	public ImageElementModel(ImageElement imageElement) {
 		properties_ = imageElement.getProperties();
@@ -37,23 +38,27 @@ public class ImageElementModel extends ModelElement {
 	}
 
 	@Override
-	public JComponent getInitializedJComponent(MutableInt outputLayer) {
-
-		DataSource ds = null;
-		for (Property p : properties_)
-			if (p instanceof DataSource)
-				{ds = (DataSource) p;
-				break;
+	public JComponent getJComponent(MutableInt outputLayer) {
+		if (mComponent == null) {
+			DataSource ds = null;
+			for (Property p : properties_)
+				if (p instanceof DataSource) {
+					ds = (DataSource) p;
+					break;
 				}
-		if (ds == null)
-			throw new IllegalStateException("An ImageElement must have a DataSource");
-		
-		String filename = ds.getCurrentData();
-		JLabel image = new JLabel(new ImageIcon(filename));
-		image.setLocation(getLocation());
-		image.setSize(mSize);
+			if (ds == null)
+				throw new IllegalStateException(
+						"An ImageElement must have a DataSource");
+
+			String filename = ds.getCurrentData();
+			JLabel image = new JLabel(new ImageIcon(filename));
+			image.setLocation(getLocation());
+			image.setSize(mSize);
+			
+			mComponent = image;
+		}
 		outputLayer.setValue(getLayer());
-		
-		return image;
+
+		return mComponent;
 	}
 }

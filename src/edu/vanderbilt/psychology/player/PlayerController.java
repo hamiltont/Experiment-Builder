@@ -12,6 +12,7 @@ import edu.vanderbilt.psychology.model.Slide;
 import edu.vanderbilt.psychology.model.events.Event;
 import edu.vanderbilt.psychology.model.events.EventListener;
 import edu.vanderbilt.psychology.model.events.EventType;
+import edu.vanderbilt.psychology.model.properties.Appearance;
 
 /**
  * Given an {@link Experiment} that has been loaded from disk, the
@@ -32,6 +33,8 @@ public class PlayerController extends JLayeredPane implements EventListener {
 		// We are interested in slide events
 		EventManager.getInstance().registerEventObserver(
 				EventType.TYPE_SLIDE_EVENTS, this);
+		EventManager.getInstance().registerEventObserver(
+				EventType.TYPE_APPEARANCE_EVENTS, new Appearance());
 
 		mExperiment = e;
 
@@ -57,7 +60,10 @@ public class PlayerController extends JLayeredPane implements EventListener {
 
 		List<Pair<JComponent, Integer>> components = s.getGui();
 		for (Pair<JComponent, Integer> pair : components)
-			add(pair.fst, pair.snd);
+		{			
+			setLayer(pair.fst, pair.snd.intValue());
+			add(pair.fst);
+		}
 
 		revalidate();
 	}

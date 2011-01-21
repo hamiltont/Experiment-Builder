@@ -50,6 +50,8 @@ public class ImageElement extends SlideElement {
 
 	private ArrayList<Property> properties_;
 
+	private ImageElementModel mModel;
+
 	public ImageElement(File imageFileSelected) throws ImageFormatException {
 		super();
 
@@ -106,6 +108,8 @@ public class ImageElement extends SlideElement {
 
 		setBackground(Color.RED);
 
+		mModel = new ImageElementModel(this);
+
 	}
 
 	@Override
@@ -116,13 +120,14 @@ public class ImageElement extends SlideElement {
 
 	@Override
 	public List<Property> getProperties() {
+		// TODO this is a hack for now. Later on store the properties in the
+		// model
 		return properties_;
 	}
 
 	@Override
 	public ModelElement getModel() {
-		final ImageElementModel model = new ImageElementModel(this);
-		return model;
+		return mModel;
 	}
 
 	@Override

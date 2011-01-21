@@ -6,9 +6,8 @@ package edu.vanderbilt.psychology.model;
 import java.awt.Component;
 import java.awt.Point;
 import java.io.File;
-import java.util.List;
+import java.util.Set;
 
-import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
@@ -190,7 +189,7 @@ public class BuilderState {
 
 		System.out.println("Writing slide to stage wrapper");
 
-		final List<ModelElement> elements = s.getModelElements();
+		final Set<ModelElement> elements = s.getModelElements();
 		for (ModelElement me : elements) {
 			SlideElement se = me.getInitializedSlideElement();
 			stageWrapper.add(se, me.getLayer());

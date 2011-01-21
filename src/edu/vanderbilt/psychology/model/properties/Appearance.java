@@ -3,8 +3,12 @@
  */
 package edu.vanderbilt.psychology.model.properties;
 
+import java.awt.Color;
+
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
@@ -21,8 +25,10 @@ import edu.vanderbilt.psychology.model.events.Event;
  */
 public class Appearance extends Property {
 
+	public static final int ACTION_SHOW_BORDER = 0;
+	public static final int ACTION_HIDE_BORDER = 1;
+
 	public Appearance() {
-		// TODO Implement
 	}
 
 	@Override
@@ -34,7 +40,19 @@ public class Appearance extends Property {
 
 	@Override
 	public void receiveEvent(Event e) {
-		// TODO Auto-generated method stub
-
+		switch (e.getActionCode()) {
+		case ACTION_SHOW_BORDER:
+			e.getSource().setBorder(
+					BorderFactory.createLineBorder(Color.black, 5));
+			e.getSource().revalidate();
+			break;
+		case ACTION_HIDE_BORDER:
+			e.getSource().setBorder(BorderFactory.createEmptyBorder());
+			e.getSource().revalidate();
+			break;
+		
+		default:
+			throw new IllegalArgumentException("Unknown action code!");
+		}
 	}
 }

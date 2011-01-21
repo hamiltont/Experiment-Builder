@@ -4,7 +4,9 @@
 package edu.vanderbilt.psychology.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
@@ -39,7 +41,7 @@ import edu.vanderbilt.psychology.model.properties.Property;
 // TODO Add some visual info the Slide, particularly the z-ordering of the
 // elements on screen (or add that to the Appearance element somehow)
 public class Slide {
-	List<ModelElement> elements_ = new ArrayList<ModelElement>();
+	Set<ModelElement> elements_ = new HashSet<ModelElement>();
 	List<EventReactor> reactors_ = new ArrayList<EventReactor>();
 
 	public void saveElement(ModelElement me) {
@@ -88,7 +90,7 @@ public class Slide {
 		elements_.clear();
 	}
 
-	public List<ModelElement> getModelElements() {
+	public Set<ModelElement> getModelElements() {
 		return elements_;
 	}
 
@@ -108,15 +110,16 @@ public class Slide {
 		ArrayList<Pair<JComponent, Integer>> components = new ArrayList<Pair<JComponent, Integer>>(
 				elements_.size());
 
-		for (int i = 0; i < elements_.size(); i++) {
+		Object[] elements = elements_.toArray();
+		for (int i = 0; i < elements.length; i++) {
 
 			MutableInt result = new MutableInt();
-			JComponent output = elements_.get(i).getInitializedJComponent(
-					result);
+			JComponent output = ((ModelElement) elements[i])
+					.getJComponent(result);
 
 			// For each reactor that references this model element, add the
 			// triggers to the component
-			for (EventReactor reactor : getReactorsReferencing(elements_.get(i)))
+			for (EventReactor reactor : getReactorsReferencing((ModelElement) elements[i]))
 				reactor.addTriggerToJComponent(output);
 
 			components.add(new Pair<JComponent, Integer>(output, result

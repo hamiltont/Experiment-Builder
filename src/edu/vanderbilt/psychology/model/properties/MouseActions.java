@@ -14,7 +14,6 @@ import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.BuilderState;
 import edu.vanderbilt.psychology.model.events.Event;
-import edu.vanderbilt.psychology.model.events.EventFactory;
 import edu.vanderbilt.psychology.model.events.EventReactor;
 import edu.vanderbilt.psychology.model.events.EventType;
 
@@ -35,7 +34,8 @@ public class MouseActions extends Property {
 				// Build the EventReactor
 				SlideElement selection = SelectionManager.getInstance()
 						.getRealSelection();
-				Event ev = EventFactory.buildEvent(EventType.TYPE_SLIDE_EVENTS);
+				Event ev = new Event(EventType.TYPE_APPEARANCE_EVENTS,
+						Appearance.ACTION_SHOW_BORDER, selection.getModel());
 				EventReactor er = new EventReactor(selection, ev,
 						EventReactor.TRIGGER_ON_MOUSE_ENTER);
 

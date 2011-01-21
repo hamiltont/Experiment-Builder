@@ -25,6 +25,8 @@ public class TextModelElement extends ModelElement {
 	private Color foreGround_;
 	private List<Property> properties_;
 
+	private JComponent mComponent;
+
 	public TextModelElement(TextElement textElement) {
 		text_ = textElement.getText();
 		font_ = textElement.getFont();
@@ -55,17 +57,20 @@ public class TextModelElement extends ModelElement {
 		return te;
 	}
 
-	
 	@Override
-	public JComponent getInitializedJComponent(MutableInt outLayer) {
-		JLabel text = new JLabel(text_);
-		text.setFont(font_);
-		text.setForeground(foreGround_);
-		text.setSize(text.getPreferredSize());
-		text.setLocation(getLocation());
-		
+	public JComponent getJComponent(MutableInt outLayer) {
+		if (mComponent == null) {
+			JLabel text = new JLabel(text_);
+			text.setFont(font_);
+			text.setForeground(foreGround_);
+			text.setSize(text.getPreferredSize());
+			text.setLocation(getLocation());
+			
+			mComponent = text;
+		}
+
 		outLayer.setValue(getLayer());
-		
-		return text;
+
+		return mComponent;
 	}
 }

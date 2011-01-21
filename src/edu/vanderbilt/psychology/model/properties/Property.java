@@ -3,6 +3,8 @@
  */
 package edu.vanderbilt.psychology.model.properties;
 
+import javax.swing.JComponent;
+
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.DataCapture;
