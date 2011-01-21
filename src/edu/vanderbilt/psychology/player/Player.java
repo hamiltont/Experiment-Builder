@@ -29,12 +29,19 @@ public class Player {
 		 */
 		int returnVal = open.showOpenDialog(open);
 		{
-			if (returnVal == JFileChooser.APPROVE_OPTION) 
-				e = Experiment.loadExperiment(open.getSelectedFile());
+			if (returnVal == JFileChooser.APPROVE_OPTION)
+				try {
+					e = Experiment.loadExperiment(open.getSelectedFile());
+				} catch (RuntimeException re) {
+					System.out
+							.println("There was some error loading the experiment");
+					re.printStackTrace();
+					System.exit(1);
+				}
 			else
 				System.exit(0);
 		}
-		
+
 		final PlayerController pc = new PlayerController(e);
 
 		// Schedule a job for the event-dispatching thread:
@@ -54,8 +61,7 @@ public class Player {
 							.getLocalGraphicsEnvironment();
 					GraphicsDevice[] devices = ge.getScreenDevices();
 					devices[0].setFullScreenWindow(frame);
-				} else
-				{
+				} else {
 					frame.setSize(1400, 900);
 				}
 
