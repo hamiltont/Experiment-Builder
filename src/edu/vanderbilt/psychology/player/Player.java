@@ -29,12 +29,12 @@ public class Player {
 		 */
 		int returnVal = open.showOpenDialog(open);
 		{
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
+			if (returnVal == JFileChooser.APPROVE_OPTION) 
 				e = Experiment.loadExperiment(open.getSelectedFile());
-			}
+			else
+				System.exit(0);
 		}
-		System.out.print(true);
-
+		
 		final PlayerController pc = new PlayerController(e);
 
 		// Schedule a job for the event-dispatching thread:
