@@ -15,7 +15,6 @@ import javax.swing.JFileChooser;
  */
 public class DialogManager {
 	private static JDialog mActionDialog;
-	private static JFileChooser mSaveFileChooser;
 
 	public static void showActionDialog() {
 		if (mActionDialog == null)

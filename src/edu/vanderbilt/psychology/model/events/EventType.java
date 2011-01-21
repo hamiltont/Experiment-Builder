@@ -10,7 +10,7 @@ package edu.vanderbilt.psychology.model.events;
  */
 public class EventType {
 
-	public static final String TYPE_SLIDE_EVENTS = "slide";
+	public static final EventType TYPE_SLIDE_EVENTS = new EventType("slide");
 	
 	private String mUniqueId;
 

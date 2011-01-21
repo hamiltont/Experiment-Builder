@@ -45,19 +45,45 @@ public class Slide {
 	public void saveElement(ModelElement me) {
 		elements_.add(me);
 	}
-	
+
 	public void addEventReactor(EventReactor reactor) {
 		reactors_.add(reactor);
 	}
-	
+
 	public List<EventReactor> getEventReactors() {
 		return reactors_;
 	}
-	
+
 	public void setEventReactors(List<EventReactor> reactors) {
 		reactors_ = reactors;
 	}
-	
+
+	/**
+	 * Given a {@link SlideElement}, this returns all of the
+	 * {@link EventReactor}s that are listening for some type of event on that
+	 * {@link SlideElement}
+	 * 
+	 * @param element
+	 * @return
+	 */
+	public List<EventReactor> getReactorsReferencing(SlideElement element) {
+		ArrayList<EventReactor> result = new ArrayList<EventReactor>(1);
+		for (EventReactor er : reactors_)
+			if (er.getSlideElement() == element)
+				result.add(er);
+
+		return result;
+	}
+
+	private List<EventReactor> getReactorsReferencing(ModelElement element) {
+		ArrayList<EventReactor> result = new ArrayList<EventReactor>(1);
+		for (EventReactor er : reactors_)
+			if (er.getModelElement() == element)
+				result.add(er);
+
+		return result;
+	}
+
 	public void clearElements() {
 		elements_.clear();
 	}
@@ -68,7 +94,9 @@ public class Slide {
 
 	/**
 	 * Converts the internal model of elements into a series of
-	 * {@link JComponent}s that can then be added to the player's GUI
+	 * {@link JComponent}s that can then be added to the player's GUI. As it
+	 * builds the list of {@link JComponent}s, it also registers any triggers as
+	 * specified by {@link EventReactor}s
 	 * 
 	 * @return A list of {@link JComponent}s that represent various
 	 *         {@link ModelElement}s. Each list item is a {@link Pair}
@@ -81,9 +109,15 @@ public class Slide {
 				elements_.size());
 
 		for (int i = 0; i < elements_.size(); i++) {
+
 			MutableInt result = new MutableInt();
 			JComponent output = elements_.get(i).getInitializedJComponent(
 					result);
+
+			// For each reactor that references this model element, add the
+			// triggers to the component
+			for (EventReactor reactor : getReactorsReferencing(elements_.get(i)))
+				reactor.addTriggerToJComponent(output);
 
 			components.add(new Pair<JComponent, Integer>(output, result
 					.getValue()));

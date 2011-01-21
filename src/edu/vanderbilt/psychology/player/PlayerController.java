@@ -26,11 +26,12 @@ import edu.vanderbilt.psychology.model.events.EventType;
 @SuppressWarnings("serial")
 public class PlayerController extends JLayeredPane implements EventListener {
 	private Experiment mExperiment;
+	private int mCurrentSlide = 0;
 
 	public PlayerController(Experiment e) {
 		// We are interested in slide events
 		EventManager.getInstance().registerEventObserver(
-				new EventType(EventType.TYPE_SLIDE_EVENTS), this);
+				EventType.TYPE_SLIDE_EVENTS, this);
 
 		mExperiment = e;
 
@@ -38,13 +39,22 @@ public class PlayerController extends JLayeredPane implements EventListener {
 			throw new IllegalArgumentException(
 					"The loaded experiment has no slides!");
 
-		loadSlide(e.getSlide(0));
-		
-		
+		loadSlide(e.getSlide(mCurrentSlide));
+
 	}
 
+	/**
+	 * Loads the new {@link Slide} into the GUI
+	 * 
+	 * @param s
+	 *            passing null indicates that we have reached the end of the
+	 *            {@link Experiment} and should wrap up
+	 */
 	private void loadSlide(Slide s) {
-		
+
+		if (s == null)
+			System.exit(0);
+
 		List<Pair<JComponent, Integer>> components = s.getGui();
 		for (Pair<JComponent, Integer> pair : components)
 			add(pair.fst, pair.snd);
@@ -54,8 +64,13 @@ public class PlayerController extends JLayeredPane implements EventListener {
 
 	@Override
 	public void receiveEvent(Event e) {
-		// TODO Auto-generated method stub
+		if (e.getType().equals(EventType.TYPE_SLIDE_EVENTS)) {
+			mCurrentSlide++;
+			if (mExperiment.getSlideExistsAtPosition(mCurrentSlide))
+				loadSlide(mExperiment.getSlide(mCurrentSlide));
+			else
+				loadSlide(null);
+		}
 
 	}
-
 }

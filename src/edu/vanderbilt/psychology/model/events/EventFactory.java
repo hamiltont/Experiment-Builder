@@ -13,4 +13,9 @@ public class EventFactory {
 		Event e = new Event(type);
 		return e;
 	}
+	
+	public static Event buildEvent(EventType type) {
+		Event e = new Event(type);
+		return e;
+	}
 }

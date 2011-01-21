@@ -17,19 +17,22 @@ import edu.vanderbilt.psychology.model.Experiment;
  */
 public class Player {
 
+	private static final boolean DEBUG = true;
+
 	public static void main(String[] args) {
 		Experiment e = null;
 		JFileChooser open = new JFileChooser();
-	    // TODO Fix file filter so that only XML, i.e. compatible, files are
+		// TODO Fix file filter so that only XML, i.e. compatible, files are
 		// displayed.
 		/*
-		XMLFilter filter = new XMLFilter();
-	    open.setFileFilter(filter);
-	    */
-	    int returnVal = open.showOpenDialog(open); {
-	    if (returnVal == JFileChooser.APPROVE_OPTION) {
-	       e = Experiment.loadExperiment(open.getSelectedFile());}
-	    }
+		 * XMLFilter filter = new XMLFilter(); open.setFileFilter(filter);
+		 */
+		int returnVal = open.showOpenDialog(open);
+		{
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				e = Experiment.loadExperiment(open.getSelectedFile());
+			}
+		}
 		System.out.print(true);
 
 		final PlayerController pc = new PlayerController(e);
@@ -46,10 +49,15 @@ public class Player {
 				frame.setContentPane(pc);
 
 				// Setup full screen
-				GraphicsEnvironment ge = GraphicsEnvironment
-						.getLocalGraphicsEnvironment();
-				GraphicsDevice[] devices = ge.getScreenDevices();
-				devices[0].setFullScreenWindow(frame);
+				if (DEBUG == false) {
+					GraphicsEnvironment ge = GraphicsEnvironment
+							.getLocalGraphicsEnvironment();
+					GraphicsDevice[] devices = ge.getScreenDevices();
+					devices[0].setFullScreenWindow(frame);
+				} else
+				{
+					frame.setSize(1400, 900);
+				}
 
 				// Display the window.
 				frame.setVisible(true);

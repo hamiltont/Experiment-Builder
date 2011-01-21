@@ -12,6 +12,7 @@ import com.thoughtworks.xstream.XStream;
 
 import edu.vanderbilt.psychology.model.elements.ImageElementModel;
 import edu.vanderbilt.psychology.model.elements.TextModelElement;
+import edu.vanderbilt.psychology.model.events.EventReactor;
 import edu.vanderbilt.psychology.model.properties.Appearance;
 import edu.vanderbilt.psychology.model.properties.DataSource;
 import edu.vanderbilt.psychology.model.properties.MouseActions;
@@ -141,16 +142,7 @@ public class Experiment {
 	public boolean saveExperimentToDisk(File fileToBeSaved) {
 		XStream xs = new XStream();
 
-		xs.alias("Experiment", Experiment.class);
-		xs.alias("Slide", Slide.class);
-		xs.alias("ImageElement", ImageElementModel.class);
-		xs.alias("TextElement", TextModelElement.class);
-		xs.alias("DataSource", DataSource.class);
-		xs.alias("Appearance", Appearance.class);
-		xs.alias("MouseActions", MouseActions.class);
-		xs.alias("Position", Position.class);
-		xs.alias("Movement", Movement.class);
-		xs.omitField(Position.class, "section_");
+		addXStreamAliases(xs);
 
 		try {
 			FileWriter fw = new FileWriter(fileToBeSaved);
@@ -165,43 +157,10 @@ public class Experiment {
 		return true;
 	}
 
-	public static Experiment loadExperiment() {
-		XStream xs = new XStream();
-
-		xs.alias("Experiment", Experiment.class);
-		xs.alias("Slide", Slide.class);
-		xs.alias("ImageElement", ImageElementModel.class);
-		xs.alias("TextElement", TextModelElement.class);
-		xs.alias("DataSource", DataSource.class);
-		xs.alias("Appearance", Appearance.class);
-		xs.alias("Position", Position.class);
-		xs.alias("Movement", Movement.class);
-
-		Experiment e = null;
-		try {
-			FileReader fr = new FileReader("test.xml");
-			e = (Experiment) xs.fromXML(fr);
-			fr.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-
-		System.out.println("Imported!");
-
-		return e;
-	}
-
 	public static Experiment loadExperiment(File fileToLoad) {
 		XStream xs = new XStream();
 
-		xs.alias("Experiment", Experiment.class);
-		xs.alias("Slide", Slide.class);
-		xs.alias("ImageElement", ImageElementModel.class);
-		xs.alias("TextElement", TextModelElement.class);
-		xs.alias("DataSource", DataSource.class);
-		xs.alias("Appearance", Appearance.class);
-		xs.alias("Position", Position.class);
-		xs.alias("Movement", Movement.class);
+		addXStreamAliases(xs);
 
 		Experiment e = null;
 		try {
@@ -215,5 +174,20 @@ public class Experiment {
 		System.out.println("Imported!");
 
 		return e;
+	}
+
+	public static void addXStreamAliases(XStream xs) {
+		xs.alias("Experiment", Experiment.class);
+		xs.alias("Slide", Slide.class);
+		xs.alias("ImageElement", ImageElementModel.class);
+		xs.alias("TextElement", TextModelElement.class);
+		xs.alias("DataSource", DataSource.class);
+		xs.alias("Appearance", Appearance.class);
+		xs.alias("MouseActions", MouseActions.class);
+		xs.alias("Position", Position.class);
+		xs.omitField(Position.class, "section_");
+		xs.alias("Movement", Movement.class);
+		xs.alias("EventReactor", EventReactor.class);
+		xs.omitField(EventReactor.class, "mSlideElement");
 	}
 }

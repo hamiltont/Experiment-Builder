@@ -11,6 +11,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.gui.dialogs.DialogManager;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
+import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.BuilderState;
 import edu.vanderbilt.psychology.model.events.Event;
 import edu.vanderbilt.psychology.model.events.EventFactory;
@@ -30,15 +31,18 @@ public class MouseActions extends Property {
 			public void actionPerformed(ActionEvent e) {
 				// TODO do something with the dialog return value
 				DialogManager.showActionDialog();
-				
+
 				// Build the EventReactor
-				JPanel selection = SelectionManager.getInstance().getRealSelection();
-				Event ev = EventFactory.buildEvent (EventType.TYPE_SLIDE_EVENTS);
-				EventReactor er = new EventReactor(selection, ev);
-				
+				SlideElement selection = SelectionManager.getInstance()
+						.getRealSelection();
+				Event ev = EventFactory.buildEvent(EventType.TYPE_SLIDE_EVENTS);
+				EventReactor er = new EventReactor(selection, ev,
+						EventReactor.TRIGGER_ON_MOUSE_ENTER);
+
 				// Add it to the current slide
-				BuilderState.getInstance().getCurrentSlide().addEventReactor(er);
-				
+				BuilderState.getInstance().getCurrentSlide()
+						.addEventReactor(er);
+
 			}
 		}));
 		return new Section("Mouse Actions", panel);

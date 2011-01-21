@@ -118,16 +118,12 @@ public class BuilderState {
 	public void saveCurrentSlide() {
 		Slide newSlide = null;
 		if (experiment_.getSlideExistsAtPosition(currentSlidePos_)) {
-			// Event reactors are not saved into the GUI, so we have to make
-			// sure we don't erase any existing EventReactors
 			Slide oldSlide = experiment_.getSlide(currentSlidePos_);
 
-			newSlide = writeStageWrapperToSlide(stageWrapper_, false);
-
-			newSlide.setEventReactors(oldSlide.getEventReactors());
+			newSlide = writeStageWrapperToSlide(stageWrapper_, false, oldSlide);
 		} else
 			// Just save the GUI info
-			newSlide = writeStageWrapperToSlide(stageWrapper_, false);
+			newSlide = writeStageWrapperToSlide(stageWrapper_, false, null);
 
 		experiment_.saveSlide(newSlide, currentSlidePos_);
 
@@ -136,67 +132,54 @@ public class BuilderState {
 	/**
 	 * Converts the {@link StageWrapper} into a {@link Slide}, optionally
 	 * clearing the {@link StageWrapper} to prepare for the addition of other
-	 * elements
+	 * elements.
 	 * 
 	 * @param stageWrapper
 	 *            The {@link StageWrapper} to be saved
 	 * @param clearStage
 	 *            true if all {@link SlideElement}s should be removed from the
 	 *            {@link StageWrapper} after they are saved into a {@link Slide}
+	 * @param oldSlide
+	 *            If null, a new {@link Slide} is created. Otherwise any model
+	 *            information in the oldSlide, such as any event reactors, will
+	 *            be saved.
 	 * @return The {@link Slide} containing all {@link SlideElement}s that were
 	 *         present on the {@link StageWrapper}
 	 */
 	private static Slide writeStageWrapperToSlide(StageWrapper stageWrapper,
-			boolean clearStage) {
+			boolean clearStage, Slide oldSlide) {
 
-		Slide s = new Slide();
+		Slide s = null;
+		if (oldSlide == null)
+			s = new Slide();
+		else
+			s = oldSlide;
 
 		for (Component c : stageWrapper.getComponents()) {
 			if ((c instanceof SlideElement) == false)
 				continue;
 
-			ModelElement me = ((SlideElement) c).getModel();
-			int layer = stageWrapper.getLayer(c);
+			SlideElement se = (SlideElement) c;
+
+			// Setup the ModelElement and store to Slide
+			ModelElement me = se.getModel();
+			int layer = stageWrapper.getLayer(se);
 			Point p = c.getLocation();
-
 			me.addGuiProperties(layer, p);
-
 			s.saveElement(me);
+
+			// Update the EventReactors so that each EventReactor has a
+			// reference to the ModelElement for this SlideElement
+			// TODO - Check for memory leaks here
+			if (oldSlide != null)
+				for (EventReactor er : oldSlide.getReactorsReferencing(se))
+					er.setModelElement(me);
 
 			if (clearStage)
 				stageWrapper.remove(c);
 		}
 
 		return s;
-	}
-
-	/**
-	 * Given an existing {@link Slide}, replaces all of the {@link ModelElement}
-	 * s in the {@link Slide} with the {@link ModelElement}s generated from all
-	 * of the {@link SlideElement}s currently stored on the {@link StageWrapper}
-	 * 
-	 * @param existingSlide
-	 * @param stageWrapper
-	 */
-	// TODO - this is a convoluted way of "updating" an existing slide w/o
-	// throwing away the reactor references
-	private static void writeStageWrapperToExistingSlide(Slide existingSlide,
-			StageWrapper stageWrapper) {
-
-		existingSlide.clearElements();
-
-		for (Component c : stageWrapper.getComponents()) {
-			if ((c instanceof SlideElement) == false)
-				continue;
-
-			ModelElement me = ((SlideElement) c).getModel();
-			int layer = stageWrapper.getLayer(c);
-			Point p = c.getLocation();
-
-			me.addGuiProperties(layer, p);
-
-			existingSlide.saveElement(me);
-		}
 	}
 
 	// TODO - Things to consider: not all SlideElements
