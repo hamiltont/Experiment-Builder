@@ -11,12 +11,11 @@ public class Sleeper implements EventListener {
 		if (e.getData() != null && e.getData() instanceof Long)
 			pauseTime = (Long) e.getData();
 		
-		synchronized (Thread.currentThread()) {
 			try {
-				Thread.currentThread().wait(pauseTime);
+				Thread.sleep(2000);
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-		}
+		
 	}
 }
