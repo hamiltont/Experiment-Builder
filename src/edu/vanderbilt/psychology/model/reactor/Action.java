@@ -5,9 +5,16 @@ import javax.swing.JComponent;
 import edu.vanderbilt.psychology.model.MutableInt;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
 
-public class Event {
+/**
+ * Represents an action that should be caused to occur. This is typically sent
+ * in response to a {@link Trigger}
+ * 
+ * @author hamiltont
+ * 
+ */
+public class Action {
 
-	private EventType mType;
+	private ActionType mType;
 	private int mEventActionCode;
 	private ModelElement mModel;
 	private Object mData;
@@ -21,10 +28,10 @@ public class Event {
 	 *            by the receiver of this event. This only has meaning to the
 	 *            party receiving events of this type
 	 * @param data
-	 *            Some data that can be used by the {@link EventListener}. This
-	 *            data only has meaning for the {@link EventListener}
+	 *            Some data that can be used by the {@link ActionListener}. This
+	 *            data only has meaning for the {@link ActionListener}
 	 */
-	public Event(EventType type, int eventAction, ModelElement model,
+	public Action(ActionType type, int eventAction, ModelElement model,
 			Object data) {
 		mType = type;
 		mEventActionCode = eventAction;
@@ -32,10 +39,10 @@ public class Event {
 		mData = data;
 	}
 
-	public EventType getType() {
+	public ActionType getType() {
 		return mType;
 	}
-	
+
 	public Object getData() {
 		return mData;
 	}

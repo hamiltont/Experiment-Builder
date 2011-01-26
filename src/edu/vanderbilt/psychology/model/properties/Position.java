@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.Slide;
-import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.Action;
 
 /**
  * Defines where and when a {@link SlideElement} is positioned on the
@@ -68,7 +68,7 @@ public class Position extends Property {
 	}
 
 	@Override
-	public void receiveEvent(Event e) {
+	public void receiveAction(Action e) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -11,9 +11,9 @@ import edu.vanderbilt.psychology.model.Experiment;
 import edu.vanderbilt.psychology.model.ListDatabase;
 import edu.vanderbilt.psychology.model.Slide;
 import edu.vanderbilt.psychology.model.properties.Appearance;
-import edu.vanderbilt.psychology.model.reactor.Event;
-import edu.vanderbilt.psychology.model.reactor.EventListener;
-import edu.vanderbilt.psychology.model.reactor.EventType;
+import edu.vanderbilt.psychology.model.reactor.Action;
+import edu.vanderbilt.psychology.model.reactor.ActionListener;
+import edu.vanderbilt.psychology.model.reactor.ActionType;
 import edu.vanderbilt.psychology.model.reactor.Sleeper;
 
 /**
@@ -27,20 +27,20 @@ import edu.vanderbilt.psychology.model.reactor.Sleeper;
  * 
  */
 @SuppressWarnings("serial")
-public class PlayerController extends JLayeredPane implements EventListener {
+public class PlayerController extends JLayeredPane implements ActionListener {
 	private Experiment mExperiment;
 	private int mCurrentSlide = 0;
 
 	public PlayerController(Experiment e) {
 		// We are interested in slide events
 		EventManager.getInstance().registerEventObserver(
-				EventType.TYPE_SLIDE_EVENTS, this);
+				ActionType.TYPE_SLIDE_EVENTS, this);
 		EventManager.getInstance().registerEventObserver(
-				EventType.TYPE_APPEARANCE_EVENTS, new Appearance());
+				ActionType.TYPE_APPEARANCE_EVENTS, new Appearance());
 		EventManager.getInstance().registerEventObserver(
-				EventType.TYPE_SLEEP_EVENTS, new Sleeper());
+				ActionType.TYPE_SLEEP_EVENTS, new Sleeper());
 		EventManager.getInstance().registerEventObserver(
-				EventType.TYPE_LIST_EVENTS, ListDatabase.getInstance());
+				ActionType.TYPE_LIST_EVENTS, ListDatabase.getInstance());
 
 		mExperiment = e;
 
@@ -76,8 +76,8 @@ public class PlayerController extends JLayeredPane implements EventListener {
 	}
 
 	@Override
-	public void receiveEvent(Event e) {
-		if (e.getType().equals(EventType.TYPE_SLIDE_EVENTS)) {
+	public void receiveAction(Action e) {
+		if (e.getType().equals(ActionType.TYPE_SLIDE_EVENTS)) {
 			mCurrentSlide++;
 			if (mExperiment.getSlideExistsAtPosition(mCurrentSlide))
 				loadSlide(mExperiment.getSlide(mCurrentSlide));

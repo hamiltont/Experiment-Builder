@@ -15,7 +15,7 @@ import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
-import edu.vanderbilt.psychology.model.reactor.EventReactor;
+import edu.vanderbilt.psychology.model.reactor.Reactor;
 
 /**
  * Holds state information needed by the builder component. For example,
@@ -208,11 +208,11 @@ public class BuilderState {
 			me.addGuiProperties(layer, p);
 			s.saveElement(me);
 
-			// Update the EventReactors so that each EventReactor has a
+			// Update the EventReactors so that each Reactor has a
 			// reference to the ModelElement for this SlideElement
 			// TODO - Check for memory leaks here
 			if (oldSlide != null)
-				for (EventReactor er : oldSlide.getReactorsReferencing(se))
+				for (Reactor er : oldSlide.getReactorsReferencing(se))
 					er.setModelElement(me);
 
 			if (clearStage)

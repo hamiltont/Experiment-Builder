@@ -17,7 +17,7 @@ import edu.vanderbilt.psychology.model.properties.DataSource;
 import edu.vanderbilt.psychology.model.properties.MouseActions;
 import edu.vanderbilt.psychology.model.properties.Movement;
 import edu.vanderbilt.psychology.model.properties.Position;
-import edu.vanderbilt.psychology.model.reactor.EventReactor;
+import edu.vanderbilt.psychology.model.reactor.Reactor;
 
 /**
  * <p>
@@ -189,7 +189,7 @@ public class Experiment {
 		xs.alias("Position", Position.class);
 		xs.omitField(Position.class, "section_");
 		xs.alias("Movement", Movement.class);
-		xs.alias("EventReactor", EventReactor.class);
-		xs.omitField(EventReactor.class, "mSlideElement");
+		xs.alias("Reactor", Reactor.class);
+		xs.omitField(Reactor.class, "mSlideElement");
 	}
 }

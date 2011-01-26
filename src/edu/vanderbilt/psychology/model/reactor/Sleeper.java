@@ -1,11 +1,11 @@
 package edu.vanderbilt.psychology.model.reactor;
 
-public class Sleeper implements EventListener {
+public class Sleeper implements ActionListener {
 
 	public static final int ACTION_PAUSE_EXPERIMENT = 0;
 
 	@Override
-	public void receiveEvent(Event e) {
+	public void receiveAction(Action e) {
 		long pauseTime = 2000;
 
 		if (e.getData() != null && e.getData() instanceof Long)

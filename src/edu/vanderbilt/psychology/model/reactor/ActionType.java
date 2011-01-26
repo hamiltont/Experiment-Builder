@@ -8,17 +8,17 @@ package edu.vanderbilt.psychology.model.reactor;
  * @author hamiltont
  * 
  */
-public class EventType {
+public class ActionType {
 
-	public static final EventType TYPE_SLIDE_EVENTS = new EventType("slide");
-	public static final EventType TYPE_SLEEP_EVENTS = new EventType("pause");
-	public static final EventType TYPE_APPEARANCE_EVENTS = new EventType(
+	public static final ActionType TYPE_SLIDE_EVENTS = new ActionType("slide");
+	public static final ActionType TYPE_SLEEP_EVENTS = new ActionType("pause");
+	public static final ActionType TYPE_APPEARANCE_EVENTS = new ActionType(
 			"appearance");
-	public static final EventType TYPE_LIST_EVENTS = new EventType("list");
+	public static final ActionType TYPE_LIST_EVENTS = new ActionType("list");
 
 	private String mUniqueId;
 
-	public EventType(String uniqueID) {
+	public ActionType(String uniqueID) {
 		mUniqueId = uniqueID;
 	}
 
@@ -33,8 +33,8 @@ public class EventType {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof EventType)
-			if (((EventType) o).getUniqueID().equals(mUniqueId))
+		if (o instanceof ActionType)
+			if (((ActionType) o).getUniqueID().equals(mUniqueId))
 				return true;
 
 		return false;

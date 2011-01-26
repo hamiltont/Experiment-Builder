@@ -6,8 +6,8 @@ import java.util.List;
 
 import sun.security.action.GetLongAction;
 
-import edu.vanderbilt.psychology.model.reactor.Event;
-import edu.vanderbilt.psychology.model.reactor.EventListener;
+import edu.vanderbilt.psychology.model.reactor.Action;
+import edu.vanderbilt.psychology.model.reactor.ActionListener;
 
 /**
  * Creates the list database. This is the only location in the code that keeps
@@ -19,7 +19,7 @@ import edu.vanderbilt.psychology.model.reactor.EventListener;
  * @contributor hamiltont
  * 
  */
-public class ListDatabase implements EventListener {
+public class ListDatabase implements ActionListener {
 	private static ListDatabase instance_ = null;
 	private ArrayList<EBList<String>> stringLists_ = new ArrayList<EBList<String>>();
 	private ArrayList<EBList<File>> fileReferenceLists_ = new ArrayList<EBList<File>>();
@@ -78,7 +78,7 @@ public class ListDatabase implements EventListener {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void receiveEvent(Event e) {
+	public void receiveAction(Action e) {
 		if (e.getData() != null && e.getData() instanceof String) {
 			String listName = (String) e.getData();
 			EBList<Object> list = getByName(listName);

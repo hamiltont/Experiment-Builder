@@ -1,12 +1,12 @@
 package edu.vanderbilt.psychology.model.reactor;
 
-public class EventStore {
+public class TAStore {
 
-	private static EventStore mInstance;
+	private static TAStore mInstance;
 	
-	private static EventStore getInstance() {
+	private static TAStore getInstance() {
 		if (mInstance == null)
-			mInstance = new EventStore();
+			mInstance = new TAStore();
 		return mInstance;
 	}
 	

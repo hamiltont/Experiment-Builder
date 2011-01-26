@@ -5,8 +5,8 @@ package edu.vanderbilt.psychology.model;
 
 import edu.vanderbilt.psychology.model.inputs.Input;
 import edu.vanderbilt.psychology.model.properties.Property;
-import edu.vanderbilt.psychology.model.reactor.Event;
-import edu.vanderbilt.psychology.model.reactor.EventListener;
+import edu.vanderbilt.psychology.model.reactor.Action;
+import edu.vanderbilt.psychology.model.reactor.ActionListener;
 
 /**
  * <p>
@@ -31,9 +31,9 @@ import edu.vanderbilt.psychology.model.reactor.EventListener;
  * <td>Slide Number<sup>1</sup></td>
  * <td>Sender Type<sup>2</sup></td>
  * <td>Sender Name<sup>3</sup></td>
- * <td>Event Name</td>
- * <td>Event Value<sup>4</sup></td>
- * <td>Event State Info<sup>5</sup></td>
+ * <td>Action Name</td>
+ * <td>Action Value<sup>4</sup></td>
+ * <td>Action State Info<sup>5</sup></td>
  * </tr>
  * <tr>
  * <td>12</td>
@@ -60,14 +60,14 @@ import edu.vanderbilt.psychology.model.reactor.EventListener;
  * @author Hamilton Turner
  * 
  */
-public class DataCapture implements EventListener {
+public class DataCapture implements ActionListener {
 
 	public String getName() {
 		return "DataCapture";
 	}
 
 	@Override
-	public void receiveEvent(Event e) {
+	public void receiveAction(Action e) {
 		// TODO Auto-generated method stub
 		
 	}

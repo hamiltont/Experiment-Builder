@@ -12,17 +12,17 @@ import edu.vanderbilt.psychology.model.elements.ModelElement;
 import edu.vanderbilt.psychology.player.EventManager;
 
 /**
- * An event reactor that will send an {@link Event} to the {@link EventManager}
+ * An event reactor that will send an {@link Action} to the {@link EventManager}
  * in response to some trigger, such as
- * {@link EventReactor#TRIGGER_ON_MOUSE_ENTER}.
+ * {@link Reactor#TRIGGER_ON_MOUSE_ENTER}.
  * 
  * 
  * This is created by the GUI code, and therefore contains a reference to a
- * {@link SlideElement} and the {@link Event} to fire. Before it is saved to
- * disk, however, the method {@link EventReactor#setModelElement(ModelElement)}
+ * {@link SlideElement} and the {@link Action} to fire. Before it is saved to
+ * disk, however, the method {@link Reactor#setModelElement(ModelElement)}
  * must be called to link this to an instance of a {@link ModelElement} that
  * corresponds to the {@link SlideElement} referenced by
- * {@link EventReactor#getSlideElement()}. Then, when this element is
+ * {@link Reactor#getSlideElement()}. Then, when this element is
  * deserialized, the {@link ModelElement} reference contained in this object can
  * be used to link this with the appropriately created {@link JComponent}.
  * 
@@ -30,20 +30,20 @@ import edu.vanderbilt.psychology.player.EventManager;
  * 
  */
 // TODO - add in conditions. See issue #7
-public class EventReactor implements EventListener {
+public class Reactor implements ActionListener {
 
 	public static final int TRIGGER_ON_MOUSE_ENTER = 1 << 0;
 
 	private SlideElement mSlideElement;
 	private JComponent mComponent;
 	private ModelElement mModelElement;
-	private List<Event> mEventsToFire;
+	private List<Action> mEventsToFire;
 	private int mTrigger;
 
-	public EventReactor(SlideElement element, int triggerOfInterest, Event... eventToFire) {
+	public Reactor(SlideElement element, int triggerOfInterest, Action... eventToFire) {
 		mSlideElement = element;
-		mEventsToFire = new ArrayList<Event>(eventToFire.length);
-		for (Event e : eventToFire)
+		mEventsToFire = new ArrayList<Action>(eventToFire.length);
+		for (Action e : eventToFire)
 			mEventsToFire.add(e);
 
 		// Ensure that the trigger exists
@@ -59,13 +59,13 @@ public class EventReactor implements EventListener {
 	/**
 	 * Given a {@link JComponent} that presumably has just been created from a
 	 * {@link ModelElement}, this adds the appropriate triggers to it based on
-	 * what is contained within this {@link EventReactor}
+	 * what is contained within this {@link Reactor}
 	 * 
 	 * 
 	 * @param component
 	 *            The component to add triggers to. Cannot be null
 	 * 
-	 * @see {@link EventReactor#TRIGGER_ON_MOUSE_ENTER}
+	 * @see {@link Reactor#TRIGGER_ON_MOUSE_ENTER}
 	 * 
 	 */
 	public boolean addTriggerToJComponent(JComponent component) {
@@ -90,7 +90,7 @@ public class EventReactor implements EventListener {
 
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
-					for (Event e : mEventsToFire)
+					for (Action e : mEventsToFire)
 						EventManager.getInstance().sendEvent(e);
 				}
 
@@ -121,7 +121,7 @@ public class EventReactor implements EventListener {
 	}
 
 	@Override
-	public void receiveEvent(Event e) {
+	public void receiveAction(Action e) {
 
 	}
 

@@ -6,7 +6,7 @@ package edu.vanderbilt.psychology.model.inputs;
 import edu.vanderbilt.psychology.model.DataCapture;
 import edu.vanderbilt.psychology.model.Experiment;
 import edu.vanderbilt.psychology.model.properties.Property;
-import edu.vanderbilt.psychology.model.reactor.EventListener;
+import edu.vanderbilt.psychology.model.reactor.ActionListener;
 
 /**
  * Defines a superclass for any sort of user input sources that we do not have
@@ -28,7 +28,7 @@ import edu.vanderbilt.psychology.model.reactor.EventListener;
  * @author Hamilton Turner
  * 
  */
-public abstract class Input implements EventListener {
+public abstract class Input implements ActionListener {
 
 	public final String getType() {
 		return "Input";

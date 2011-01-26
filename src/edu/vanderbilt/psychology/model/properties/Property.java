@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.DataCapture;
-import edu.vanderbilt.psychology.model.reactor.EventListener;
+import edu.vanderbilt.psychology.model.reactor.ActionListener;
 
 /**
  * <p>
@@ -45,7 +45,7 @@ import edu.vanderbilt.psychology.model.reactor.EventListener;
  * 
  * <p>
  * {@link Property}s can also register to listen for events, as all
- * {@link Property}s implement {@link EventListener}. This allows the setting of
+ * {@link Property}s implement {@link ActionListener}. This allows the setting of
  * {@link Property} values to be chained. For example, if something happens in
  * Property A, then Property B can be set to react to this change. I am not sure
  * that this implementation is the best (aka having the Propertys be the
@@ -74,7 +74,7 @@ import edu.vanderbilt.psychology.model.reactor.EventListener;
 // TODO - There is a mixing of the builder code and player code here. Some of
 // these methods are only needed for the builder, some of them are only needed
 // for the player
-public abstract class Property implements EventListener, Cloneable {
+public abstract class Property implements ActionListener, Cloneable {
 
 	/**
 	 * Will be used in the logging. This returns the value that will go into the

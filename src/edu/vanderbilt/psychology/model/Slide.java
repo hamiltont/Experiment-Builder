@@ -17,7 +17,7 @@ import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
 import edu.vanderbilt.psychology.model.inputs.Input;
 import edu.vanderbilt.psychology.model.properties.Property;
-import edu.vanderbilt.psychology.model.reactor.EventReactor;
+import edu.vanderbilt.psychology.model.reactor.Reactor;
 
 /**
  * {@link Slide}s do not directly keep track of any visual information. The GUI
@@ -45,7 +45,7 @@ public class Slide {
 	public static final int ACTION_ADVANCE_TO_NEXT_SLIDE = 0;
 	
 	Set<ModelElement> elements_ = new HashSet<ModelElement>();
-	List<EventReactor> reactors_ = new ArrayList<EventReactor>();
+	List<Reactor> reactors_ = new ArrayList<Reactor>();
 
 	private JLayeredPane mSlideThumbnail;
 
@@ -53,38 +53,38 @@ public class Slide {
 		elements_.add(me);
 	}
 
-	public void addEventReactor(EventReactor reactor) {
+	public void addEventReactor(Reactor reactor) {
 		reactors_.add(reactor);
 	}
 
-	public List<EventReactor> getEventReactors() {
+	public List<Reactor> getEventReactors() {
 		return reactors_;
 	}
 
-	public void setEventReactors(List<EventReactor> reactors) {
+	public void setEventReactors(List<Reactor> reactors) {
 		reactors_ = reactors;
 	}
 
 	/**
 	 * Given a {@link SlideElement}, this returns all of the
-	 * {@link EventReactor}s that are listening for some type of event on that
+	 * {@link Reactor}s that are listening for some type of event on that
 	 * {@link SlideElement}
 	 * 
 	 * @param element
 	 * @return
 	 */
-	public List<EventReactor> getReactorsReferencing(SlideElement element) {
-		ArrayList<EventReactor> result = new ArrayList<EventReactor>(1);
-		for (EventReactor er : reactors_)
+	public List<Reactor> getReactorsReferencing(SlideElement element) {
+		ArrayList<Reactor> result = new ArrayList<Reactor>(1);
+		for (Reactor er : reactors_)
 			if (er.getSlideElement() == element)
 				result.add(er);
 
 		return result;
 	}
 
-	private List<EventReactor> getReactorsReferencing(ModelElement element) {
-		ArrayList<EventReactor> result = new ArrayList<EventReactor>(1);
-		for (EventReactor er : reactors_)
+	private List<Reactor> getReactorsReferencing(ModelElement element) {
+		ArrayList<Reactor> result = new ArrayList<Reactor>(1);
+		for (Reactor er : reactors_)
 			if (er.getModelElement() == element)
 				result.add(er);
 
@@ -103,7 +103,7 @@ public class Slide {
 	 * Converts the internal model of elements into a series of
 	 * {@link JComponent}s that can then be added to the player's GUI. As it
 	 * builds the list of {@link JComponent}s, it also registers any triggers as
-	 * specified by {@link EventReactor}s
+	 * specified by {@link Reactor}s
 	 * 
 	 * @return A list of {@link JComponent}s that represent various
 	 *         {@link ModelElement}s. Each list item is a {@link Pair}
@@ -124,7 +124,7 @@ public class Slide {
 
 			// For each reactor that references this model element, add the
 			// triggers to the component
-			for (EventReactor reactor : getReactorsReferencing((ModelElement) elements[i]))
+			for (Reactor reactor : getReactorsReferencing((ModelElement) elements[i]))
 				reactor.addTriggerToJComponent(output);
 
 			components.add(new Pair<JComponent, Integer>(output, result

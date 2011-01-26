@@ -3,7 +3,7 @@
  */
 package edu.vanderbilt.psychology.model.inputs;
 
-import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.Action;
 
 /**
  * @author Hamilton Turner
@@ -16,7 +16,7 @@ public class AudioRecord extends Input {
 	}
 
 	@Override
-	public void receiveEvent(Event e) {
+	public void receiveAction(Action e) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.Slide;
-import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.Action;
 
 /**
  * Defines how and when a {@link SlideElement} is in motion on the {@link Slide}
@@ -34,7 +34,7 @@ public class Movement extends Property {
 	}
 
 	@Override
-	public void receiveEvent(Event e) {
+	public void receiveAction(Action e) {
 		// TODO Auto-generated method stub
 	}
 }

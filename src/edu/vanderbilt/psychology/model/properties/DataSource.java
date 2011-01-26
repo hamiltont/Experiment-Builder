@@ -14,7 +14,7 @@ import edu.vanderbilt.psychology.controller.toolbarActions.AddImageAction;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.EBList;
-import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.Action;
 
 /**
  * This {@link Property} will define the source of data for a
@@ -80,7 +80,7 @@ public class DataSource extends Property {
 	}
 
 	@Override
-	public void receiveEvent(Event e) {
+	public void receiveAction(Action e) {
 		// TODO Auto-generated method stub
 
 	}

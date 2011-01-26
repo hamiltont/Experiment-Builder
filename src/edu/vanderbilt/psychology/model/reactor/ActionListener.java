@@ -12,13 +12,13 @@ import edu.vanderbilt.psychology.player.EventManager;
  * @author Hamilton Turner
  * 
  */
-public interface EventListener {
+public interface ActionListener {
 
 	/**
-	 * Called when the {@link EventManager} wants to pass this {@link EventListener} an {@link Event}
+	 * Called when the {@link EventManager} wants to pass this {@link ActionListener} an {@link Action}
 	 * 
 	 * @param e
-	 *            the event
+	 *            the action
 	 */
-	public void receiveEvent(Event e);
+	public void receiveAction(Action e);
 }
