@@ -6,8 +6,8 @@ import java.util.List;
 
 import sun.security.action.GetLongAction;
 
-import edu.vanderbilt.psychology.model.events.Event;
-import edu.vanderbilt.psychology.model.events.EventListener;
+import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.EventListener;
 
 /**
  * Creates the list database. This is the only location in the code that keeps

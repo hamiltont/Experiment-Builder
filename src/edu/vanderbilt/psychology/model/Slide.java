@@ -15,9 +15,9 @@ import com.sun.tools.javac.util.Pair;
 
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
-import edu.vanderbilt.psychology.model.events.EventReactor;
 import edu.vanderbilt.psychology.model.inputs.Input;
 import edu.vanderbilt.psychology.model.properties.Property;
+import edu.vanderbilt.psychology.model.reactor.EventReactor;
 
 /**
  * {@link Slide}s do not directly keep track of any visual information. The GUI

@@ -1,4 +1,4 @@
-package edu.vanderbilt.psychology.model.events;
+package edu.vanderbilt.psychology.model.reactor;
 
 /**
  * Stores a unique string that represents a type of event. The 'standard' event

@@ -1,4 +1,4 @@
-package edu.vanderbilt.psychology.model.events;
+package edu.vanderbilt.psychology.model.reactor;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

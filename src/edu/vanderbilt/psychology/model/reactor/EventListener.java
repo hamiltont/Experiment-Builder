@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.vanderbilt.psychology.model.events;
+package edu.vanderbilt.psychology.model.reactor;
 
 import edu.vanderbilt.psychology.player.EventManager;
 

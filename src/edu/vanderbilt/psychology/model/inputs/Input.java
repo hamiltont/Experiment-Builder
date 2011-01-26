@@ -5,8 +5,8 @@ package edu.vanderbilt.psychology.model.inputs;
 
 import edu.vanderbilt.psychology.model.DataCapture;
 import edu.vanderbilt.psychology.model.Experiment;
-import edu.vanderbilt.psychology.model.events.EventListener;
 import edu.vanderbilt.psychology.model.properties.Property;
+import edu.vanderbilt.psychology.model.reactor.EventListener;
 
 /**
  * Defines a superclass for any sort of user input sources that we do not have

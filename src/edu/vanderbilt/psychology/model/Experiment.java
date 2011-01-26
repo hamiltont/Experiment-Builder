@@ -12,12 +12,12 @@ import com.thoughtworks.xstream.XStream;
 
 import edu.vanderbilt.psychology.model.elements.ImageElementModel;
 import edu.vanderbilt.psychology.model.elements.TextModelElement;
-import edu.vanderbilt.psychology.model.events.EventReactor;
 import edu.vanderbilt.psychology.model.properties.Appearance;
 import edu.vanderbilt.psychology.model.properties.DataSource;
 import edu.vanderbilt.psychology.model.properties.MouseActions;
 import edu.vanderbilt.psychology.model.properties.Movement;
 import edu.vanderbilt.psychology.model.properties.Position;
+import edu.vanderbilt.psychology.model.reactor.EventReactor;
 
 /**
  * <p>

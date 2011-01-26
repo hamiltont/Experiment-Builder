@@ -3,10 +3,10 @@
  */
 package edu.vanderbilt.psychology.model;
 
-import edu.vanderbilt.psychology.model.events.Event;
-import edu.vanderbilt.psychology.model.events.EventListener;
 import edu.vanderbilt.psychology.model.inputs.Input;
 import edu.vanderbilt.psychology.model.properties.Property;
+import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.EventListener;
 
 /**
  * <p>

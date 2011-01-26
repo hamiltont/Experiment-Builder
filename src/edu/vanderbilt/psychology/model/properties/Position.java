@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.Slide;
-import edu.vanderbilt.psychology.model.events.Event;
+import edu.vanderbilt.psychology.model.reactor.Event;
 
 /**
  * Defines where and when a {@link SlideElement} is positioned on the

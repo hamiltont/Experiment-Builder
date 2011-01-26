@@ -14,10 +14,10 @@ import edu.vanderbilt.psychology.gui.sideBar.Section;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.BuilderState;
 import edu.vanderbilt.psychology.model.Slide;
-import edu.vanderbilt.psychology.model.events.Event;
-import edu.vanderbilt.psychology.model.events.EventReactor;
-import edu.vanderbilt.psychology.model.events.EventType;
-import edu.vanderbilt.psychology.model.events.Sleeper;
+import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.EventReactor;
+import edu.vanderbilt.psychology.model.reactor.EventType;
+import edu.vanderbilt.psychology.model.reactor.Sleeper;
 
 public class MouseActions extends Property {
 

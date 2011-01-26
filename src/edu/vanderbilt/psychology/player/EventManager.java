@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import edu.vanderbilt.psychology.model.events.Event;
-import edu.vanderbilt.psychology.model.events.EventListener;
-import edu.vanderbilt.psychology.model.events.EventType;
+import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.EventListener;
+import edu.vanderbilt.psychology.model.reactor.EventType;
 
 /**
  * Implements a publisher / subscriber system for various events

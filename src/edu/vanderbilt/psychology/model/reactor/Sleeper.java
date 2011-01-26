@@ -1,4 +1,4 @@
-package edu.vanderbilt.psychology.model.events;
+package edu.vanderbilt.psychology.model.reactor;
 
 public class Sleeper implements EventListener {
 

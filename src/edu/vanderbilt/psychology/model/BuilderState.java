@@ -15,7 +15,7 @@ import edu.vanderbilt.psychology.controller.SelectionManager;
 import edu.vanderbilt.psychology.gui.main.StageWrapper;
 import edu.vanderbilt.psychology.gui.slideElements.SlideElement;
 import edu.vanderbilt.psychology.model.elements.ModelElement;
-import edu.vanderbilt.psychology.model.events.EventReactor;
+import edu.vanderbilt.psychology.model.reactor.EventReactor;
 
 /**
  * Holds state information needed by the builder component. For example,

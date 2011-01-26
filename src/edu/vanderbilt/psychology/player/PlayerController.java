@@ -10,11 +10,11 @@ import com.sun.tools.javac.util.Pair;
 import edu.vanderbilt.psychology.model.Experiment;
 import edu.vanderbilt.psychology.model.ListDatabase;
 import edu.vanderbilt.psychology.model.Slide;
-import edu.vanderbilt.psychology.model.events.Event;
-import edu.vanderbilt.psychology.model.events.EventListener;
-import edu.vanderbilt.psychology.model.events.EventType;
-import edu.vanderbilt.psychology.model.events.Sleeper;
 import edu.vanderbilt.psychology.model.properties.Appearance;
+import edu.vanderbilt.psychology.model.reactor.Event;
+import edu.vanderbilt.psychology.model.reactor.EventListener;
+import edu.vanderbilt.psychology.model.reactor.EventType;
+import edu.vanderbilt.psychology.model.reactor.Sleeper;
 
 /**
  * Given an {@link Experiment} that has been loaded from disk, the

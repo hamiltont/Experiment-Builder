@@ -3,7 +3,7 @@
  */
 package edu.vanderbilt.psychology.model.inputs;
 
-import edu.vanderbilt.psychology.model.events.Event;
+import edu.vanderbilt.psychology.model.reactor.Event;
 
 /**
  * @author Hamilton Turner
