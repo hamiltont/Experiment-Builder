@@ -68,7 +68,7 @@ public class BuilderState {
 	 * 
 	 * @param thumbnail
 	 */
-	public void setCurrentSlide(JLayeredPane thumbnail) {
+	public void setCurrentSlide(JLayeredPane thumbnail) {		
 		int size = experiment_.getSize();
 		for (int i = 0; i < size; i++)
 			if (experiment_.getSlideExistsAtPosition(i)
@@ -165,6 +165,8 @@ public class BuilderState {
 			// Just save the GUI info
 			newSlide = writeStageWrapperToSlide(stageWrapper_, false, null);
 
+		newSlide.updateThumbnail();
+		
 		experiment_.saveSlide(newSlide, currentSlidePos_);
 
 	}

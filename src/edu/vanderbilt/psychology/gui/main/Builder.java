@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -70,9 +71,9 @@ public class Builder {
 	 */
 	private static final int SLIDE_SWITCHER_HEIGHT = 100;
 
-	private static final int SLIDE_THUMBNAIL_WIDTH = 140;
+	public static final int SLIDE_THUMBNAIL_WIDTH = 140;
 
-	private static final int SLIDE_THUMBNAIL_HEIGHT = 85;
+	public static final int SLIDE_THUMBNAIL_HEIGHT = 85;
 
 	/**
 	 * Creates and populates the toolbar.
@@ -304,6 +305,7 @@ public class Builder {
 	 * 
 	 * @return
 	 */
+	// TODO The SlideThumbnail deserves to be a new class
 	private static JLayeredPane createSlideThumbnail() {
 		// Build the JLayeredPane to hold the slide's thumbnail
 		final JLayeredPane slide = new JLayeredPane();
@@ -348,13 +350,13 @@ public class Builder {
 		BufferedImage backgroundImage = new BufferedImage(
 				SLIDE_THUMBNAIL_WIDTH, SLIDE_THUMBNAIL_HEIGHT,
 				BufferedImage.TYPE_INT_RGB);
-		int rgb = Color.GRAY.getRGB();
-		for (int x = 0; x < SLIDE_THUMBNAIL_WIDTH; x++)
-			for (int y = 0; y < SLIDE_THUMBNAIL_HEIGHT; y++)
-				backgroundImage.setRGB(x, y, rgb);
-
+		Graphics g = backgroundImage.getGraphics();
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(0, 0, SLIDE_THUMBNAIL_WIDTH, SLIDE_THUMBNAIL_HEIGHT);
+		
 		// Create the background image layer
 		ImageIcon backgroundIcon = new ImageIcon(backgroundImage);
+		backgroundIcon.setDescription("background image");
 		JLabel slideThumbnail = new JLabel(backgroundIcon);
 		slideThumbnail.setBounds(0, 0, SLIDE_THUMBNAIL_WIDTH,
 				SLIDE_THUMBNAIL_HEIGHT);

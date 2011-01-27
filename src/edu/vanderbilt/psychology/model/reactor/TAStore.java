@@ -1,16 +1,23 @@
 package edu.vanderbilt.psychology.model.reactor;
 
+/**
+ * Keeps track of all the possible {@link Trigger}s and {@link Action}s
+ * 
+ * @author hamiltont
+ * 
+ */
 public class TAStore {
 
 	private static TAStore mInstance;
 	
-	private static TAStore getInstance() {
+
+	public static TAStore getInstance() {
 		if (mInstance == null)
 			mInstance = new TAStore();
 		return mInstance;
 	}
-	
-	private void registerTrigger() {
+
+	public void registerTrigger(Trigger t) {
 		
 	}
 }
