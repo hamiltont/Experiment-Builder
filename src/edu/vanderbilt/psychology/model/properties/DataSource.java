@@ -60,6 +60,20 @@ public class DataSource extends Property {
 		type_ = dataType;
 	}
 
+	public void setDataSource(String data, Type dataType) {
+		mData = data;
+		type_ = dataType;
+	}
+
+	public void setDataSource(EBList<Object> listData, Type dataType) {
+		mListData = listData;
+		type_ = dataType;
+	}
+	
+	public Type getCurrentDataType() {
+		return type_;
+	}
+
 	public String getCurrentData() {
 		if (type_ == Type.Single_File || type_ == Type.Single_String)
 			return mData;
